@@ -1,15 +1,22 @@
 
 
+// ================ variables ========================
+
 $page1-intro-font:"Times New Roman", Times, serif;
 $page1-logo-font:Verdana, Geneva, Tahoma, sans-serif;
 $page1-info-font:"Times New Roman", Times, serif;
 $page1__register:"Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-$page2__content:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+$page2__content:Verdana, Geneva, Tahoma, sans-serif;
+
+// ================ home page =================================
 
 .homepage {
   overflow-x: hidden;
   position: relative;
 }
+
+// =================== page 1 =========================================
+
 .page1::before {
   content: "";
   position: absolute;
@@ -30,6 +37,9 @@ $page2__content:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida 
   width: 100%;
   position: relative;
 }
+
+// ================ navigation bar =========================
+
 .page1__navbar {
   position: fixed;
   top:0;
@@ -39,8 +49,14 @@ $page2__content:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida 
   width: 100%;
   height: 60px;
   color: cornsilk;
-  // background: aqua;
+  transition: all 1s ease;
+  z-index:100;
 }
+
+.page1__navbarNew{
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
 .page1__logo {
   display: flex;
   align-items: center;
@@ -78,6 +94,7 @@ $page2__content:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida 
   padding: 5px 20px;
   border-radius: 30px;
   cursor: pointer;
+  outline: none;
   &:hover {
     background-color: rgba(255, 255, 255, 0.7);
     color: black;
@@ -93,19 +110,32 @@ $page2__content:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida 
   // background: chartreuse;
 }
 
-.page1__register button {
+.page1__registerBtn{
   padding: 8px 40px;
+  min-width: 100px;
   font-size: 16px;
   font-family:$page1__register;
-  font-weight: 600;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: snow;
+  font-weight: 800;
+  background-color: rgba(255, 255, 255, 0.6);
+  color: black;
   border: none;
   cursor: pointer;
   &:hover {
     background-color: rgba(0, 0, 0, 1);
+    color:snow;
   }
 }
+.register__buttonNew{
+  background-color: rgba(255, 255, 255, 0.6);
+  color:black;
+  &:hover {
+    background-color: rgba(255, 255, 255, 1);
+    color:black;
+  }
+}
+
+
+// ====================== page 1 intro ====================================
 
 .page1__intro{
   color:whitesmoke;
@@ -117,6 +147,8 @@ $page2__content:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida 
   font-family:$page1-intro-font;
   width:40%;
 }
+
+// =================== page 2 ===============================
 
 .page2{
   height: 100vh;
@@ -148,9 +180,57 @@ $page2__content:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida 
   font-size: 20px;
   font-family: $page2__content;
   padding:30px;
-  h3{
+  b{
     font-size: 40px;
     font-weight: 600;
-    margin-top: 20px;
+    line-height: 100px;
+  }
+}
+
+
+// ===================== contact form==============================
+
+.homepage__contact{
+  background-color: rgba(0, 0, 0, 0.6);
+  padding:40px 5vw;
+  width:100%;
+  h2{
+    margin-bottom:20px;
+    margin-left:10px;
+  }
+}
+
+.homepage__contactForm{
+  display:flex;
+  flex-direction: column;
+  font-size: 30px;
+  input{
+    padding:10px;
+    margin:10px;
+    // border-radius: 10px;
+    border:none;
+    font-size: 18px;
+    &:focus{
+      border:none;
+      outline: none;
+    }
+  }
+  textarea{
+    padding:10px;
+    margin:10px;
+    // border-radius: 10px;
+    border:none;
+    font-size: 18px;
+    resize:vertical;
+    &:focus{
+      border:none;
+      outline: none;
+    }
+  }
+  button{
+    padding:10px;
+    margin:10px;
+    font-size:20px;
+    font-weight: 600;
   }
 }
