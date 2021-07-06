@@ -1,8 +1,24 @@
 import React, { useEffect, createRef } from "react";
+import { useHistory } from "react-router-dom";
 import "./HomePage.css";
 import page2Image from "./images/confused girl.jpg";
+import logo from "./images/logo.png";
 
 function HomePage() {
+  // ====================== React scripts ====================================
+
+  const history = useHistory();
+  const login = () => {
+    history.push("/login");
+  };
+  const signup = () => {
+    history.push("/signup");
+  };
+
+  // ====================================================================
+
+  // ==============Animation part scripts ================================
+
   window.addEventListener("scroll", () => {
     const navBar = document.querySelector(".page1__navbar");
     const regBtn = document.querySelectorAll(".page1__registerBtn");
@@ -20,14 +36,19 @@ function HomePage() {
     }
   });
 
+  // ============================================================================
+
   return (
     <div className="homepage">
       <div className="page1__navbar">
         <div className="page1__logo">
-          <div className="logo">
-            <img src="" alt="" />
+          <div className="logo__img">
+            <img src={logo} alt="" />
           </div>
-          <h2 className="name"> YourGuide</h2>
+          <div className="logo__text">
+            <h2 className="name"> ACment</h2>
+            <p>we GUIDE u RISE</p>
+          </div>
         </div>
         <div className="page1__right">
           <div className="page1__info">
@@ -42,8 +63,12 @@ function HomePage() {
             </a>
           </div>
           <div className="page1__register">
-            <button className="page1__registerBtn">Log In</button>
-            <button className="page1__registerBtn">Sign Up</button>
+            <button className="page1__registerBtn" onClick={login}>
+              Log In
+            </button>
+            <button className="page1__registerBtn" onClick={signup}>
+              Sign Up
+            </button>
           </div>
         </div>
       </div>
@@ -99,8 +124,8 @@ function HomePage() {
           </button>
         </form>
       </div>
-      <div className="homepage__footerSpaceOccupier"></div>
-      <div className="homepage__footer">This is the footer</div>
+      {/* <div className="homepage__footerSpaceOccupier"></div>
+      <div className="homepage__footer">This is the footer</div> */}
     </div>
   );
 }

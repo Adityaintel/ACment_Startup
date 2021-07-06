@@ -1,0 +1,223 @@
+.student__details > input, .mentor__details > input {
+  margin: 5px;
+  border: none;
+  width: 100%;
+  background-color: white;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.student__details > input:focus, .mentor__details > input:focus {
+  border: none;
+  outline: none;
+}
+
+.student__details > select, .mentor__details > select {
+  margin: 5px;
+  border: none;
+  width: 100%;
+  background-color: white;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.student__details > select:focus, .mentor__details > select:focus {
+  border: none;
+  outline: none;
+}
+
+.student__details > select option, .mentor__details > select option {
+  margin: 5px;
+  border: none;
+  width: 100%;
+  background-color: white;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.signup {
+  background-image: url("./images/signup-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+.signupSection {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  background: #D9B79E;
+  border-radius: 4px;
+  padding: 30px 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 400px;
+  margin-bottom: 10px;
+}
+
+.signup__heading {
+  background-color: #E6CD9C;
+  padding: 10px 20px;
+  border-radius: 30px 0 30px 0;
+  border-left: 3px solid white;
+  border-right: 3px solid white;
+  margin-bottom: 20px;
+}
+
+.signup__heading h3 {
+  color: #1f1e1e;
+}
+
+.logo__link {
+  text-decoration: none;
+  color: #353535;
+}
+
+.full__logo {
+  text-align: center;
+  outline: none;
+  border: none;
+  color: white;
+  float: left;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.full__logo .logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  overflow: hidden;
+}
+
+.full__logo .logo img {
+  height: 100%;
+  width: 100%;
+}
+
+.full__logo h2 {
+  font-family: 16px;
+}
+
+.full__logo p {
+  font-size: 14px;
+}
+
+.BtnSection {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 20px;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.BtnSection button {
+  padding: 8px 10px;
+  width: 40%;
+  border: none;
+  outline: none;
+  background-color: #ce9e44;
+}
+
+.signup__formContainer {
+  width: 80%;
+}
+
+.signup__form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+.signup__form > input {
+  margin: 10px;
+  border: none;
+  width: 100%;
+  background-color: white;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.signup__form > input:focus {
+  border: none;
+  outline: none;
+}
+
+.pwdCheckbox {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 10px;
+}
+
+.pwdCheckbox label {
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.signup__form button {
+  cursor: pointer;
+  padding: 10px 30px;
+  margin: 10px;
+  background: #4A878C;
+  border: none;
+  font-weight: 700;
+  color: white;
+  border-radius: 4px;
+}
+
+.sign__alternate {
+  color: black;
+  font-size: .9em;
+}
+
+.sign__alternateAnch {
+  font-size: 15px;
+  text-decoration: none;
+  color: #39696d;
+}
+
+.mentorBtn {
+  background-color: #FFE6D4;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 16px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+/*# sourceMappingURL=Signup.css.map */

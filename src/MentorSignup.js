@@ -1,0 +1,90 @@
+import React from "react";
+
+function MentorSignup({ setMentor, mentorData }) {
+  const changeHandler = (event) => {
+    const data = { ...mentorData };
+    const field = event.target.name;
+    const value = event.target.value;
+    data[field] = value;
+    setMentor(data);
+  };
+
+  return (
+    <div className="mentor__details">
+      <input
+        type="text"
+        minLength="6"
+        name="username"
+        placeholder="Enter your full name"
+        className="signup__name"
+        onChange={changeHandler}
+      />
+      <input
+        type="email"
+        minLength="6"
+        name="email"
+        placeholder="Enter your email"
+        className="signup__email"
+        onChange={changeHandler}
+      />
+      <input
+        type="tel"
+        pattern="[0-9]{10}"
+        name="mentor__phone"
+        placeholder="Phone no."
+        className="signup__phone"
+        onChange={changeHandler}
+      />
+      <input
+        type="text"
+        minLength="6"
+        name="mentor__address"
+        placeholder="Address"
+        className="signup__email"
+        onChange={changeHandler}
+      />
+      <br />
+      {/* <label for="mentor__exam">which exam:</label> */}
+      <select
+        name="mentor__exam"
+        id="mentor__exam"
+        placeholder="Exam"
+        onChange={changeHandler}
+      >
+        <option value="" disabled selected>
+          Select exam
+        </option>
+        <option value="JEE">JEE</option>
+        <option value="NEET">NEET</option>
+      </select>
+      {/* <label for="mentor__subject">which subject:</label> */}
+      <select
+        name="mentor__subject"
+        id="mentor__subject"
+        placeholder="subject"
+        onChange={changeHandler}
+      >
+        <option value="" disabled selected>
+          Select subject
+        </option>
+        <option value="physics">Physics</option>
+        <option value="chemistry">Chemistry</option>
+        {mentorData["mentor__exam"] === "JEE" ? (
+          <option value="Maths">Maths</option>
+        ) : (
+          <option value="Biology">Biology</option>
+        )}
+      </select>
+      <input
+        type="password"
+        minLength="6"
+        name="password"
+        placeholder="Enter password"
+        className="signup__password"
+        onChange={changeHandler}
+      />
+    </div>
+  );
+}
+
+export default MentorSignup;
