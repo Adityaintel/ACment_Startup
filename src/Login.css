@@ -58,8 +58,9 @@
 }
 
 .login__full__logo .login__logo {
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
+  margin: auto;
   border-radius: 50%;
   -o-object-fit: contain;
      object-fit: contain;
