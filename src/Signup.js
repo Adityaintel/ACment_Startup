@@ -41,7 +41,7 @@ function Signup() {
         exam: mentorData.mentor__exam,
         subject: mentorData.mentor__subject,
       };
-      const url = process.env.REACT_APP_BASE_URL + "mentor/register";
+      const url = process.env.REACT_APP_BASE_URL + "/mentor/register";
       axios.post(url, data).then((res) => {
         console.log(res);
       });
