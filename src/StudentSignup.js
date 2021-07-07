@@ -31,7 +31,15 @@ function StudentSignup({ setStudent, studentData }) {
       <input
         type="tel"
         pattern="[0-9]{10}"
-        name="parents__phone"
+        name="phone"
+        placeholder="Your phone no."
+        className="signup__phone"
+        onChange={changeHandler}
+      />
+      <input
+        type="tel"
+        pattern="[0-9]{10}"
+        name="parent_phone"
         placeholder="Parent's phone no."
         className="signup__phone"
         onChange={changeHandler}

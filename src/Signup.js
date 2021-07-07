@@ -4,8 +4,49 @@ import logo from "./images/logo.png";
 import "./Signup.css";
 import StudentSignup from "./StudentSignup";
 import MentorSignup from "./MentorSignup";
+import axios from "axios";
+
+
+console.log(process.env.REACT_APP_BASE_URL);
 
 function Signup() {
+
+  // Sending data to server
+  const signupUser = (e) => {
+    e.preventDefault();
+    console.log("submitting data...");
+    if (category === "Student") {
+      console.log("submitting student data");
+      const data = {
+        username: studentData.username,
+        email: studentData.email,
+        phone: studentData.phone,
+        parent_phone: studentData.parent_phone,
+        address: studentData.student__address,
+        password: studentData.password,
+        exam: studentData.student__exam,
+      };
+      const url = process.env.REACT_APP_BASE_URL+"/user/register"; 
+      axios.post(url, data).then((res) => {
+        console.log(res);
+      });
+    } else {
+      console.log("submitting mentor data");
+      const data = {
+        username: mentorData.username,
+        email: mentorData.email,
+        phone: mentorData.mentor__phone,
+        address: mentorData.mentor__address,
+        password: mentorData.password,
+        exam: mentorData.mentor__exam,
+        subject: mentorData.mentor__subject,
+      };
+      const url = process.env.REACT_APP_BASE_URL + "mentor/register";
+      axios.post(url, data).then((res) => {
+        console.log(res);
+      });
+    }
+  };
 
   // To store whether the user is mentor or student
   const [category, setcategory] = useState("Student");
@@ -14,10 +55,11 @@ function Signup() {
   const [studentData, setstudentData] = useState({
     username: "",
     email: "",
-    parents__phone: "",
+    phone: "",
+    parent_phone: "",
     student__address: "",
     student__exam: "JEE",
-    password:"",
+    password: "",
   });
 
   // to store the mentor data if the user is mentor
@@ -27,17 +69,16 @@ function Signup() {
     mentor__phone: "",
     mentor__address: "",
     mentor__exam: "JEE",
-    mentor__subject:"physics",
-    password:"",
+    mentor__subject: "physics",
+    password: "",
   });
 
-  // If user is student, then oppositeCategory="mentor" : 
+  // If user is student, then oppositeCategory="mentor" :
   // This is used to display alternate signup option for mentor
   const oppositeCategory = category === "Student" ? "Mentor" : "Student";
 
   console.log(studentData);
   console.log(mentorData);
-
 
   const pwdShowHide = (event) => {
     console.log("checkbox clicked");
@@ -70,11 +111,13 @@ function Signup() {
         <div className="signup__formContainer">
           <form className="signup__form">
             {category === "Student" ? (
-              <StudentSignup setStudent={setstudentData}  studentData={studentData}/>
+              <StudentSignup
+                setStudent={setstudentData}
+                studentData={studentData}
+              />
             ) : (
-              <MentorSignup setMentor={setmentorData}  mentorData={mentorData}/>
+              <MentorSignup setMentor={setmentorData} mentorData={mentorData} />
             )}
-
 
             <div className="pwdCheckbox">
               <input
@@ -88,7 +131,11 @@ function Signup() {
               <label for="pwdCheck">Show password</label>
             </div>
 
-            <button type="submit" className="signup__submit">
+            <button
+              type="submit"
+              onClick={signupUser}
+              className="signup__submit"
+            >
               Submit
             </button>
           </form>
