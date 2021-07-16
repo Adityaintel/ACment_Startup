@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import logo from "./images/logo.png";
 import "./Signup.css";
 import StudentSignup from "./StudentSignup";
 import MentorSignup from "./MentorSignup";
 import axios from "axios";
 
-
 console.log(process.env.REACT_APP_BASE_URL);
 
 function Signup() {
+
+    const history = useHistory();
+    
 
   // Sending data to server
   const signupUser = (e) => {
@@ -26,9 +28,10 @@ function Signup() {
         password: studentData.password,
         exam: studentData.student__exam,
       };
-      const url = process.env.REACT_APP_BASE_URL+"/user/register"; 
+      const url = process.env.REACT_APP_BASE_URL + "/user/register";
       axios.post(url, data).then((res) => {
-        console.log(res);
+          console.log(res);
+          history.push("/studentpage")
       });
     } else {
       console.log("submitting mentor data");
@@ -43,7 +46,8 @@ function Signup() {
       };
       const url = process.env.REACT_APP_BASE_URL + "/mentor/register";
       axios.post(url, data).then((res) => {
-        console.log(res);
+          console.log(res);
+          history.push("/mentorpage")
       });
     }
   };
@@ -96,20 +100,23 @@ function Signup() {
         <div className="full__logo">
           <div className="logo">
             <img src={logo} alt="" />
-          </div>
+          </div>{" "}
           <div className="logo__text">
-            <h2>ACment</h2>
-            <p>we GUIDE u RISE</p>
-          </div>
-        </div>
-      </Link>
+            <h2> ACment </h2> <p> we GUIDE u RISE </p>{" "}
+          </div>{" "}
+        </div>{" "}
+      </Link>{" "}
       <div className="signupSection">
         <div className="signup__heading">
-          <h3>{category} Signup</h3>
-        </div>
-
+          <h3>
+            {" "}
+            {category}
+            Signup{" "}
+          </h3>{" "}
+        </div>{" "}
         <div className="signup__formContainer">
           <form className="signup__form">
+            {" "}
             {category === "Student" ? (
               <StudentSignup
                 setStudent={setstudentData}
@@ -117,8 +124,7 @@ function Signup() {
               />
             ) : (
               <MentorSignup setMentor={setmentorData} mentorData={mentorData} />
-            )}
-
+            )}{" "}
             <div className="pwdCheckbox">
               <input
                 type="checkbox"
@@ -128,33 +134,30 @@ function Signup() {
                 id="pwdCheck"
                 className="pwdCheck"
               />
-              <label for="pwdCheck">Show password</label>
-            </div>
-
+              <label for="pwdCheck"> Show password </label>{" "}
+            </div>{" "}
             <button
               type="submit"
               onClick={signupUser}
               className="signup__submit"
             >
-              Submit
-            </button>
-          </form>
-        </div>
-
+              Submit{" "}
+            </button>{" "}
+          </form>{" "}
+        </div>{" "}
         <h5 className="sign__alternate">
-          Already have an account?{" "}
+          Already have an account ?{" "}
           <Link to="/login" className="sign__alternateAnch">
-            Log In
-          </Link>
-        </h5>
-
+            Log In{" "}
+          </Link>{" "}
+        </h5>{" "}
         <div
           className="mentorBtn"
           onClick={() => setcategory(oppositeCategory)}
         >
-          Not a {category}? Sign up as <b>{oppositeCategory}</b>
-        </div>
-      </div>
+          Not a {category} ? Sign up as <b> {oppositeCategory} </b>{" "}
+        </div>{" "}
+      </div>{" "}
     </div>
   );
 }

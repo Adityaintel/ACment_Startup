@@ -1,13 +1,20 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import logo from "./images/logo.png";
 import "./Login.css";
 import axios from "axios";
+import { loginValidator } from "./validator";
 
 function Login() {
+  const history = useHistory();
+
   // Sending credentials to server through axios
   const loginUser = (e) => {
     e.preventDefault();
+    if (!loginValidator(e)) {
+      return;
+    }
+
     if (category === "Student") {
       const url = process.env.REACT_APP_BASE_URL + "/user/login";
       const data = {
@@ -15,6 +22,7 @@ function Login() {
         password: studentCred.password,
       };
       axios.post(url, data).then((res) => {
+        history.push("/studentpage");
         console.log(res);
       });
     } else {
@@ -26,7 +34,7 @@ function Login() {
       axios.post(url, data).then((res) => {
         console.log(res);
       });
-    } 
+    }
   };
 
   const [category, setcategory] = useState("Student");
@@ -89,7 +97,7 @@ function Login() {
         </div>
 
         <div className="login__formContainer">
-          <form className="login__form">
+          <form className="login__form" onSubmit={loginUser}>
             <input
               type="email"
               minLength="6"
@@ -98,14 +106,17 @@ function Login() {
               className="login__email"
               onChange={changeHandler}
             />
+            <span className="email__error error"></span>
+
             <input
               type="password"
-              minLength="6"
+              minLength="8"
               name="password"
               placeholder="Enter password"
               className="login__password"
               onChange={changeHandler}
             />
+            <span className="password__error error"></span>
 
             <div className="pwdCheckbox">
               <input
@@ -119,7 +130,7 @@ function Login() {
               <label for="pwdCheck">Show password</label>
             </div>
 
-            <button type="submit" className="login__submit" onClick={loginUser}>
+            <button type="submit" className="login__submit">
               Submit
             </button>
           </form>

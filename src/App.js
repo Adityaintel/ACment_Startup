@@ -4,25 +4,26 @@ import './App.css';
 import HomePage from './HomePage';
 import Login from './Login'
 import Signup from './Signup'
+import StudentPage from './StudentPage';
+import MentorPage from './MentorPage';
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
-          
           <Route path="/login">
             <Login />
           </Route>
           <Route path="/signup">
             <Signup />
           </Route>
-          {/* <Route path="/mentorpage">
+          <Route path="/mentorpage">
             <MentorPage />
-          </Route>
+          </Route >
           <Route path="/studentpage">
             <StudentPage />
-          </Route> */}
+          </Route>
           <Route path="/">
             <HomePage/>
           </Route>
