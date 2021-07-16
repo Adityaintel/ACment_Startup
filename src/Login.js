@@ -22,8 +22,9 @@ function Login() {
         password: studentCred.password,
       };
       axios.post(url, data).then((res) => {
-        history.push("/studentpage");
+        // store response returned from server related to user in the context
         console.log(res);
+        history.push("/studentpage");
       });
     } else {
       const url = process.env.REACT_APP_BASE_URL + "/mentor/login";
