@@ -10,7 +10,8 @@ function MentorSignup({ setMentor, mentorData }) {
   };
 
   return (
-    <div className="mentor__details">
+    <div className="register__details">
+      <label for="">Enter Name</label>
       <input
         type="text"
         minLength="6"
@@ -18,7 +19,9 @@ function MentorSignup({ setMentor, mentorData }) {
         placeholder="Enter your full name"
         className="signup__name"
         onChange={changeHandler}
+        required
       />
+      <label for="">Enter Email</label>
       <input
         type="email"
         minLength="6"
@@ -26,7 +29,9 @@ function MentorSignup({ setMentor, mentorData }) {
         placeholder="Enter your email"
         className="signup__email"
         onChange={changeHandler}
+        required
       />
+      <label for="">Enter Mobile Number</label>
       <input
         type="tel"
         pattern="[0-9]{10}"
@@ -34,35 +39,40 @@ function MentorSignup({ setMentor, mentorData }) {
         placeholder="Phone no."
         className="signup__phone"
         onChange={changeHandler}
+        required
       />
+      <label for="">Enter Address</label>
       <input
         type="text"
         minLength="6"
         name="mentor__address"
         placeholder="Address"
-        className="signup__email"
+        className="signup__address"
         onChange={changeHandler}
+        required
       />
       <br />
-      {/* <label for="mentor__exam">which exam:</label> */}
+      <label for="student__exam">Exam you are mentoring</label>
       <select
         name="mentor__exam"
         id="mentor__exam"
         placeholder="Exam"
         onChange={changeHandler}
+        required
       >
-        <option value="" disabled selected>
+        <option value="" disabled selected required>
           Select exam
         </option>
         <option value="JEE">JEE</option>
         <option value="NEET">NEET</option>
       </select>
-      {/* <label for="mentor__subject">which subject:</label> */}
+      <label for="student__exam">Subject you are mentoring</label>
       <select
         name="mentor__subject"
         id="mentor__subject"
         placeholder="subject"
         onChange={changeHandler}
+        required
       >
         <option value="" disabled selected>
           Select subject
@@ -75,13 +85,15 @@ function MentorSignup({ setMentor, mentorData }) {
           <option value="Biology">Biology</option>
         )}
       </select>
+      <label for="">Password</label>
       <input
         type="password"
         minLength="6"
         name="password"
         placeholder="Enter password"
-        className="signup__password"
+        className="register__password"
         onChange={changeHandler}
+        required
       />
     </div>
   );

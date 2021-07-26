@@ -1,33 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap");
-
 // ==================================== variables and mixins =================================================
+
+@import "./mixins";
 
 $violet: #735ccb;
 $lt_grey: #e5e5e5;
 $dk_grey: #cecece;
 $ft_black: #26262e;
-
-@mixin btnShape($bg: $violet, $txt: white) {
-  background-color: $bg;
-  color: $txt;
-  border-radius: 100px;
-  border: none;
-  outline: none;
-  padding: 15px;
-  font-weight: 800;
-  cursor: pointer;
-  font-size: 14px;
-  &:hover {
-    background: darken($bg, 15%);
-  }
-}
-@mixin circle($diam, $bg: $violet) {
-  width: $diam;
-  height: $diam;
-  border-radius: 50%;
-  background-color: $bg;
-  z-index: -100;
-}
 
 * {
   margin: 0;
@@ -39,10 +17,11 @@ $ft_black: #26262e;
 
 body {
   width: 100%;
-  font-family: "Roboto", sans-serif;
+
   // padding:0;
   min-width: 1280px;
   overflow-x: hidden;
+  overflow-y: auto;
   // position: relative;
   .frontBg {
     position: absolute;
@@ -62,6 +41,7 @@ body {
       height: 100%;
     }
   }
+
   .small_circle {
     @include circle(120px);
     position: absolute;
@@ -80,6 +60,29 @@ body {
     top: 800px;
     left: -210px;
   }
+}
+
+// ===================================Register part ===============================
+
+.homepageRegister {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 100;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 1.5s ease-in-out;
+}
+
+.show__homepageRegister {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: all;
+  transition: all 1.5s ease-in-out;
 }
 
 // ======================================= main wrapper properties ====================================================

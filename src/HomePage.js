@@ -1,6 +1,8 @@
-import React, { useEffect, createRef } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./HomePage.css";
+import Login from "./Login";
+import Signup from "./Signup";
 import frontbg from "./images/homepage_illustrations/background.svg";
 import sidebg from "./images/homepage_illustrations/pic_6.svg";
 import logo from "./images/homepage_illustrations/logo for cisco.png";
@@ -20,23 +22,37 @@ import fb_logo from "./images/social_media_logos/fb.svg";
 import youtube_logo from "./images/social_media_logos/youtube.svg";
 import acment_logo_white from "./images/homepage_illustrations/Acment_logo.png";
 
-// import page2Image from "./images/confused girl.jpg";
-// import logo from "./images/logo.png";
-
 function HomePage() {
+  const [registerPart, setRegisterPart] = useState("");
+
   // ====================== React scripts ====================================
-
-  const history = useHistory();
-  const login = () => {
-    history.push("/login");
+  const open_login = () => {
+    console.log("opening login form");
+    setRegisterPart(
+      <Login close_register={close_register} open_signup={open_signup} />
+    );
+    const homepageRegister = document.querySelector(".homepageRegister");
+    homepageRegister.classList.add("show__homepageRegister");
   };
-  const signup = () => {
-    history.push("/signup");
-  };
 
+  const open_signup = () => {
+    console.log("opening signup form");
+    setRegisterPart(
+      <Signup close_register={close_register} open_login={open_login} />
+    );
+    const homepageRegister = document.querySelector(".homepageRegister");
+    homepageRegister.classList.add("show__homepageRegister");
+  };
+  const close_register = () => {
+    console.log("closing register form");
+    const homepageRegister = document.querySelector(".homepageRegister");
+    homepageRegister.classList.remove("show__homepageRegister");
+    setRegisterPart("");
+  };
 
   return (
     <div className="body">
+      <div className="homepageRegister">{registerPart}</div>
       <img src={frontbg} alt="" className="frontBg" />
       <div className="big_circle"></div>
       <div className="small_circle"></div>
@@ -70,7 +86,7 @@ function HomePage() {
               <a href="#">Contact us</a>
             </li>
           </ul>
-          <button onClick={login}>Log in</button>
+          <button onClick={open_login}>Log in</button>
         </div>
 
         <div className="part1">

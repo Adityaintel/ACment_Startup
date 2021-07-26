@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-// import logo from "./images/logo.png";
-import "./Login.css";
+import "./register.css";
 import axios from "axios";
 import { loginValidator } from "./validator";
+import mentor_icon from "./images/icons/mentor_icon.svg";
+import student_icon from "./images/icons/student_icon.svg";
 
-function Login() {
+function Login({ close_register, open_signup }) {
   const history = useHistory();
 
   // Sending credentials to server through axios
@@ -15,44 +16,44 @@ function Login() {
       return;
     }
 
-    if (category === "Student") {
+    if (category === "student") {
       const url = process.env.REACT_APP_BASE_URL + "/user/login";
       const data = {
         email: studentCred.email,
         password: studentCred.password,
       };
-      axios
-        .post(url, data)
-        .then((res) => {
-          // store response returned from server related to user in the context
-          console.log(res);
-          history.push("/studentpage");
-        })
-        .catch((err) => {
-          console.log(err);
-          console.log(err.response.data.message);
-        });
+      // axios
+      //   .post(url, data)
+      //   .then((res) => {
+      //     // store response returned from server related to user in the context
+      //     console.log(res);
+      //     history.push("/studentpage");
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //     console.log(err.response.data.message);
+      //   });
     } else {
       const url = process.env.REACT_APP_BASE_URL + "/mentor/login";
       const data = {
         email: mentorCred.email,
         password: mentorCred.password,
       };
-      axios
-        .post(url, data)
-        .then((res) => {
-          console.log(res);
-          history.push("/mentorpage");
-        })
-        .catch((err) => {
-          console.log(err);
-          console.log(err.response.data.message);
-        });
+      // axios
+      //   .post(url, data)
+      //   .then((res) => {
+      //     console.log(res);
+      //     history.push("/mentorpage");
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //     console.log(err.response.data.message);
+      //   });
     }
   };
 
-  const [category, setcategory] = useState("Student");
-  const oppositeCategory = category === "Student" ? "Mentor" : "Student";
+  const [category, setcategory] = useState("student");
+  const oppositeCategory = category === "student" ? "mentor" : "student";
 
   // state variable for student credentials
   const [studentCred, setstudentCred] = useState({
@@ -87,48 +88,48 @@ function Login() {
     console.log("checkbox clicked");
     console.log(event.target.checked);
     if (event.target.checked) {
-      document.querySelector(".login__password").type = "text";
+      document.querySelector(".register__password").type = "text";
     } else {
-      document.querySelector(".login__password").type = "password";
+      document.querySelector(".register__password").type = "password";
     }
   };
 
   return (
-    <div className="login">
-      <div className="loginSection">
-        <Link to="/" className="logo__link">
-          <div className="login__full__logo">
-            <div className="login__logo">
-              <img src="" alt="" />
-            </div>
-            <h2>ACment</h2>
-            <p>we GUIDE u RISE</p>
-          </div>
-        </Link>
-
-        <div className="login__heading">
-          <h3>{category} login</h3>
+    <div className="register">
+      <div className="  registerSection">
+        {/* this is for purple circle in background */}
+        <div className="purple_circle"></div>
+        {/* ================================================= */}
+        <div className="cross" onClick={close_register}>
+          &#x274C;
+        </div>
+        <div className="register__heading">
+          <h1>SIGN IN</h1>
         </div>
 
-        <div className="login__formContainer">
-          <form className="login__form" onSubmit={loginUser}>
+        <div className="register__formContainer">
+          <form className="register__form" onSubmit={loginUser}>
+            <label for="email">Enter Email</label>
             <input
               type="email"
               minLength="6"
               name="email"
-              placeholder="Enter your email"
-              className="login__email"
+              placeholder="Enter Email"
+              className="register__email"
               onChange={changeHandler}
+              required
             />
             <span className="email__error error"></span>
 
+            <label for="password">Password</label>
             <input
               type="password"
               minLength="8"
               name="password"
-              placeholder="Enter password"
-              className="login__password"
+              placeholder="Password"
+              className="register__password"
               onChange={changeHandler}
+              required
             />
             <span className="password__error error"></span>
 
@@ -144,24 +145,30 @@ function Login() {
               <label for="pwdCheck">Show password</label>
             </div>
 
-            <button type="submit" className="login__submit">
-              Submit
+            <button type="submit" className="register__submit">
+              SIGN IN
             </button>
           </form>
-        </div>
-
-        <h5 className="sign__alternate">
-          Don't have an account?{" "}
-          <Link to="/signup" className="sign__alternateAnch">
-            Sign Up
-          </Link>
-        </h5>
-
-        <div
-          className="mentorBtn"
-          onClick={() => setcategory(oppositeCategory)}
-        >
-          Not a {category}? Login as <b>{oppositeCategory}</b>
+          <h5 className="sign__alternate">
+            Create a new account?{" "}
+            <span className="sign__alternateAnch" onClick={open_signup}>
+              Sign up
+            </span>
+          </h5>
+          <hr />
+          <h4 className="or">OR</h4>
+          <div
+            className="mentorBtn"
+            onClick={() => setcategory(oppositeCategory)}
+          >
+            <div className="user_icon">
+              <img
+                src={oppositeCategory === "mentor" ? mentor_icon : student_icon}
+                alt=""
+              />
+            </div>
+            Sign in as&nbsp;{oppositeCategory}
+          </div>
         </div>
       </div>
     </div>

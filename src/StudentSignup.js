@@ -1,7 +1,6 @@
 import React from "react";
 
 function StudentSignup({ setStudent, studentData }) {
-  
   const changeHandler = (event) => {
     const data = { ...studentData };
     const field = event.target.name;
@@ -11,7 +10,8 @@ function StudentSignup({ setStudent, studentData }) {
   };
 
   return (
-    <div className="student__details">
+    <div className="register__details">
+      <label for="">Enter Name</label>
       <input
         type="text"
         minLength="6"
@@ -19,7 +19,9 @@ function StudentSignup({ setStudent, studentData }) {
         placeholder="Full name"
         className="signup__name"
         onChange={changeHandler}
+        required
       />
+      <label for="">Enter Email</label>
       <input
         type="email"
         minLength="6"
@@ -27,7 +29,9 @@ function StudentSignup({ setStudent, studentData }) {
         placeholder="Email"
         className="signup__email"
         onChange={changeHandler}
+        required
       />
+      <label for="">Enter Mobile Number</label>
       <input
         type="tel"
         pattern="[0-9]{10}"
@@ -35,7 +39,9 @@ function StudentSignup({ setStudent, studentData }) {
         placeholder="Your phone no."
         className="signup__phone"
         onChange={changeHandler}
+        required
       />
+      <label for="">Enter Parent's Mobile Number</label>
       <input
         type="tel"
         pattern="[0-9]{10}"
@@ -44,33 +50,40 @@ function StudentSignup({ setStudent, studentData }) {
         className="signup__phone"
         onChange={changeHandler}
       />
+      <label for="">Enter Address</label>
       <input
         type="text"
         minLength="6"
         name="student__address"
         placeholder="Address"
-        className="signup__email"
+        className="signup__address"
         onChange={changeHandler}
+        required
       />
       <br />
-      {/* <label for="student__exam">Exam you are preparing for:</label> */}
+      <label for="student__exam">Exam you are preparing </label>
       <select
         name="student__exam"
         id="student__exam"
         placeholder="Exam"
         onChange={changeHandler}
+        required
       >
-        <option value="" disabled selected>Select exam</option>
+        <option value="" disabled selected>
+          Select exam
+        </option>
         <option value="JEE">JEE</option>
         <option value="NEET">NEET</option>
       </select>
+      <label for="">Password</label>
       <input
         type="password"
         minLength="6"
         name="password"
         placeholder="Enter password"
-        className="signup__password"
+        className="register__password "
         onChange={changeHandler}
+        required
       />
     </div>
   );

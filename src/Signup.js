@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-// import logo from "./images/logo.png";
-import "./Signup.css";
+import "./register.css";
 import StudentSignup from "./StudentSignup";
 import MentorSignup from "./MentorSignup";
 import axios from "axios";
+import mentor_icon from "./images/icons/mentor_icon.svg";
+import student_icon from "./images/icons/student_icon.svg";
 
 console.log(process.env.REACT_APP_BASE_URL);
 
-function Signup() {
+function Signup({ close_register, open_login }) {
   const history = useHistory();
 
   // Sending data to server
@@ -27,15 +28,15 @@ function Signup() {
         exam: studentData.student__exam,
       };
       const url = process.env.REACT_APP_BASE_URL + "/user/register";
-      axios
-        .post(url, data)
-        .then((res) => {
-          console.log(res);
-          history.push("/studentpage");
-        })
-        .catch((err) => {
-          console.log(err.response.data.message);
-        });
+      // axios
+      //   .post(url, data)
+      //   .then((res) => {
+      //     console.log(res);
+      //     history.push("/studentpage");
+      //   })
+      //   .catch((err) => {
+      //     console.log(err.response.data.message);
+      //   });
     } else {
       console.log("submitting mentor data");
       const data = {
@@ -48,15 +49,15 @@ function Signup() {
         subject: mentorData.mentor__subject,
       };
       const url = process.env.REACT_APP_BASE_URL + "/mentor/register";
-      axios
-        .post(url, data)
-        .then((res) => {
-          console.log(res);
-          history.push("/mentorpage");
-        })
-        .catch((err) => {
-          console.log(err.response.data.message);
-        });
+      // axios
+      //   .post(url, data)
+      //   .then((res) => {
+      //     console.log(res);
+      //     history.push("/mentorpage");
+      //   })
+      //   .catch((err) => {
+      //     console.log(err.response.data.message);
+      //   });
     }
   };
 
@@ -96,34 +97,26 @@ function Signup() {
     console.log("checkbox clicked");
     console.log(event.target.checked);
     if (event.target.checked) {
-      document.querySelector(".signup__password").type = "text";
+      document.querySelector(".register__password").type = "text";
     } else {
-      document.querySelector(".signup__password").type = "password";
+      document.querySelector(".register__password").type = "password";
     }
   };
 
   return (
-    <div className="signup">
-      <Link to="/" className="logo__link">
-        <div className="full__logo">
-          <div className="logo">
-            <img src={""} alt="" />
-          </div>{" "}
-          <div className="logo__text">
-            <h2> ACment </h2> <p> we GUIDE u RISE </p>{" "}
-          </div>{" "}
+    <div className="register">
+      <div className="registerSection">
+        {/* this is for purple circle in background */}
+        <div className="purple_circle"></div>
+        {/* ================================================= */}
+        <div className="cross" onClick={close_register}>
+          &#x274C;
+        </div>
+        <div className="register__heading">
+          <h1>SIGN UP</h1>
         </div>{" "}
-      </Link>{" "}
-      <div className="signupSection">
-        <div className="signup__heading">
-          <h3>
-            {" "}
-            {category}
-            Signup{" "}
-          </h3>{" "}
-        </div>{" "}
-        <div className="signup__formContainer">
-          <form className="signup__form">
+        <div className="register__formContainer">
+          <form className="register__form">
             {" "}
             {category === "Student" ? (
               <StudentSignup
@@ -147,23 +140,31 @@ function Signup() {
             <button
               type="submit"
               onClick={signupUser}
-              className="signup__submit"
+              className="register__submit"
             >
-              Submit{" "}
+              SIGN UP{" "}
             </button>{" "}
           </form>{" "}
-        </div>{" "}
-        <h5 className="sign__alternate">
-          Already have an account ?{" "}
-          <Link to="/login" className="sign__alternateAnch">
-            Log In{" "}
-          </Link>{" "}
-        </h5>{" "}
-        <div
-          className="mentorBtn"
-          onClick={() => setcategory(oppositeCategory)}
-        >
-          Not a {category} ? Sign up as <b> {oppositeCategory} </b>{" "}
+          <h5 className="sign__alternate">
+            Already have an account ?{" "}
+            <span className="sign__alternateAnch" onClick={open_login}>
+              Log In{" "}
+            </span>{" "}
+          </h5>{" "}
+          <hr />
+          <h4 className="or">OR</h4>
+          <div
+            className="mentorBtn"
+            onClick={() => setcategory(oppositeCategory)}
+          >
+            <div className="user_icon">
+              <img
+                src={oppositeCategory === "mentor" ? mentor_icon : student_icon}
+                alt=""
+              />
+            </div>
+            Sign up as&nbsp;{oppositeCategory}
+          </div>
         </div>{" "}
       </div>{" "}
     </div>
