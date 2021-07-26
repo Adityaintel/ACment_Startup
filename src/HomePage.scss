@@ -1,259 +1,487 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap");
 
+// ==================================== variables and mixins =================================================
 
-// ================ variables ========================
+$violet: #735ccb;
+$lt_grey: #e5e5e5;
+$dk_grey: #cecece;
+$ft_black: #26262e;
 
-$page1-intro-font:"Times New Roman", Times, serif;
-$page1-logo-font:Verdana, Geneva, Tahoma, sans-serif;
-$page1-info-font:"Times New Roman", Times, serif;
-$page1__register:"Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-$page2__content:Verdana, Geneva, Tahoma, sans-serif;
+@mixin btnShape($bg: $violet, $txt: white) {
+  background-color: $bg;
+  color: $txt;
+  border-radius: 100px;
+  border: none;
+  outline: none;
+  padding: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  font-size: 14px;
+  &:hover {
+    background: darken($bg, 15%);
+  }
+}
+@mixin circle($diam, $bg: $violet) {
+  width: $diam;
+  height: $diam;
+  border-radius: 50%;
+  background-color: $bg;
+  z-index: -100;
+}
 
-// ================ home page =================================
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-.homepage {
+// ==================================== body and background images ==================================================
+
+body {
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+  // padding:0;
+  min-width: 1280px;
   overflow-x: hidden;
-  position: relative;
+  // position: relative;
+  .frontBg {
+    position: absolute;
+    top: -40px;
+    z-index: -100;
+  }
+  .sideBg {
+    position: absolute;
+    z-index: -100;
+    top: 1150px;
+    right: -40px;
+    height: 650px;
+    width: 300px;
+    object-fit: contain;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .small_circle {
+    @include circle(120px);
+    position: absolute;
+    top: 565px;
+    right: 290px;
+  }
+  .big_circle {
+    @include circle(350px);
+    position: absolute;
+    top: 500px;
+    right: -120px;
+  }
+  .grey_circle {
+    @include circle(450px, #e1e1e1);
+    position: absolute;
+    top: 800px;
+    left: -210px;
+  }
 }
 
-// =================== page 1 =========================================
+// ======================================= main wrapper properties ====================================================
 
-.page1::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: -1;
-  // opacity:0.8;
-  background-image: url("./images/online studying.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
-.page1 {
-  background-color: rgba(0, 0, 0, 0.7);
-  height: 100vh;
-  width: 100%;
-  position: relative;
+.mainwrapper {
+  width: 1280px;
+  margin: 0 auto;
+  font-family: "Roboto", sans-serif;
 }
 
-// ================ navigation bar =========================
+// ===================================== header and login button =====================================================
 
-.page1__navbar {
-  position: fixed;
-  top:0;
+.headerbox {
+  margin-top: 30px;
+  height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  // background-color: salmon;
+  .logo {
+    img {
+      height: 100%;
+      width: 100%;
+    }
+    object-fit: contain;
+    height: 100%;
+    width: 100px;
+    margin-left: 10px;
+  }
+  ul {
+    flex: 1;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    li {
+      margin: auto 30px;
+      &:hover {
+        // font-size: 20px;
+        font-weight: 600;
+        text-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2);
+      }
+    }
+    li a {
+      text-decoration: none;
+      color: black;
+    }
+  }
+  button {
+    @include btnShape(white, black);
+    width: 100px;
+  }
+}
+
+// ==================================== part 1 ==================================================
+
+.part1 {
+  // background-color: yellow;
   width: 100%;
-  height: 60px;
-  color: cornsilk;
-  transition: all 1s ease;
-  z-index:100;
+  margin-top: 30px;
+  // margin-bottom: 40px;
+  height: 400px;
+  position: relative;
+  .textPart {
+    text-align: left;
+    padding: 50px 0;
+    width: 500px;
+    h1 {
+      font-size: 3em;
+      font-weight: 900;
+      margin-bottom: 30px;
+      span {
+        color: $violet;
+      }
+    }
+    p {
+      width: 400px;
+      font-size: 18px;
+    }
+    button {
+      @include btnShape();
+      padding: 15px;
+      width: 130px;
+      margin-top: 40px;
+    }
+  }
+  .imagePart {
+    overflow: hidden;
+    object-fit: contain;
+    position: absolute;
+    right: 200px;
+    top: 0;
+    width: 400px;
+    margin-top: -30px;
+    // background-color: crimson;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
 
-.page1__navbarNew{
-  background-color: rgba(0, 0, 0, 0.9);
-}
+// ======================================== part2 =============================================
 
-.page1__logo {
-  display: flex;
-  align-items: center;
-  flex: 1;
-  // color:black;
-  font-family:$page1-logo-font ;
-  // background-color: darkgoldenrod;
-}
-.page1__right {
-  display: flex;
-  align-items: center;
-  flex: 2;
-  // background-color: darkgoldenrod;
-}
-.page1__logo .logo__img {
-  width: 45px;
-  height: 45px;
-  background: #bbb;
-  border-radius: 50%;
-  margin: 10px;
-  object-fit: contain;
+.part2 {
+  // background-color: yellowgreen;
+  // padding: 20px 0;
+  height: 500px;
   overflow: hidden;
-  // background:cornflowerblue;
-  img{
-    width:100%;
-    height:100%;
-  }
-}
- .logo__text{
-  height: 100%;
-  margin-left: 10px;
-  padding:8px;
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  // background: chartreuse;
-  h2{
-    font-size: 25px;
-    // background:crimson;
-  }
-  p{
-    font-size: 12px;
-  }
-}
-.page1__info {
+  margin-top: 80px;
   display: flex;
-  flex: 1;
-  justify-content: space-evenly;
-  // background: blueviolet;
-}
-.page1__info h3 {
-  margin: 10px;
-  font-size: 18px;
-  font-weight: 400;
-  color: white;
-  font-family: $page1-info-font;
-  padding: 5px 20px;
-  border-radius: 30px;
-  cursor: pointer;
-  outline: none;
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.7);
-    color: black;
+  .imagePart {
+    img {
+      width: 100%;
+      height: 100%;
+    }
+    // flex: 1;
+    margin: auto 0;
+    object-fit: contain;
+    width: 48%;
+    height: 400px;
+    // background-color: yellow;
+    overflow: hidden;
+  }
+  .textPart {
+    // flex: 1;
+    margin: auto 0;
+    // margin-left:-80px;
+    width: 52%;
+    h1 {
+      margin-bottom: 30px;
+    }
+    p {
+      width: 490px;
+      font-size: 14px;
+      text-align: left;
+      line-height: 30px;
+    }
+    button {
+      margin-top: 50px;
+      @include btnShape();
+      width: 170px;
+    }
   }
 }
-.page1__info a{
-  text-decoration: none;
+
+// ============================================ part3 =======================================================
+
+.part3 {
+  height: 425px;
+  width: 950px;
+  margin: 40px auto;
+  padding: 30px;
+  position: relative;
+  box-shadow: 5px 10px 20px 5px rgba(0, 0, 0, 0.2);
+  .text1,
+  .text2 {
+    font-weight: 500;
+    width: 700px;
+    height: 200px;
+    text-align: left;
+    // background-color: cyan;
+    h2 {
+      margin-bottom: 30px;
+      font-size: 30px;
+    }
+  }
+  .text1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-left: 70px;
+    padding-top: 70px;
+  }
+  .text2 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding-left: 70px;
+    padding-right: 70px;
+    // padding-top:40px;
+  }
+  .image1,
+  .image2 {
+    img {
+      width: 100%;
+      height: 100%;
+    }
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    margin: 40px;
+  }
+  .image1 {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .image2 {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
 }
-.page1__register {
+
+// ========================================== part4 ===========================================
+
+.part4 {
+  // background-color: darkgoldenrod;
+  height: 300px;
+  width: 1200px;
+  margin: 80px auto;
   display: flex;
-  flex: 1;
-  justify-content: space-evenly;
-  // background: chartreuse;
-}
-
-.page1__registerBtn{
-  padding: 8px 40px;
-  min-width: 100px;
-  font-size: 16px;
-  font-family:$page1__register;
-  font-weight: 800;
-  background-color: rgba(255, 255, 255, 0.6);
-  color: black;
-  border: none;
-  cursor: pointer;
-  &:hover {
-    background-color: rgba(0, 0, 0, 1);
-    color:snow;
+  .textPart {
+    width: 48%;
+    padding: 20px;
+    padding-left: 40px;
+    h1 {
+      margin-bottom: 30px;
+    }
+    p {
+      line-height: 30px;
+    }
+    button {
+      @include btnShape();
+      margin-top: 30px;
+      margin-left: 60px;
+      width: 140px;
+    }
+  }
+  .imagePart {
+    img {
+      width: 100%;
+      height: 100%;
+    }
+    width: 52%;
+    height: 300px;
+    object-fit: contain;
+    // background-color: darkgray;
   }
 }
-.register__buttonNew{
-  background-color: rgba(255, 255, 255, 0.6);
-  color:black;
-  &:hover {
-    background-color: rgba(255, 255, 255, 1);
-    color:black;
-  }
-}
 
+// ========================================= part5 =============================================
 
-// ====================== page 1 intro ====================================
-
-.page1__intro{
-  color:whitesmoke;
+.part5 {
+  width: 100vw;
   position: absolute;
-  top:50%;
-  left:10%;
-  transform: translateY(-50%);
-  font-size: 40px;
-  font-family:$page1-intro-font;
-  width:40%;
-}
-
-// =================== page 2 ===============================
-
-.page2{
-  height: 100vh;
-  width: 100%;
-  background-color:  #504745;
-  display:flex;
-  flex-wrap: nowrap;
-  justify-content: space-around;
+  left: 0;
+  height: 300px;
+  background-color: $violet;
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
   align-items: center;
-}
-.page2__image{
-  height:auto;
-  flex:1;
-  max-width:600px;
-  width:100%;
-  object-fit: contain;
-  padding: 20px;
-  // box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.6);
-  img{
-    width:100%;
-    height:100%;
+  .imagePart {
+    img {
+      width: 100%;
+      height: 100%;
+    }
+    object-fit: contain;
+    height: 290px;
+    width: 400px;
+    margin: auto 0;
+    // background-color: yellow;
   }
-  
+  .textPart {
+    width: 700px;
+    font-size: 30px;
+    line-height: 40px;
+    font-weight: 900;
+    padding: 20px;
+    color: white;
+    button {
+      @include btnShape(white, black);
+      width: 150px;
+      margin-top: 40px;
+    }
+  }
 }
-.page2__content{
-  color:white;
-  flex:1;
+.part5_dummy {
+  height: 300px;
+  width: 100%;
+  background-color: yellow;
+  margin-bottom: 50px;
+}
+
+// ======================================== part6 ===============================================
+
+.part6 {
+  width: 1280px;
+  // height: 600px;
   text-align: center;
-  font-size: 20px;
-  font-family: $page2__content;
-  padding:30px;
-  b{
-    font-size: 40px;
+  margin-top: 80px;
+  margin-bottom: 100px;
+  & > h1 {
+    margin-bottom: 10px;
+  }
+  & > p {
+    font-size: 14px;
     font-weight: 600;
-    line-height: 100px;
   }
-}
-
-
-// ===================== contact form==============================
-
-.homepage__contact{
-  background-color: rgba(0, 0, 0, 0.6);
-  padding:40px 5vw;
-  width:100%;
-  h2{
-    margin-bottom:20px;
-    margin-left:10px;
-  }
-}
-
-.homepage__contactForm{
-  display:flex;
-  flex-direction: column;
-  font-size: 30px;
-  input{
-    padding:10px;
-    margin:10px;
-    // border-radius: 10px;
-    border:none;
-    font-size: 18px;
-    &:focus{
-      border:none;
-      outline: none;
+  .part6_container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    & > div {
+      width: 28%;
+      margin: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      flex-direction: column;
+      // text-align: justify;
+      padding: 10px 40px;
+      border-radius: 10px;
+      box-shadow: 2px 15px 20px 10px rgba(0, 0, 0, 0.15);
+      .feature_image {
+        margin: 40px;
+        width: 70%;
+        object-fit: contain;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      h2 {
+        font-size: 25px;
+        margin-bottom: 20px;
+        height: 70px;
+      }
+      p {
+        flex: 1;
+        line-height: 30px;
+      }
+      button {
+        @include btnShape();
+        width: 180px;
+        margin-top: 40px;
+        margin-bottom: 40px;
+      }
     }
   }
-  textarea{
-    padding:10px;
-    margin:10px;
-    // border-radius: 10px;
-    border:none;
-    font-size: 18px;
-    resize:vertical;
-    &:focus{
-      border:none;
-      outline: none;
+  // background-color: yellowgreen;
+}
+
+// ================================= footer ===============================================
+
+.footer {
+  width: 100%;
+  .footer_upper {
+    padding-top: 20px;
+    background-color: $ft_black;
+    display: flex;
+    justify-content: center;
+    color: white;
+    .footer_list {
+      margin: 30px;
+      width: 150px;
+      line-height: 30px;
+      text-align: left;
+      h3 {
+        font-size: 18px;
+        margin-bottom: 30px;
+      }
+      li {
+        list-style: none;
+        font-size: 14px;
+      }
+      a {
+        text-decoration: none;
+        color: white;
+      }
     }
   }
-  button{
-    padding:10px;
-    margin:10px;
-    font-size:20px;
-    font-weight: 600;
+
+  .footer_lower {
+    height: 80px;
+    padding: 0 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #000;
+    color: white;
+    .footer_lower_left {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      .logo {
+        object-fit: contain;
+        height: 60px;
+        margin-right: 30px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+    .footer_lower_right {
+      display: flex;
+      align-items: center;
+      .logos {
+        margin: 10px;
+      }
+    }
   }
 }

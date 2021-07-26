@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import logo from "./images/logo.png";
+// import logo from "./images/logo.png";
 import "./Signup.css";
 import StudentSignup from "./StudentSignup";
 import MentorSignup from "./MentorSignup";
@@ -9,9 +9,7 @@ import axios from "axios";
 console.log(process.env.REACT_APP_BASE_URL);
 
 function Signup() {
-
-    const history = useHistory();
-    
+  const history = useHistory();
 
   // Sending data to server
   const signupUser = (e) => {
@@ -29,10 +27,15 @@ function Signup() {
         exam: studentData.student__exam,
       };
       const url = process.env.REACT_APP_BASE_URL + "/user/register";
-      axios.post(url, data).then((res) => {
+      axios
+        .post(url, data)
+        .then((res) => {
           console.log(res);
-          history.push("/studentpage")
-      });
+          history.push("/studentpage");
+        })
+        .catch((err) => {
+          console.log(err.response.data.message);
+        });
     } else {
       console.log("submitting mentor data");
       const data = {
@@ -45,10 +48,15 @@ function Signup() {
         subject: mentorData.mentor__subject,
       };
       const url = process.env.REACT_APP_BASE_URL + "/mentor/register";
-      axios.post(url, data).then((res) => {
+      axios
+        .post(url, data)
+        .then((res) => {
           console.log(res);
-          history.push("/mentorpage")
-      });
+          history.push("/mentorpage");
+        })
+        .catch((err) => {
+          console.log(err.response.data.message);
+        });
     }
   };
 
@@ -81,8 +89,8 @@ function Signup() {
   // This is used to display alternate signup option for mentor
   const oppositeCategory = category === "Student" ? "Mentor" : "Student";
 
-  console.log(studentData);
-  console.log(mentorData);
+  // console.log(studentData);
+  // console.log(mentorData);
 
   const pwdShowHide = (event) => {
     console.log("checkbox clicked");
@@ -99,7 +107,7 @@ function Signup() {
       <Link to="/" className="logo__link">
         <div className="full__logo">
           <div className="logo">
-            <img src={logo} alt="" />
+            <img src={""} alt="" />
           </div>{" "}
           <div className="logo__text">
             <h2> ACment </h2> <p> we GUIDE u RISE </p>{" "}

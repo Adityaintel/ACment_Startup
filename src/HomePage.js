@@ -1,8 +1,27 @@
 import React, { useEffect, createRef } from "react";
 import { useHistory } from "react-router-dom";
 import "./HomePage.css";
-import page2Image from "./images/confused girl.jpg";
-import logo from "./images/logo.png";
+import frontbg from "./images/homepage_illustrations/background.svg";
+import sidebg from "./images/homepage_illustrations/pic_6.svg";
+import logo from "./images/homepage_illustrations/logo for cisco.png";
+import image1 from "./images/homepage_illustrations/footer.svg";
+import image2 from "./images/homepage_illustrations/pic_1.svg";
+import image3 from "./images/homepage_illustrations/pic_2.svg";
+import image4 from "./images/homepage_illustrations/pic_3.svg";
+import image5 from "./images/homepage_illustrations/pic_4.svg";
+import image6 from "./images/homepage_illustrations/pic_5.svg";
+import ft_image1 from "./images/homepage_illustrations/Mask Group 1.svg";
+import ft_image2 from "./images/homepage_illustrations/Mask Group 2.svg";
+import ft_image3 from "./images/homepage_illustrations/Mask Group 3.svg";
+import twitter_logo from "./images/social_media_logos/twitter.svg";
+import insta_logo from "./images/social_media_logos/insta.svg";
+import linkedin_logo from "./images/social_media_logos/linkedin.svg";
+import fb_logo from "./images/social_media_logos/fb.svg";
+import youtube_logo from "./images/social_media_logos/youtube.svg";
+import acment_logo_white from "./images/homepage_illustrations/Acment_logo.png";
+
+// import page2Image from "./images/confused girl.jpg";
+// import logo from "./images/logo.png";
 
 function HomePage() {
   // ====================== React scripts ====================================
@@ -15,119 +34,401 @@ function HomePage() {
     history.push("/signup");
   };
 
-  // ====================================================================
-
-  // ==============Animation part scripts ================================
-
-  window.addEventListener("scroll", () => {
-    const navBar = document.querySelector(".page1__navbar");
-    const regBtn = document.querySelectorAll(".page1__registerBtn");
-    let scrollPos = window.scrollY;
-
-    console.log(scrollPos);
-    if (scrollPos >= 100) {
-      navBar.classList.add("page1__navbarNew");
-      [...regBtn].forEach((elem) => elem.classList.add("register__buttonNew"));
-    } else {
-      navBar.classList.remove("page1__navbarNew");
-      [...regBtn].forEach((elem) =>
-        elem.classList.remove("register__buttonNew")
-      );
-    }
-  });
-
-  // ============================================================================
 
   return (
-    <div className="homepage">
-      <div className="page1__navbar">
-        <div className="page1__logo">
-          <div className="logo__img">
-            <img src={logo} alt="" />
-          </div>
-          <div className="logo__text">
-            <h2 className="name"> ACment</h2>
-            <p>we GUIDE u RISE</p>
-          </div>
-        </div>
-        <div className="page1__right">
-          <div className="page1__info">
-            <a href="#">
-              <h3>Home</h3>
-            </a>
-            <a href="#">
-              <h3>About</h3>
-            </a>
-            <a href="#">
-              <h3>Contact</h3>
-            </a>
-          </div>
-          <div className="page1__register">
-            <button className="page1__registerBtn" onClick={login}>
-              Log In
-            </button>
-            <button className="page1__registerBtn" onClick={signup}>
-              Sign Up
-            </button>
-          </div>
-        </div>
+    <div className="body">
+      <img src={frontbg} alt="" className="frontBg" />
+      <div className="big_circle"></div>
+      <div className="small_circle"></div>
+      <div className="sideBg">
+        <img src={sidebg} alt="" />
       </div>
-      <div className="page1">
-        <div className="page1__content">
-          <div className="page1__intro">
+      <div className="grey_circle"></div>
+
+      <div className="mainwrapper">
+        <div className="headerbox">
+          <div className="logo">
+            <a href="#">
+              <img src={logo} />
+            </a>
+          </div>
+
+          <ul>
+            <li>
+              <a href="#">About us</a>
+            </li>
+            <li>
+              <a href="#">Mentorship?</a>
+            </li>
+            <li>
+              <a href="#">Pay Now</a>
+            </li>
+            <li>
+              <a href="#">Pricing</a>
+            </li>
+            <li>
+              <a href="#">Contact us</a>
+            </li>
+          </ul>
+          <button onClick={login}>Log in</button>
+        </div>
+
+        <div className="part1">
+          <div className="textPart">
+            <h1>
+              Personal <span>Mentorship</span>
+            </h1>
             <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae,
-              delectus.
+              Dedicated support of mentors from Top llTs, NITs and Govt. Medical
+              Colleges to help you crack these exams with ease.
+            </p>
+            <button>Get Started</button>
+          </div>
+          <div className="imagePart">
+            <img src={image1} alt="" />
+          </div>
+        </div>
+
+        <div className="part2">
+          <div className="imagePart">
+            <img src={image2} alt="" />
+          </div>
+          <div className="textPart">
+            <h1>TO BE SUCCESS</h1>
+            <p>
+              We believe in excellence in education and all round development .
+              Every student is different and so are their needs. We tap into the
+              potential of each student and help them reach the zenith of
+              success. To achieve maximum efficiency we have personal mentors
+              expert in their field in addition to minutely curated content and
+              study resources.
+            </p>
+            <button>LEARN MORE</button>
+          </div>
+        </div>
+
+        <div className="part3">
+          <div className="text1">
+            <h2>Live Sessions &amp; Calls</h2>
+            <p>
+              One on one Consultation Calls daily to assess your progress. Live
+              Chapter Guidance Sessions by Educators and Mentors every alternate
+              day.
+            </p>
+          </div>
+          <div className="image1">
+            <img src={image3} alt="" />
+          </div>
+          <div className="image2">
+            <img src={image4} alt="" />
+          </div>
+          <div className="text2">
+            <h2>Study Planner</h2>
+            <p>
+              Ace your preparation with customized study plan &amp; bi-weekly
+              reviews that highlight your progress.
             </p>
           </div>
         </div>
-      </div>
-      <div className="page2">
-        <div className="page2__image">
-          <img src={page2Image} alt="" />
+
+        <div className="part4">
+          <div className="textPart">
+            <h1>Constant Motivation And Guidance</h1>
+            <p>
+              If a mentee ever lack confidence or loses motivation, our mentors
+              are always there to cheer them up and help reach their full
+              potential. These mentors, having themselves faced similar setbacks
+              in their journey, know ways to get through and shall prove helpful
+              I in paving your way towards success.
+            </p>
+            <button>LEARN MORE</button>
+          </div>
+          <div className="imagePart">
+            <img src={image5} alt="" />
+          </div>
         </div>
-        <p className="page2__content">
-          Are you Pursuing JEE or NEET?
-          <br />
-          Don't know where to start and what to do?
-          <br />
-          Don't have a proper mentor to guide you?
-          <br />
-          <b>We are here for you!</b>
-        </p>
+
+        <div className="part5">
+          <div className="imagePart">
+            <img src={image6} alt="" />
+          </div>
+          <div className="textPart">
+            <p>
+              With the correct guidance and monitoring, the student can be more
+              focussed and perform better, thus we have a provision for parents
+              to keep a continuous track as well.
+            </p>
+            <button>Read More</button>
+          </div>
+        </div>
+        <div className="part5_dummy"></div>
+
+        <div className="part6">
+          <h1>Features Of Our Acment</h1>
+          <p>Check out our list of awesome features below</p>
+          <div className="part6_container">
+            <div className="feature1">
+              <div className="feature_image">
+                <img src={ft_image1} alt="" />
+              </div>
+              <h2>Personalized Time Table</h2>
+              <p>
+                Our schedule is designed in such a way that it caters to your
+                needs and requirements, so that you may study according to you
+                study without any pressure. We try to help you maintain a
+                balance between your daily schooling and your preparation for
+                any exam simultaneously without feeling over burdened.
+              </p>
+              <button>LEARN MORE</button>
+            </div>
+            <div className="feature2">
+              <div className="feature_image">
+                <img src={ft_image2} alt="" />
+              </div>
+              <h2>Promoting Self Study By Providing Assessments</h2>
+              <p>
+                We take regular tests and provide assignments for them to
+                complete under designated time. This helps them find out their
+                weak areas so that they can particularly focus on their weak
+                topics.
+              </p>
+              <button>LEARN MORE</button>
+            </div>
+            <div className="feature3">
+              <div className="feature_image">
+                <img src={ft_image3} alt="" />
+              </div>
+              <h2>One on One Personal Mentorship</h2>
+              <p>
+                We believe in giving you our utmost time and attention and
+                therefore provide you direct access to your personal mentor whom
+                you can contact any time you have an issue. He/she will be your
+                constant guide in your journey to success.
+              </p>
+              <button>LEARN MORE</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="homepage__contact">
-        <h2>Leave a message...</h2>
-        <form action="" className="homepage__contactForm">
-          <input type="text" name="name" placeholder="Name" className="name" />
-          <input
-            type="email"
-            name="email"
-            placeholder="Email id"
-            className="email"
-          />
-          <input
-            type="text"
-            name="subject"
-            placeholder="Subject"
-            className="subject"
-          />
-          <textarea
-            name="message"
-            className="message"
-            cols="30"
-            rows="6"
-            placeholder="Message..."
-          />
-          <button type="submit" className="submit">
-            Submit
-          </button>
-        </form>
+      <div className="footer">
+        <div className="footer_upper">
+          <div className="footer_list">
+            <h3>Company </h3>
+            <ul>
+              <li>
+                <a href="#">About</a>
+              </li>
+              <li>
+                <a href="#">Leadership</a>
+              </li>
+              <li>
+                <a href="#">Blog</a>
+              </li>
+              <li>
+                <a href="#">Careers</a>
+              </li>
+              <li>
+                <a href="#">Customers</a>
+              </li>
+              <li>
+                <a href="#">Partners</a>
+              </li>
+              <li>
+                <a href="#">Referral Program</a>
+              </li>
+
+              <li>
+                <a href="#">Press</a>
+              </li>
+              <li>
+                <a href="#">Legal</a>
+              </li>
+              <li>
+                <a href="#">Trust Platform</a>
+              </li>
+
+              <li>
+                <a href="#">Investor Relations</a>
+              </li>
+            </ul>
+          </div>
+          <div className="footer_list">
+            <h3>Products</h3>
+            <ul>
+              <li>
+                <a href="#">Products Overview</a>
+              </li>
+              <li>
+                <a href="#">Droplets</a>
+              </li>
+              <li>
+                <a href="#">Kubernetes</a>
+              </li>
+              <li>
+                <a href="#">Managed Databases</a>
+              </li>
+              <li>
+                <a href="#">Spaces</a>
+              </li>
+              <li>
+                <a href="#">Marketplace</a>
+              </li>
+              <li>
+                <a href="#">Load Balancers</a>
+              </li>
+              <li>
+                <a href="#">Block Storage</a>
+              </li>
+              <li>
+                <a href="#">Tools &amp; Integrations</a>
+              </li>
+              <li>
+                <a href="#">API</a>
+              </li>
+              <li>
+                <a href="#">Pricing</a>
+              </li>
+              <li>
+                <a href="#">Documentation</a>
+              </li>
+              <li>
+                <a href="#">Release Notes</a>
+              </li>
+            </ul>
+          </div>
+          <div className="footer_list">
+            <h3>Community</h3>
+            <ul>
+              <li>
+                <a href="#">Tutorials</a>
+              </li>
+              <li>
+                <a href="#">Meetups</a>
+              </li>
+              <li>
+                <a href="#">Q&mp;A</a>
+              </li>
+              <li>
+                <a href="#">Write for Donations</a>
+              </li>
+              <li>
+                <a href="#">Droplets for Demos</a>
+              </li>
+              <li>
+                <a href="#">Hatch Startup Program</a>
+              </li>
+              <li>
+                <a href="#">Shop Swag</a>
+              </li>
+              <li>
+                <a href="#">Research Program</a>
+              </li>
+              <li>
+                <a href="#">Currents Research</a>
+              </li>
+              <li>
+                <a href="#">Open Source</a>
+              </li>
+              <li>
+                <a href="#">Code of Conduct</a>
+              </li>
+              <li>
+                <a href="#">Newsletter Signup</a>
+              </li>
+            </ul>
+          </div>
+          <div className="footer_list">
+            <h3>Solutions</h3>
+            <ul>
+              <li>
+                <a href="#">Web &amp; Mobile Apps</a>
+              </li>
+              <li>
+                <a href="#">Website Hosting</a>
+              </li>
+              <li>
+                <a href="#">Game Development</a>
+              </li>
+              <li>
+                <a href="#">Streaming VPN</a>
+              </li>
+              <li>
+                <a href="#">Startups</a>
+              </li>
+              <li>
+                <a href="#">SaaS Solutions</a>
+              </li>
+              <li>
+                <a href="#">Agency &amp; Web Dev Shops Managed Cloud</a>
+              </li>
+              <li>
+                <a href="#">Hosting Providers</a>
+              </li>
+              <li>
+                <a href="#">Big Data</a>
+              </li>
+              <li>
+                <a href="#">Business Solutions</a>
+              </li>
+            </ul>
+          </div>
+          <div className="footer_list">
+            <h3>Contact</h3>
+            <ul>
+              <li>
+                <a href="#">Support</a>
+              </li>
+              <li>
+                <a href="#">Sales</a>
+              </li>
+              <li>
+                <a href="#">Report Abuse</a>
+              </li>
+              <li>
+                <a href="#">System Status</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="footer_lower">
+          <div className="footer_lower_left">
+            <div className="logo">
+              <img src={acment_logo_white} alt="" />
+            </div>
+            <div className="copyright">
+              &copy; Copyright 2021. All Rights Reserved.
+            </div>
+          </div>
+          <div className="footer_lower_right">
+            <div className="logos">
+              <a href="#">
+                <img src={fb_logo} alt="" />
+              </a>
+            </div>
+            <div className="logos">
+              <a href="#">
+                <img src={insta_logo} alt="" />
+              </a>
+            </div>
+            <div className="logos">
+              <a href="#">
+                <img src={linkedin_logo} alt="" />
+              </a>
+            </div>
+            <div className="logos">
+              <a href="#">
+                <img src={twitter_logo} alt="" />
+              </a>
+            </div>
+            <div className="logos">
+              <a href="#">
+                <img src={youtube_logo} alt="" />
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-      {/* <div className="homepage__footerSpaceOccupier"></div>
-      <div className="homepage__footer">This is the footer</div> */}
     </div>
   );
 }
-
 export default HomePage;

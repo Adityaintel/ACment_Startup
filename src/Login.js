@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import logo from "./images/logo.png";
+// import logo from "./images/logo.png";
 import "./Login.css";
 import axios from "axios";
 import { loginValidator } from "./validator";
@@ -21,20 +21,33 @@ function Login() {
         email: studentCred.email,
         password: studentCred.password,
       };
-      axios.post(url, data).then((res) => {
-        // store response returned from server related to user in the context
-        console.log(res);
-        history.push("/studentpage");
-      });
+      axios
+        .post(url, data)
+        .then((res) => {
+          // store response returned from server related to user in the context
+          console.log(res);
+          history.push("/studentpage");
+        })
+        .catch((err) => {
+          console.log(err);
+          console.log(err.response.data.message);
+        });
     } else {
       const url = process.env.REACT_APP_BASE_URL + "/mentor/login";
       const data = {
         email: mentorCred.email,
         password: mentorCred.password,
       };
-      axios.post(url, data).then((res) => {
-        console.log(res);
-      });
+      axios
+        .post(url, data)
+        .then((res) => {
+          console.log(res);
+          history.push("/mentorpage");
+        })
+        .catch((err) => {
+          console.log(err);
+          console.log(err.response.data.message);
+        });
     }
   };
 
@@ -86,7 +99,7 @@ function Login() {
         <Link to="/" className="logo__link">
           <div className="login__full__logo">
             <div className="login__logo">
-              <img src={logo} alt="" />
+              <img src="" alt="" />
             </div>
             <h2>ACment</h2>
             <p>we GUIDE u RISE</p>

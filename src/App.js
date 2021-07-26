@@ -1,11 +1,12 @@
-import React from 'react';
-import {BrowserRouter as Router,Route,Switch}  from 'react-router-dom';
-import './App.css';
-import HomePage from './HomePage';
-import Login from './Login'
-import Signup from './Signup'
-import StudentPage from './StudentPage';
-import MentorPage from './MentorPage';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./App.css";
+import HomePage from "./HomePage";
+import Login from "./Login";
+import Signup from "./Signup";
+import StudentPage from "./StudentPage";
+import MentorPage from "./MentorPage";
+import FileUploader from "./FileUploader";
 
 function App() {
   return (
@@ -20,12 +21,15 @@ function App() {
           </Route>
           <Route path="/mentorpage">
             <MentorPage />
-          </Route >
+          </Route>
           <Route path="/studentpage">
             <StudentPage />
           </Route>
+          <Route path="/upload">
+            <FileUploader />
+          </Route>
           <Route path="/">
-            <HomePage/>
+            <HomePage />
           </Route>
         </Switch>
       </Router>
