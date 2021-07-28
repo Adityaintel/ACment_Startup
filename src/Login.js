@@ -9,52 +9,6 @@ import student_icon from "./images/icons/student_icon.svg";
 function Login({ close_register, open_signup }) {
   const history = useHistory();
 
-  // Sending credentials to server through axios
-  const loginUser = (e) => {
-    e.preventDefault();
-    if (!loginValidator(e)) {
-      return;
-    }
-
-    if (category === "student") {
-      const url = process.env.REACT_APP_BASE_URL + "/user/login";
-      const data = {
-        email: studentCred.email,
-        password: studentCred.password,
-      };
-      // axios
-      //   .post(url, data)
-      //   .then((res) => {
-      //     // store response returned from server related to user in the context
-      //     console.log(res);
-      //     history.push("/studentpage");
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //     console.log(err.response.data.message);
-      //   });
-    } else {
-      const url = process.env.REACT_APP_BASE_URL + "/mentor/login";
-      const data = {
-        email: mentorCred.email,
-        password: mentorCred.password,
-      };
-      // axios
-      //   .post(url, data)
-      //   .then((res) => {
-      //     console.log(res);
-      //     history.push("/mentorpage");
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //     console.log(err.response.data.message);
-      //   });
-    }
-  };
-
-  const [category, setcategory] = useState("student");
-  const oppositeCategory = category === "student" ? "mentor" : "student";
-
   // state variable for student credentials
   const [studentCred, setstudentCred] = useState({
     email: "",
@@ -67,14 +21,71 @@ function Login({ close_register, open_signup }) {
     password: "",
   });
 
+  const [category, setcategory] = useState("student");
+  const oppositeCategory = category === "student" ? "mentor" : "student";
+
+  // Sending credentials to server through axios
+  const loginUser = (e) => {
+    e.preventDefault();
+    if (!loginValidator(e)) {
+      return;
+    }
+    if (category === "student") {
+      const url = process.env.REACT_APP_BASE_URL + "/user/login";
+      const data = {
+        email: studentCred.email,
+        password: studentCred.password,
+      };
+      console.log(data);
+      axios
+        .post(url, data)
+        .then((res) => {
+          // store response returned from server related to user in the context
+          console.log(res);
+          history.push("/studentpage");
+        })
+        .catch((err) => {
+          console.log(err);
+          console.log(err.response);
+          alert(err.response.data.message);
+        });
+    } else {
+      const url = process.env.REACT_APP_BASE_URL + "/mentor/login";
+      const data = {
+        email: mentorCred.email,
+        password: mentorCred.password,
+      };
+      console.log(data);
+      axios
+        .post(url, data)
+        .then((res) => {
+          console.log(res);
+          history.push("/mentorpage");
+        })
+        .catch((err) => {
+          console.log(err);
+          console.log(err.response);
+          alert(err.response.data.message);
+        });
+    }
+  };
+
+  console.log(studentCred);
+
   // Handling changes for each input part, storing it in state variable
   const changeHandler = (event) => {
-    if (category === "Student") {
+    console.log("some changes occured in input field");
+    if (category === "student") {
       const cred = { ...studentCred };
       const field = event.target.name;
       const value = event.target.value;
       cred[field] = value;
+      console.log("before state change");
+      console.log(cred);
+      console.log(cred);
       setstudentCred(cred);
+      console.log("after state change:state is  ");
+      console.log(studentCred);
     } else {
       const cred = { ...mentorCred };
       const field = event.target.name;

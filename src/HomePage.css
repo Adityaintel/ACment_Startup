@@ -64,7 +64,7 @@ body .grey_circle {
   z-index: -100;
   position: absolute;
   top: 800px;
-  left: -210px;
+  left: -230px;
 }
 
 .homepageRegister {
@@ -470,7 +470,7 @@ body .grey_circle {
 .part5_dummy {
   height: 300px;
   width: 100%;
-  background-color: yellow;
+  background-color: #735ccb;
   margin-bottom: 50px;
 }
 
@@ -634,6 +634,7 @@ body .grey_circle {
   -o-object-fit: contain;
      object-fit: contain;
   height: 60px;
+  width: 60px;
   margin-right: 30px;
 }
 

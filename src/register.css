@@ -232,7 +232,7 @@ select:-webkit-autofill:focus {
   text-align: center;
   margin: auto;
   background-color: white;
-  width: 40px;
+  width: 40 px;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
 }

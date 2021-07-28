@@ -58,7 +58,7 @@ body {
     @include circle(450px, #e1e1e1);
     position: absolute;
     top: 800px;
-    left: -210px;
+    left: -230px;
   }
 }
 
@@ -364,7 +364,7 @@ body {
 .part5_dummy {
   height: 300px;
   width: 100%;
-  background-color: yellow;
+  background-color: $violet;
   margin-bottom: 50px;
 }
 
@@ -472,6 +472,7 @@ body {
       .logo {
         object-fit: contain;
         height: 60px;
+        width: 60px;
         margin-right: 30px;
         img {
           width: 100%;

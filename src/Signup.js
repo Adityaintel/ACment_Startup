@@ -28,15 +28,15 @@ function Signup({ close_register, open_login }) {
         exam: studentData.student__exam,
       };
       const url = process.env.REACT_APP_BASE_URL + "/user/register";
-      // axios
-      //   .post(url, data)
-      //   .then((res) => {
-      //     console.log(res);
-      //     history.push("/studentpage");
-      //   })
-      //   .catch((err) => {
-      //     console.log(err.response.data.message);
-      //   });
+      axios
+        .post(url, data)
+        .then((res) => {
+          console.log(res);
+          history.push("/studentpage");
+        })
+        .catch((err) => {
+          console.log(err.response.data.message);
+        });
     } else {
       console.log("submitting mentor data");
       const data = {
@@ -49,15 +49,15 @@ function Signup({ close_register, open_login }) {
         subject: mentorData.mentor__subject,
       };
       const url = process.env.REACT_APP_BASE_URL + "/mentor/register";
-      // axios
-      //   .post(url, data)
-      //   .then((res) => {
-      //     console.log(res);
-      //     history.push("/mentorpage");
-      //   })
-      //   .catch((err) => {
-      //     console.log(err.response.data.message);
-      //   });
+      axios
+        .post(url, data)
+        .then((res) => {
+          console.log(res);
+          history.push("/mentorpage");
+        })
+        .catch((err) => {
+          console.log(err.response.data.message);
+        });
     }
   };
 
