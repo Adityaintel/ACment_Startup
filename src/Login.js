@@ -27,9 +27,7 @@ function Login({ close_register, open_signup }) {
   // Sending credentials to server through axios
   const loginUser = (e) => {
     e.preventDefault();
-    if (!loginValidator(e)) {
-      return;
-    }
+
     if (category === "student") {
       const url = process.env.REACT_APP_BASE_URL + "/user/login";
       const data = {
@@ -37,6 +35,12 @@ function Login({ close_register, open_signup }) {
         password: studentCred.password,
       };
       console.log(data);
+
+      //validating the submitting data
+      if (!loginValidator(data)) {
+        return;
+      }
+
       axios
         .post(url, data)
         .then((res) => {
@@ -56,6 +60,12 @@ function Login({ close_register, open_signup }) {
         password: mentorCred.password,
       };
       console.log(data);
+
+      //validating the submitting data
+      if (!loginValidator(data)) {
+        return;
+      }
+
       axios
         .post(url, data)
         .then((res) => {

@@ -3,6 +3,9 @@ import { Link, useHistory } from "react-router-dom";
 import "./register.css";
 import StudentSignup from "./StudentSignup";
 import MentorSignup from "./MentorSignup";
+import { studentSignup_validator } from "./validator";
+import { mentorSignup_validator } from "./validator";
+
 import axios from "axios";
 import mentor_icon from "./images/icons/mentor_icon.svg";
 import student_icon from "./images/icons/student_icon.svg";
@@ -16,6 +19,7 @@ function Signup({ close_register, open_login }) {
   const signupUser = (e) => {
     e.preventDefault();
     console.log("submitting data...");
+
     if (category === "Student") {
       console.log("submitting student data");
       const data = {
@@ -27,6 +31,12 @@ function Signup({ close_register, open_login }) {
         password: studentData.password,
         exam: studentData.student__exam,
       };
+
+      // validating the submitting data of student
+      if (!studentSignup_validator(data)) {
+        return;
+      }
+
       const url = process.env.REACT_APP_BASE_URL + "/user/register";
       axios
         .post(url, data)
@@ -35,7 +45,9 @@ function Signup({ close_register, open_login }) {
           history.push("/studentpage");
         })
         .catch((err) => {
-          console.log(err.response.data.message);
+          console.log(err);
+          console.log(err.response);
+          alert(err.response.data.message);
         });
     } else {
       console.log("submitting mentor data");
@@ -48,6 +60,12 @@ function Signup({ close_register, open_login }) {
         exam: mentorData.mentor__exam,
         subject: mentorData.mentor__subject,
       };
+
+      // validating the submitting data of mentor
+      if (!mentorSignup_validator(data)) {
+        return;
+      }
+
       const url = process.env.REACT_APP_BASE_URL + "/mentor/register";
       axios
         .post(url, data)
@@ -56,7 +74,9 @@ function Signup({ close_register, open_login }) {
           history.push("/mentorpage");
         })
         .catch((err) => {
-          console.log(err.response.data.message);
+          console.log(err);
+          console.log(err.response);
+          alert(err.response.data.message);
         });
     }
   };

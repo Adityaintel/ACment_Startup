@@ -1,35 +1,178 @@
-const emailValidator = (event) => {
-  let email = event.target.email.value;
-  let email__error = document.querySelector(".email__error");
-  if (email === null || email === "") {
-    email__error.innerHTML = "*email should be filled";
+const validator = require("validator");
+
+export const loginValidator = ({ email, password }) => {
+  if (!email || typeof email !== "string") {
+    console.log("Email is required");
+    alert("Email is required");
     return false;
-  } else {
-    email__error.innerHTML = "";
+  }
+
+  if (!validator.isEmail(email)) {
+    console.log("Wrong email");
+    alert("Wrong email");
+    return false;
+  }
+
+  if (!password || typeof password !== "string") {
+    console.log("Password is required");
+    alert("Password is required");
+    return false;
+  }
+
+  if (password.length < 8) {
+    console.log("Password too small. Should be atleast 8 characters");
+    alert("Password too small. Should be atleast 8 characters");
+    return false;
   }
   return true;
 };
 
-const passwordValidator = (event) => {
-  let password = event.target.password.value;
-  let password__error = document.querySelector(".password__error");
-  if (password === null || password === "") {
-    password__error.innerHTML = "*password should be filled";
+export const studentSignup_validator = ({
+  username,
+  email,
+  phone,
+  parent_phone,
+  address,
+  password,
+  exam,
+}) => {
+  if (!username || typeof username !== "string") {
+    console.log("Username is required");
+    alert("Username is required");
     return false;
-  } else {
-    password__error.innerHTML = "";
   }
+
+  if (!email || typeof email !== "string") {
+    console.log("Email is required");
+    alert("Email is required");
+    return false;
+  }
+
+  if (!validator.isEmail(email)) {
+    console.log("Wrong email");
+    alert("Wrong email");
+    return false;
+  }
+
+  if (!phone || typeof phone !== "string") {
+    console.log("Phone no. is required");
+    alert("Phone no. is required");
+    return false;
+  }
+
+  if (!parent_phone || typeof phone !== "string") {
+    console.log("Parents phone no. is required");
+    alert("Parents phone no. is required");
+    return false;
+  }
+
+  if (!address || typeof address !== "string") {
+    console.log("Address is required");
+    alert("Address is required");
+    return false;
+  }
+
+  if (phone.length !== 10) {
+    console.log("Wrong phone no.");
+    alert("Wrong phone no.");
+    return false;
+  }
+
+  if (parent_phone.length !== 10) {
+    console.log("Wrong parent's phone no.");
+    alert("Wrong parent's phone no.");
+    return false;
+  }
+
+  if (!password || typeof password !== "string") {
+    console.log("Password is required");
+    alert("Password is required");
+    return false;
+  }
+
+  if (password.length < 7) {
+    console.log("Password too small. Should be atleast 8 characters");
+    alert("Password too small. Should be atleast 8 characters");
+    return false;
+  }
+
+  if (!exam || typeof exam !== "string") {
+    console.log("Exam is required");
+    alert("Exam is required");
+    return false;
+  }
+
   return true;
 };
 
-export const loginValidator = (event) => {
-  if (!emailValidator(event)) {
-    console.log("*error in email field");
+export const mentorSignup_validator = ({
+  username,
+  email,
+  phone,
+  address,
+  password,
+  exam,
+  subject,
+}) => {
+  if (!username || typeof username !== "string") {
+    console.log("Username is required");
+    alert("Username is required");
     return false;
   }
-  if (!passwordValidator(event)) {
-    console.log("*error in password field");
+
+  if (!email || typeof email !== "string") {
+    console.log("Email is required");
+    alert("Email is required");
     return false;
   }
+
+  if (!validator.isEmail(email)) {
+    console.log("Wrong email");
+    alert("Wrong email");
+    return false;
+  }
+
+  if (!phone || typeof phone !== "string") {
+    console.log("Phone no. is required");
+    alert("Phone no. is required");
+    return false;
+  }
+
+  if (!address || typeof address !== "string") {
+    console.log("Address is required");
+    alert("Address is required");
+    return false;
+  }
+
+  if (phone.length !== 10) {
+    console.log("Wrong phone no.");
+    alert("Wrong phone no.");
+    return false;
+  }
+
+  if (!password || typeof password !== "string") {
+    console.log("Password is required");
+    alert("Password is required");
+    return false;
+  }
+
+  if (password.length < 7) {
+    console.log("Password too small. Should be atleast 8 characters");
+    alert("Password too small. Should be atleast 8 characters");
+    return false;
+  }
+
+  if (!exam || typeof exam !== "string") {
+    console.log("Exam is required");
+    alert("Exam is required");
+    return false;
+  }
+
+  if (!subject || typeof subject !== "string") {
+    console.log("Subject is required");
+    alert("Subject is required");
+    return false;
+  }
+
   return true;
 };
