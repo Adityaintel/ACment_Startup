@@ -16,6 +16,7 @@ function MentorSignup({ setMentor, mentorData }) {
         type="text"
         minLength="6"
         name="username"
+        value={mentorData.username}
         placeholder="Enter your full name"
         className="signup__name"
         onChange={changeHandler}
@@ -26,6 +27,7 @@ function MentorSignup({ setMentor, mentorData }) {
         type="email"
         minLength="6"
         name="email"
+        value={mentorData.email}
         placeholder="Enter your email"
         className="signup__email"
         onChange={changeHandler}
@@ -36,6 +38,7 @@ function MentorSignup({ setMentor, mentorData }) {
         type="tel"
         pattern="[0-9]{10}"
         name="mentor__phone"
+        value={mentorData.mentor_phone}
         placeholder="Phone no."
         className="signup__phone"
         onChange={changeHandler}
@@ -46,6 +49,7 @@ function MentorSignup({ setMentor, mentorData }) {
         type="text"
         minLength="6"
         name="mentor__address"
+        value={mentorData.mentor__address}
         placeholder="Address"
         className="signup__address"
         onChange={changeHandler}
@@ -55,6 +59,7 @@ function MentorSignup({ setMentor, mentorData }) {
       <label for="student__exam">Exam you are mentoring</label>
       <select
         name="mentor__exam"
+        value={mentorData.mentor__exam}
         id="mentor__exam"
         placeholder="Exam"
         onChange={changeHandler}
@@ -69,6 +74,7 @@ function MentorSignup({ setMentor, mentorData }) {
       <label for="student__exam">Subject you are mentoring</label>
       <select
         name="mentor__subject"
+        value={mentorData.mentor__subject}
         id="mentor__subject"
         placeholder="subject"
         onChange={changeHandler}
@@ -90,6 +96,7 @@ function MentorSignup({ setMentor, mentorData }) {
         type="password"
         minLength="6"
         name="password"
+        value={mentorData.password}
         placeholder="Enter password"
         className="register__password"
         onChange={changeHandler}

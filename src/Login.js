@@ -45,11 +45,17 @@ function Login({ close_register, open_signup }) {
         .post(url, data)
         .then((res) => {
           // store response returned from server related to user in the context
-          console.log(res);
+          const { jwtToken, ...userData } = res.data;
+          console.log(jwtToken);
+          console.log(userData);
+          sessionStorage.setItem("jwtToken", jwtToken);
+          sessionStorage.setItem("usertype", "student");
+          sessionStorage.setItem("userData", userData);
+          console.log(sessionStorage.getItem("userData"));
+          console.log("redirecting to studentpage");
           history.push("/studentpage");
         })
         .catch((err) => {
-          console.log(err);
           console.log(err.response);
           alert(err.response.data.message);
         });
@@ -70,17 +76,20 @@ function Login({ close_register, open_signup }) {
         .post(url, data)
         .then((res) => {
           console.log(res);
+          const { jwtToken, ...userData } = res.data;
+          console.log(jwtToken);
+          console.log(userData);
+          sessionStorage.setItem("jwtToken", jwtToken);
+          sessionStorage.setItem("usertype", "mentor");
+          sessionStorage.setItem("userData", userData);
           history.push("/mentorpage");
         })
         .catch((err) => {
-          console.log(err);
           console.log(err.response);
           alert(err.response.data.message);
         });
     }
   };
-
-  console.log(studentCred);
 
   // Handling changes for each input part, storing it in state variable
   const changeHandler = (event) => {
@@ -90,11 +99,7 @@ function Login({ close_register, open_signup }) {
       const field = event.target.name;
       const value = event.target.value;
       cred[field] = value;
-      console.log("before state change");
-      console.log(cred);
-      console.log(cred);
       setstudentCred(cred);
-      console.log("after state change:state is  ");
       console.log(studentCred);
     } else {
       const cred = { ...mentorCred };
@@ -102,6 +107,7 @@ function Login({ close_register, open_signup }) {
       const value = event.target.value;
       cred[field] = value;
       setmentorCred(cred);
+      console.log(mentorCred);
     }
   };
 
@@ -138,6 +144,9 @@ function Login({ close_register, open_signup }) {
               placeholder="Enter Email"
               className="register__email"
               onChange={changeHandler}
+              value={
+                category === "student" ? studentCred.email : mentorCred.email
+              }
               required
             />
             <span className="email__error error"></span>
@@ -150,6 +159,11 @@ function Login({ close_register, open_signup }) {
               placeholder="Password"
               className="register__password"
               onChange={changeHandler}
+              value={
+                category === "student"
+                  ? studentCred.password
+                  : mentorCred.password
+              }
               required
             />
             <span className="password__error error"></span>

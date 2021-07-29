@@ -16,6 +16,7 @@ function StudentSignup({ setStudent, studentData }) {
         type="text"
         minLength="6"
         name="username"
+        value={studentData.username}
         placeholder="Full name"
         className="signup__name"
         onChange={changeHandler}
@@ -26,6 +27,7 @@ function StudentSignup({ setStudent, studentData }) {
         type="email"
         minLength="6"
         name="email"
+        value={studentData.email}
         placeholder="Email"
         className="signup__email"
         onChange={changeHandler}
@@ -36,6 +38,7 @@ function StudentSignup({ setStudent, studentData }) {
         type="tel"
         pattern="[0-9]{10}"
         name="phone"
+        value={studentData.phone}
         placeholder="Your phone no."
         className="signup__phone"
         onChange={changeHandler}
@@ -46,6 +49,7 @@ function StudentSignup({ setStudent, studentData }) {
         type="tel"
         pattern="[0-9]{10}"
         name="parent_phone"
+        value={studentData.parent_phone}
         placeholder="Parent's phone no."
         className="signup__phone"
         onChange={changeHandler}
@@ -55,6 +59,7 @@ function StudentSignup({ setStudent, studentData }) {
         type="text"
         minLength="6"
         name="student__address"
+        value={studentData.student__address}
         placeholder="Address"
         className="signup__address"
         onChange={changeHandler}
@@ -67,6 +72,7 @@ function StudentSignup({ setStudent, studentData }) {
         id="student__exam"
         placeholder="Exam"
         onChange={changeHandler}
+        value={studentData.student__exam}
         required
       >
         <option value="" disabled selected>
@@ -80,6 +86,7 @@ function StudentSignup({ setStudent, studentData }) {
         type="password"
         minLength="6"
         name="password"
+        value={studentData.password}
         placeholder="Enter password"
         className="register__password "
         onChange={changeHandler}

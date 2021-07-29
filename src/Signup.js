@@ -31,7 +31,7 @@ function Signup({ close_register, open_login }) {
         password: studentData.password,
         exam: studentData.student__exam,
       };
-
+      console.log(data);
       // validating the submitting data of student
       if (!studentSignup_validator(data)) {
         return;
@@ -42,7 +42,8 @@ function Signup({ close_register, open_login }) {
         .post(url, data)
         .then((res) => {
           console.log(res);
-          history.push("/studentpage");
+          open_login();
+          // history.push("/studentpage");
         })
         .catch((err) => {
           console.log(err);
@@ -60,7 +61,7 @@ function Signup({ close_register, open_login }) {
         exam: mentorData.mentor__exam,
         subject: mentorData.mentor__subject,
       };
-
+      console.log(data);
       // validating the submitting data of mentor
       if (!mentorSignup_validator(data)) {
         return;
@@ -71,7 +72,8 @@ function Signup({ close_register, open_login }) {
         .post(url, data)
         .then((res) => {
           console.log(res);
-          history.push("/mentorpage");
+          open_login();
+          // history.push("/mentorpage");
         })
         .catch((err) => {
           console.log(err);

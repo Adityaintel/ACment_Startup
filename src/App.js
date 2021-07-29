@@ -1,9 +1,14 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import "./App.css";
 import HomePage from "./HomePage";
 import Login from "./Login";
-import Signup from "./Signup";
+// import Signup from "./Signup";
 import StudentPage from "./StudentPage";
 import MentorPage from "./MentorPage";
 import FileUploader from "./FileUploader";
@@ -16,9 +21,9 @@ function App() {
           <Route path="/login">
             <Login />
           </Route>
-          <Route path="/signup">
+          {/* <Route path="/signup">
             <Signup />
-          </Route>
+          </Route> */}
           <Route path="/mentorpage">
             <MentorPage />
           </Route>
