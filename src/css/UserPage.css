@@ -1,0 +1,40 @@
+.userpage {
+  min-height: 100vh;
+  background-color: yellow;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.userpage__content {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.userpage__mainContent {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  background-color: violet;
+}
+
+.userpage__userInfo {
+  width: 350px;
+  background-color: turquoise;
+  display: block;
+}
+
+.hidden_userpage__userInfo {
+  height: 0;
+  display: none;
+}
+/*# sourceMappingURL=UserPage.css.map */

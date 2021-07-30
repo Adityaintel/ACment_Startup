@@ -1,4 +1,4 @@
-import { useReducer, createContext } from "react";
+import { useReducer, createContext, useContext } from "react";
 import reducer, { initialState } from "./reducer";
 
 export const userContext = createContext();
@@ -8,3 +8,7 @@ export const UserProvider = ({ children }) => (
     {children}
   </userContext.Provider>
 );
+
+const UserContextProvider = () => useContext(userContext);
+
+export default UserContextProvider;

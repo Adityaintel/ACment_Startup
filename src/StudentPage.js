@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import "./css/UserPage.css";
+import UserContextProvider from "./UserContext";
+import Header from "./Header";
+import UserInfo from "./UserInfo";
 
 function StudentPage() {
   const history = useHistory();
-  const [userData, setUserData] = useState({});
+
+  // taking data from userContext
+  const [userData, dispatch] = UserContextProvider();
+  const userInfo = userData.userInfo; //accessing userinfo part inside reducer
+
   // checking if user is authenticated,else it will redirect to homepage
   useEffect(() => {
     const jwt = sessionStorage.getItem("jwtToken");
     console.log(jwt);
-    const storedUser = sessionStorage.getItem("userData");
-    console.log(storedUser);
-    if (storedUser) setUserData(storedUser);
-    console.log(userData);
+
     if (!jwt) {
       history.push("/");
     }
@@ -23,11 +28,24 @@ function StudentPage() {
     history.push("/");
   };
 
+  // showing and hiding userInfo part
+  const toggle_userInfo = () => {
+    const userInfo = document.querySelector(".userpage__userInfo");
+    userInfo.classList.toggle("hidden_userpage__userInfo");
+  };
+  // ();
+  console.log(userData);
   return (
-    <div className="studentPage">
-      <h1>This is the student page</h1>
-      <button onClick={logout}>log out</button>
-      <h3>hello {userData.username}</h3>
+    <div className="userpage">
+      <Header toggleUserInfo={toggle_userInfo} />
+      <div className="userpage__content">
+        <div className="userpage__mainContent">
+          <h2>This is the student page</h2>
+        </div>
+        <div className="userpage__userInfo hidden_userpage__userInfo">
+          <UserInfo />
+        </div>
+      </div>
     </div>
   );
 }

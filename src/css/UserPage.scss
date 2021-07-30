@@ -1,0 +1,29 @@
+@import "./variables";
+
+.userpage {
+  min-height: 100vh;
+  background-color: yellow;
+  display: flex;
+  flex-direction: column;
+}
+.userpage__content {
+  flex: 1;
+  width: 100%;
+  display: flex;
+}
+
+.userpage__mainContent {
+  flex: 1;
+  background-color: violet;
+}
+
+.userpage__userInfo {
+  width: 350px;
+  background-color: turquoise;
+  display: block;
+}
+
+.hidden_userpage__userInfo {
+  height: 0;
+  display: none;
+}

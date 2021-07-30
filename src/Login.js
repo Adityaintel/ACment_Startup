@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
-import "./register.css";
+import "./css/register.css";
 import axios from "axios";
 import { loginValidator } from "./validator";
+import { userContext } from "./UserContext";
 import mentor_icon from "./images/icons/mentor_icon.svg";
 import student_icon from "./images/icons/student_icon.svg";
 
 function Login({ close_register, open_signup }) {
   const history = useHistory();
+  const [userData, dispatch] = useContext(userContext);
 
   // state variable for student credentials
   const [studentCred, setstudentCred] = useState({
@@ -45,13 +47,23 @@ function Login({ close_register, open_signup }) {
         .post(url, data)
         .then((res) => {
           // store response returned from server related to user in the context
-          const { jwtToken, ...userData } = res.data;
+          const { jwtToken, ...user_info } = res.data;
           console.log(jwtToken);
-          console.log(userData);
+          console.log(user_info);
           sessionStorage.setItem("jwtToken", jwtToken);
           sessionStorage.setItem("usertype", "student");
-          sessionStorage.setItem("userData", userData);
-          console.log(sessionStorage.getItem("userData"));
+
+          // storing data in react context api
+          dispatch({
+            type: "ADD_USER",
+            data: {
+              category: "student",
+              userInfo: user_info,
+            },
+          });
+          // sessionStorage.setItem("userData", userData);
+          // console.log(sessionStorage.getItem("userData"));
+          console.log(userData);
           console.log("redirecting to studentpage");
           history.push("/studentpage");
         })
@@ -76,12 +88,21 @@ function Login({ close_register, open_signup }) {
         .post(url, data)
         .then((res) => {
           console.log(res);
-          const { jwtToken, ...userData } = res.data;
+          const { jwtToken, ...user_info } = res.data;
           console.log(jwtToken);
-          console.log(userData);
+          console.log(user_info);
           sessionStorage.setItem("jwtToken", jwtToken);
           sessionStorage.setItem("usertype", "mentor");
-          sessionStorage.setItem("userData", userData);
+
+          // storing data in react context api
+          dispatch({
+            type: "ADD_USER",
+            data: {
+              category: "mentor",
+              userInfo: user_info,
+            },
+          });
+          // sessionStorage.setItem("userData", userData);
           history.push("/mentorpage");
         })
         .catch((err) => {

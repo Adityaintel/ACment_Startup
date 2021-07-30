@@ -78,16 +78,14 @@ body .grey_circle {
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
-  -webkit-transition: all 1.5s ease-in-out;
-  transition: all 1.5s ease-in-out;
+  -webkit-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
 }
 
 .show__homepageRegister {
   visibility: visible;
   opacity: 1;
   pointer-events: all;
-  -webkit-transition: all 1.5s ease-in-out;
-  transition: all 1.5s ease-in-out;
 }
 
 .mainwrapper {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import "./register.css";
+import "./css/register.css";
 import StudentSignup from "./StudentSignup";
 import MentorSignup from "./MentorSignup";
 import { studentSignup_validator } from "./validator";

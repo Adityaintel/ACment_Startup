@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import "./HomePage.css";
+import "./css/HomePage.css";
 import Login from "./Login";
 import Signup from "./Signup";
 import frontbg from "./images/homepage_illustrations/background.svg";
