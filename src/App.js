@@ -51,7 +51,6 @@ function App() {
               },
             });
             console.log(userData);
-            console.log("redirecting to studentpage");
           })
           .catch((err) => {
             console.log(err.message);
@@ -81,7 +80,6 @@ function App() {
               },
             });
             console.log(userData);
-            console.log("redirecting to mentorpage");
           })
           .catch((err) => {
             console.log(err.message);

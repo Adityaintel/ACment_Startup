@@ -12,15 +12,19 @@
 }
 
 // ==================================== body and background images ==================================================
-
-body {
-  width: 100%;
+body{
+  overflow-x: hidden;
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
 
   // padding:0;
   min-width: 1280px;
   overflow-x: hidden;
   overflow-y: auto;
-  // position: relative;
+  position: relative;
   .frontBg {
     position: absolute;
     top: -40px;

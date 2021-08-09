@@ -5,6 +5,7 @@
   background-color: yellow;
   display: flex;
   flex-direction: column;
+  width: 100vw;
 }
 .userpage__content {
   flex: 1;
@@ -14,13 +15,14 @@
 
 .userpage__mainContent {
   flex: 1;
-  background-color: violet;
+  background-color: $lt_grey;
 }
 
 .userpage__userInfo {
   width: 350px;
-  background-color: turquoise;
+  background-color: white;
   display: block;
+  padding: 10px;
 }
 
 .hidden_userpage__userInfo {

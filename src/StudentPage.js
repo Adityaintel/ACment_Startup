@@ -23,10 +23,6 @@ function StudentPage() {
   }, []);
 
   // logging out===clearing session storage and redirecting to home page
-  const logout = () => {
-    sessionStorage.clear();
-    history.push("/");
-  };
 
   // showing and hiding userInfo part
   const toggle_userInfo = () => {

@@ -82,7 +82,7 @@
   margin: 0 50px;
 }
 
-.header__searchBar {
+.header__searchBar form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -99,7 +99,7 @@
   padding: 0;
 }
 
-.header__searchBar input {
+.header__searchBar form input {
   padding: 10px;
   height: 100%;
   width: 100%;
@@ -109,8 +109,33 @@
   outline: none;
 }
 
-.header__searchBar button {
-  width: 30px;
+.header__searchBar form input::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.43);
+}
+
+.header__searchBar form input:-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.43);
+}
+
+.header__searchBar form input::-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.43);
+}
+
+.header__searchBar form input::placeholder {
+  color: rgba(0, 0, 0, 0.43);
+}
+
+.header__searchBar form select {
+  padding: 5px;
+  height: 100%;
+  width: 100px;
+  margin: 0;
+  border: none;
+  outline: none;
+}
+
+.header__searchBar form button {
+  width: 50px;
   height: 100%;
   margin: 0;
   padding-right: 10px;
@@ -120,7 +145,7 @@
   cursor: pointer;
 }
 
-.header__searchBar button i {
+.header__searchBar form button i {
   color: black;
   font-size: 20px;
 }

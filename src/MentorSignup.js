@@ -86,9 +86,9 @@ function MentorSignup({ setMentor, mentorData }) {
         <option value="physics">Physics</option>
         <option value="chemistry">Chemistry</option>
         {mentorData["mentor__exam"] === "JEE" ? (
-          <option value="Maths">Maths</option>
+          <option value="maths">Maths</option>
         ) : (
-          <option value="Biology">Biology</option>
+          <option value="biology">Biology</option>
         )}
       </select>
       <label for="">Password</label>

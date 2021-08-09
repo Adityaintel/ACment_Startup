@@ -26,23 +26,38 @@ function HomePage() {
   const [registerPart, setRegisterPart] = useState("");
 
   // ====================== React scripts ====================================
-  const open_login = () => {
+
+  // code for opening login form
+  const open_login = (registerCategory) => {
     console.log("opening login form");
+
+    console.log(registerCategory);
     setRegisterPart(
-      <Login close_register={close_register} open_signup={open_signup} />
+      <Login
+        close_register={close_register}
+        open_signup={open_signup}
+        registerCategory={registerCategory}
+      />
     );
     const homepageRegister = document.querySelector(".homepageRegister");
     homepageRegister.classList.add("show__homepageRegister");
   };
 
-  const open_signup = () => {
+  // Code for opening sign up form
+  const open_signup = (registerCategory) => {
     console.log("opening signup form");
     setRegisterPart(
-      <Signup close_register={close_register} open_login={open_login} />
+      <Signup
+        close_register={close_register}
+        open_login={open_login}
+        registerCategory={registerCategory}
+      />
     );
     const homepageRegister = document.querySelector(".homepageRegister");
     homepageRegister.classList.add("show__homepageRegister");
   };
+
+  // Code for closing the register form
   const close_register = () => {
     console.log("closing register form");
     const homepageRegister = document.querySelector(".homepageRegister");
@@ -86,7 +101,13 @@ function HomePage() {
               <a href="#">Contact us</a>
             </li>
           </ul>
-          <button onClick={open_login}>Log in</button>
+          <button
+            onClick={() => {
+              open_login("student");
+            }}
+          >
+            Log in
+          </button>
         </div>
 
         <div className="part1">

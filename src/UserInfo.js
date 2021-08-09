@@ -1,19 +1,101 @@
-import React from "react";
+import React, { useState } from "react";
 import UserContextProvider from "./UserContext";
 import alt_profile from "./images/icons/profile_alt_icon.svg";
+import add_photo from "./images/icons/add_photo.svg";
 import "./css/UserInfo.css";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+
+const baseUrl = process.env.REACT_APP_BASE_URL;
+// const profileURL = baseUrl + "/user/profile";
 
 function UserInfo() {
   const [userData, dispatch] = UserContextProvider();
+
+  const history = useHistory();
   console.log(userData);
   const userInfo = userData.userInfo;
 
+  const logout = () => {
+    sessionStorage.clear();
+    dispatch({
+      type: "REMOVE_USER",
+    });
+    history.push("/");
+  };
+
   console.log(userInfo);
+
+  // to show and hide password updating form
+  const [pwdForm, setPwdForm] = useState(["", false]);
+  const showPwdForm = () => {
+    if (pwdForm[1]) {
+      setPwdForm(["", false]);
+      console.log("hide pwdForm");
+    } else {
+      setPwdForm([<ChangePassword setPwdForm={setPwdForm} />, true]);
+      console.log("show pwdForm");
+    }
+  };
+
+  // to upload profile picture
+  const profileUploader = (e) => {
+    console.log("uploading image profile");
+
+    // ==================  Form data preparation part =======================
+    const file = e.target.files[0]; //this returns an array of files,we need only single one
+    console.log(file);
+    const formData = new FormData();
+    formData.append("image", file);
+    console.log(formData.get("image"));
+    // ===============================================================================
+
+    const jwt = sessionStorage.getItem("jwtToken");
+    const category = userData.category;
+
+    // =====================  API URL part =====================
+    const profileURL =
+      baseUrl + (category === "student" ? "/user/profile" : "/mentor/profile");
+    console.log(profileURL);
+    // ===================================================
+
+    axios
+      .post(profileURL, formData, {
+        headers: {
+          authorization: "Bearer " + jwt,
+          "content-type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: "ADD_USER_INFO",
+          data: { profile: res.data.profile },
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // Profile pic declaring part
+  const profile = userInfo.profile ? baseUrl + userInfo.profile : alt_profile;
 
   return (
     <div className="userInfo">
-      <div className="userInfo__profilePic">
-        <img src={alt_profile} alt="" />
+      <div className="userInfo__profile">
+        <div className="userInfo__profilePic">
+          <img src={profile} alt="" />
+        </div>
+        <label for="profilePicInput">
+          <img src={add_photo} alt="" className="userInfo__addProfilePic" />
+        </label>
+        <input
+          type="file"
+          name="profilePic"
+          id="profilePicInput"
+          onChange={profileUploader}
+        />
       </div>
       <h2 className="userInfo__heading">Hello {userInfo.username}</h2>
       <div className="userInfo__details">
@@ -32,8 +114,122 @@ function UserInfo() {
           ""
         )}
       </div>
+      <button className="userInfo__changePwdBtn" onClick={showPwdForm}>
+        Change password
+      </button>
+      <div className="userInfo__pwdForm">{pwdForm}</div>
+
+      <button className="userInfo__logout" onClick={logout}>
+        Log out
+      </button>
     </div>
   );
 }
 
 export default UserInfo;
+
+// Form for changing password
+const ChangePassword = ({ setPwdForm }) => {
+  console.log("message from password form");
+  // handling update password request
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log("submit request recieved");
+    // console.log(e.target.currPwd.value);
+    const currPwd = e.target.currPwd.value;
+    const newPwd = e.target.newPwd.value;
+    const renewPwd = e.target.renewPwd.value;
+
+    // validating passwords
+    if (newPwd !== renewPwd) {
+      alert("Re-type the same password only");
+      return;
+    }
+    if (newPwd === currPwd) {
+      alert("Old and new passwords are same");
+      return;
+    }
+    if (!passwordValidator(newPwd)) {
+      return;
+    }
+    // creating data for submission
+    const data = {
+      currentPassword: currPwd,
+      newPassword: newPwd,
+    };
+    const category = sessionStorage.getItem("usertype");
+    // selecting sending users according to the current user type
+    let url =
+      category === "student"
+        ? "/user/change-password"
+        : "/mentor/change-password";
+    url = baseUrl + url;
+    const jwt = sessionStorage.getItem("jwtToken");
+
+    // sending new password to server
+    axios
+      .post(url, data, {
+        headers: {
+          authorization: "Bearer " + jwt,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        alert(res.data.message);
+        setPwdForm(["", false]); //to hide the passsword form after updating password
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err.response.data.message);
+      });
+  };
+  return (
+    <div className="userInfo__changepwdForm">
+      <form onSubmit={submitHandler}>
+        <input
+          type="password"
+          name="currPwd"
+          placeholder="current password"
+          className="userInfo__currentPwd"
+          required
+        />
+        <input
+          type="password"
+          name="newPwd"
+          placeholder="New password"
+          className="userInfo__newPwd"
+          required
+        />
+        <input
+          type="password"
+          name="renewPwd"
+          placeholder="Re-type new password"
+          className="userInfo__retypeNewPwd"
+          required
+        />
+        <button
+          type="submit"
+          className="userInfo__newPwdSubmit"
+          // onClick={submitHandler}
+        >
+          Update Password
+        </button>
+      </form>
+    </div>
+  );
+};
+
+const passwordValidator = (password) => {
+  if (!password || typeof password !== "string") {
+    console.log("Password is required");
+    alert("Password is required");
+    return false;
+  }
+
+  if (password.length < 7) {
+    console.log("Password too small. Should be atleast 8 characters");
+    alert("Password too small. Should be atleast 8 characters");
+    return false;
+  }
+  return true;
+};

@@ -7,7 +7,9 @@ import { userContext } from "./UserContext";
 import mentor_icon from "./images/icons/mentor_icon.svg";
 import student_icon from "./images/icons/student_icon.svg";
 
-function Login({ close_register, open_signup }) {
+function Login({ close_register, open_signup, registerCategory }) {
+  console.log("opened login in category:" + registerCategory);
+
   const history = useHistory();
   const [userData, dispatch] = useContext(userContext);
 
@@ -18,14 +20,15 @@ function Login({ close_register, open_signup }) {
   });
 
   // state variable for mentor credentials
-  const [mentorCred, setmentorCred] = useState({
+  const [mentorCred, setmentorCred] = useState({  
     email: "",
     password: "",
   });
 
-  const [category, setcategory] = useState("student");
+  console.log(registerCategory);
+  const [category, setcategory] = useState(registerCategory);
   const oppositeCategory = category === "student" ? "mentor" : "student";
-
+  console.log(category, oppositeCategory);
   // Sending credentials to server through axios
   const loginUser = (e) => {
     e.preventDefault();
@@ -207,7 +210,12 @@ function Login({ close_register, open_signup }) {
           </form>
           <h5 className="sign__alternate">
             Create a new account?{" "}
-            <span className="sign__alternateAnch" onClick={open_signup}>
+            <span
+              className="sign__alternateAnch"
+              onClick={() => {
+                open_signup(category);
+              }}
+            >
               Sign up
             </span>
           </h5>

@@ -1,6 +1,7 @@
 export const initialState = {
-  category: "Student",
+  category: "student",
   userInfo: {},
+  videos: [],
 };
 
 const reducer = (state, action) => {
@@ -11,6 +12,16 @@ const reducer = (state, action) => {
         ...state,
         category: action.data.category,
         userInfo: action.data.userInfo,
+      };
+    case "REMOVE_USER":
+      return {
+        category: "student",
+        userInfo: {},
+      };
+    case "ADD_USER_INFO":
+      return {
+        ...state,
+        userInfo: { ...state.userInfo, ...action.data },
       };
     default:
       return state;

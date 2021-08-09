@@ -8,6 +8,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  width: 100vw;
 }
 
 .userpage__content {
@@ -24,13 +25,14 @@
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  background-color: violet;
+  background-color: #e5e5e5;
 }
 
 .userpage__userInfo {
   width: 350px;
-  background-color: turquoise;
+  background-color: white;
   display: block;
+  padding: 10px;
 }
 
 .hidden_userpage__userInfo {

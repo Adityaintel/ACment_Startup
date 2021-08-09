@@ -12,15 +12,18 @@ import student_icon from "./images/icons/student_icon.svg";
 
 console.log(process.env.REACT_APP_BASE_URL);
 
-function Signup({ close_register, open_login }) {
+function Signup({ close_register, open_login, registerCategory }) {
   const history = useHistory();
 
+  console.log("opened signup in category:" + registerCategory);
+  // To store whether the user is mentor or student
+  const [category, setcategory] = useState(registerCategory);
   // Sending data to server
   const signupUser = (e) => {
     e.preventDefault();
     console.log("submitting data...");
 
-    if (category === "Student") {
+    if (category === "student") {
       console.log("submitting student data");
       const data = {
         username: studentData.username,
@@ -83,9 +86,6 @@ function Signup({ close_register, open_login }) {
     }
   };
 
-  // To store whether the user is mentor or student
-  const [category, setcategory] = useState("Student");
-
   // to store the student data if the user is student
   const [studentData, setstudentData] = useState({
     username: "",
@@ -110,7 +110,8 @@ function Signup({ close_register, open_login }) {
 
   // If user is student, then oppositeCategory="mentor" :
   // This is used to display alternate signup option for mentor
-  const oppositeCategory = category === "Student" ? "Mentor" : "Student";
+  const oppositeCategory = category === "student" ? "mentor" : "student";
+  console.log(category, oppositeCategory);
 
   // console.log(studentData);
   // console.log(mentorData);
@@ -140,7 +141,7 @@ function Signup({ close_register, open_login }) {
         <div className="register__formContainer">
           <form className="register__form">
             {" "}
-            {category === "Student" ? (
+            {category === "student" ? (
               <StudentSignup
                 setStudent={setstudentData}
                 studentData={studentData}
@@ -169,7 +170,12 @@ function Signup({ close_register, open_login }) {
           </form>{" "}
           <h5 className="sign__alternate">
             Already have an account ?{" "}
-            <span className="sign__alternateAnch" onClick={open_login}>
+            <span
+              className="sign__alternateAnch"
+              onClick={() => {
+                open_login(category);
+              }}
+            >
               Log In{" "}
             </span>{" "}
           </h5>{" "}
