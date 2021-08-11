@@ -27,11 +27,12 @@ function App() {
     const jwt = sessionStorage.getItem("jwtToken");
     const category = sessionStorage.getItem("usertype");
     if (jwt) {
+      // ==========================   Student part (user part) =======================================
       if (category === "student") {
-        const url = base_url + "/user/getdetails";
-
+        // To get user info and profile
+        const infourl = base_url + "/user/getdetails";
         axios
-          .get(url, {
+          .get(infourl, {
             headers: {
               authorization: "Bearer " + jwt,
             },
@@ -56,6 +57,41 @@ function App() {
             console.log(err.message);
             alert(err.message);
           });
+        console.log("userinfo fetched");
+        // to get followings of student
+        const followingsurl = base_url + "/user/followings";
+        axios
+          .post(
+            followingsurl,
+            {},
+            {
+              headers: {
+                authorization: "Bearer " + jwt,
+              },
+            }
+          )
+          .then((res) => {
+            // store response returned from server related to user in the context
+            console.log("followings fetched");
+            const userFollowings = res.data;
+            console.log(userFollowings);
+
+            // storing data in react context api
+            dispatch({
+              type: "ADD_FOLLOWINGS",
+              data: userFollowings,
+            });
+            console.log(userData);
+          })
+          .catch((err) => {
+            console.log("some error occured in fetching followings");
+            console.log(err.message);
+            alert(err.message);
+          });
+
+        // =================================================================================
+
+        // ===================================  Mentor part = =============================================
       } else {
         const url = base_url + "/mentor/getdetails";
 

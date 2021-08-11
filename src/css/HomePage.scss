@@ -1,7 +1,5 @@
 // ==================================== variables and mixins =================================================
 
-@import "./mixins";
-
 // contains variables like colors used
 @import "./variables";
 
@@ -12,7 +10,7 @@
 }
 
 // ==================================== body and background images ==================================================
-body{
+body {
   overflow-x: hidden;
 }
 .body {

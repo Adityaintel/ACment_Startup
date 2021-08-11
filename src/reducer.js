@@ -2,6 +2,7 @@ export const initialState = {
   category: "student",
   userInfo: {},
   videos: [],
+  followings: [],
 };
 
 const reducer = (state, action) => {
@@ -12,16 +13,23 @@ const reducer = (state, action) => {
         ...state,
         category: action.data.category,
         userInfo: action.data.userInfo,
+        followings: [],
       };
     case "REMOVE_USER":
       return {
         category: "student",
         userInfo: {},
+        followings: [],
       };
     case "ADD_USER_INFO":
       return {
         ...state,
         userInfo: { ...state.userInfo, ...action.data },
+      };
+    case "ADD_FOLLOWINGS":
+      return {
+        ...state,
+        followings: { ...state.followings, ...action.data },
       };
     default:
       return state;

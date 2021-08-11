@@ -1,5 +1,26 @@
-
 $violet: #735ccb;
 $lt_grey: #e5e5e5;
 $dk_grey: #cecece;
 $ft_black: #26262e;
+
+@mixin btnShape($bg: $violet, $txt: white) {
+  background-color: $bg;
+  color: $txt;
+  border-radius: 100px;
+  border: none;
+  outline: none;
+  padding: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  font-size: 14px;
+  &:hover {
+    background: darken($bg, 15%);
+  }
+}
+@mixin circle($diam, $bg: $violet) {
+  width: $diam;
+  height: $diam;
+  border-radius: 50%;
+  background-color: $bg;
+  z-index: -100;
+}

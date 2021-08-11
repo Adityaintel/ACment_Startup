@@ -4,6 +4,9 @@ import "./css/UserPage.css";
 import UserContextProvider from "./UserContext";
 import Header from "./Header";
 import UserInfo from "./UserInfo";
+import axios from "axios";
+
+const baseUrl = process.env.REACT_APP_BASE_URL;
 
 function MentorPage() {
   const history = useHistory();
@@ -33,16 +36,56 @@ function MentorPage() {
     const userInfo = document.querySelector(".userpage__userInfo");
     userInfo.classList.toggle("hidden_userpage__userInfo");
   };
-  // ();
-  console.log(userData);
+
+  // ==========================   Video Upload part  ====================================
+
+  const uploadVideo = (e) => {
+    e.preventDefault();
+    const videoData = new FormData();
+    videoData.append("video", e.target.video.files[0]);
+
+    console.log(videoData);
+
+    const jwt = sessionStorage.getItem("jwtToken");
+    const category = userData.category;
+
+    //  API URL part
+    const videoURL = baseUrl + "/mentor/video";
+    console.log(videoURL);
+
+    axios
+      .post(videoURL, videoData, {
+        headers: {
+          authorization: "Bearer " + jwt,
+          "content-type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        alert(res.statusText);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err.message);
+      });
+  };
+
+  // =========================================================================================
+
   return (
     <div className="userpage">
       <Header toggleUserInfo={toggle_userInfo} />
       <div className="userpage__content">
+        <div className="userpage__sidebar"></div> 
         <div className="userpage__mainContent">
           <h2>This is the mentor page</h2>
+          <form onSubmit={uploadVideo}>
+            <label htmlFor="video">Upload video : </label>
+            <input type="file" accept="video/*" name="video" id="video" />
+            <button type="submit">Submit</button>
+          </form>
         </div>
-        <div className="userpage__userInfo">
+        <div className="userpage__userInfo hidden_userpage__userInfo">
           <UserInfo />
         </div>
       </div>

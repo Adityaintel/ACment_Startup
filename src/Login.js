@@ -20,7 +20,7 @@ function Login({ close_register, open_signup, registerCategory }) {
   });
 
   // state variable for mentor credentials
-  const [mentorCred, setmentorCred] = useState({  
+  const [mentorCred, setmentorCred] = useState({
     email: "",
     password: "",
   });
@@ -64,8 +64,6 @@ function Login({ close_register, open_signup, registerCategory }) {
               userInfo: user_info,
             },
           });
-          // sessionStorage.setItem("userData", userData);
-          // console.log(sessionStorage.getItem("userData"));
           console.log(userData);
           console.log("redirecting to studentpage");
           history.push("/studentpage");
@@ -105,7 +103,6 @@ function Login({ close_register, open_signup, registerCategory }) {
               userInfo: user_info,
             },
           });
-          // sessionStorage.setItem("userData", userData);
           history.push("/mentorpage");
         })
         .catch((err) => {

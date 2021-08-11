@@ -22,24 +22,14 @@ function StudentPage() {
     }
   }, []);
 
-  // logging out===clearing session storage and redirecting to home page
-
-  // showing and hiding userInfo part
-  const toggle_userInfo = () => {
-    const userInfo = document.querySelector(".userpage__userInfo");
-    userInfo.classList.toggle("hidden_userpage__userInfo");
-  };
-  // ();
   console.log(userData);
   return (
     <div className="userpage">
-      <Header toggleUserInfo={toggle_userInfo} />
+      <Header />
       <div className="userpage__content">
+        <div className="userpage__sidebar"></div>
         <div className="userpage__mainContent">
           <h2>This is the student page</h2>
-        </div>
-        <div className="userpage__userInfo hidden_userpage__userInfo">
-          <UserInfo />
         </div>
       </div>
     </div>

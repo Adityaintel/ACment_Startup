@@ -5,6 +5,7 @@ import add_photo from "./images/icons/add_photo.svg";
 import "./css/UserInfo.css";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import UserInfoUpdater from "./UserInfoUpdater";
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 // const profileURL = baseUrl + "/user/profile";
@@ -27,37 +28,54 @@ function UserInfo() {
   console.log(userInfo);
 
   // to show and hide password updating form
-  const [pwdForm, setPwdForm] = useState(["", false]);
-  const showPwdForm = () => {
-    if (pwdForm[1]) {
-      setPwdForm(["", false]);
-      console.log("hide pwdForm");
+  // const [pwdForm, setPwdForm] = useState(["", false]);
+  const showHidePwdForm = () => {
+    const pwdForm = document.querySelector(".userInfo__pwdForm");
+    if (pwdForm.style.display === "none") {
+      pwdForm.style.display = "block";
     } else {
-      setPwdForm([<ChangePassword setPwdForm={setPwdForm} />, true]);
-      console.log("show pwdForm");
+      pwdForm.style.display = "none";
     }
   };
+
+  // ========================= User Info update part  ======================================
+
+  // To show the user info update  part
+  const [userInfoUpdate, setUserInfoUpdate] = useState("");
+  const openUpdateInfo = () => {
+    const field = document.querySelector(".userInfo__updateInfo");
+    field.style.display = "block";
+    setUserInfoUpdate(
+      <UserInfoUpdater closeUpdateInfo={closeUpdateInfo} userData={userData} />
+    );
+  };
+
+  const closeUpdateInfo = () => {
+    const field = document.querySelector(".userInfo__updateInfo");
+    field.style.display = "none";
+    setUserInfoUpdate("");
+  };
+  // ======================================================================================
+
+  // ============================  Profile picture part ===========================================
 
   // to upload profile picture
   const profileUploader = (e) => {
     console.log("uploading image profile");
-
-    // ==================  Form data preparation part =======================
+    //   Form data preparation part
     const file = e.target.files[0]; //this returns an array of files,we need only single one
     console.log(file);
     const formData = new FormData();
     formData.append("image", file);
     console.log(formData.get("image"));
-    // ===============================================================================
 
     const jwt = sessionStorage.getItem("jwtToken");
     const category = userData.category;
 
-    // =====================  API URL part =====================
+    //  API URL part
     const profileURL =
       baseUrl + (category === "student" ? "/user/profile" : "/mentor/profile");
     console.log(profileURL);
-    // ===================================================
 
     axios
       .post(profileURL, formData, {
@@ -81,8 +99,11 @@ function UserInfo() {
   // Profile pic declaring part
   const profile = userInfo.profile ? baseUrl + userInfo.profile : alt_profile;
 
+  // =============================================================================================
+
   return (
     <div className="userInfo">
+      <div className="userInfo__updateInfo">{userInfoUpdate}</div>
       <div className="userInfo__profile">
         <div className="userInfo__profilePic">
           <img src={profile} alt="" />
@@ -92,6 +113,7 @@ function UserInfo() {
         </label>
         <input
           type="file"
+          accept="image/*"
           name="profilePic"
           id="profilePicInput"
           onChange={profileUploader}
@@ -114,10 +136,15 @@ function UserInfo() {
           ""
         )}
       </div>
-      <button className="userInfo__changePwdBtn" onClick={showPwdForm}>
+      <button className="userInfo__updateInfoBtn" onClick={openUpdateInfo}>
+        Update Profile
+      </button>
+      <button className="userInfo__changePwdBtn" onClick={showHidePwdForm}>
         Change password
       </button>
-      <div className="userInfo__pwdForm">{pwdForm}</div>
+      <div className="userInfo__pwdForm">
+        <ChangePassword showHidePwdForm={showHidePwdForm} />
+      </div>
 
       <button className="userInfo__logout" onClick={logout}>
         Log out
@@ -129,7 +156,7 @@ function UserInfo() {
 export default UserInfo;
 
 // Form for changing password
-const ChangePassword = ({ setPwdForm }) => {
+const ChangePassword = ({ showHidePwdForm }) => {
   console.log("message from password form");
   // handling update password request
   const submitHandler = (e) => {
@@ -176,7 +203,8 @@ const ChangePassword = ({ setPwdForm }) => {
       .then((res) => {
         console.log(res);
         alert(res.data.message);
-        setPwdForm(["", false]); //to hide the passsword form after updating password
+        showHidePwdForm();
+        // setPwdForm(["", false]); //to hide the passsword form after updating password
       })
       .catch((err) => {
         console.log(err);
@@ -185,7 +213,11 @@ const ChangePassword = ({ setPwdForm }) => {
   };
   return (
     <div className="userInfo__changepwdForm">
+      <div className="userInfo__cross" onClick={showHidePwdForm}>
+        &#x274C;
+      </div>
       <form onSubmit={submitHandler}>
+        <label for="">current Password</label>
         <input
           type="password"
           name="currPwd"
@@ -193,6 +225,8 @@ const ChangePassword = ({ setPwdForm }) => {
           className="userInfo__currentPwd"
           required
         />
+        <label for="">New Password</label>
+
         <input
           type="password"
           name="newPwd"
@@ -200,6 +234,8 @@ const ChangePassword = ({ setPwdForm }) => {
           className="userInfo__newPwd"
           required
         />
+        <label for="">Re-type New Password</label>
+
         <input
           type="password"
           name="renewPwd"

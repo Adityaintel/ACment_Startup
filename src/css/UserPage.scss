@@ -13,19 +13,14 @@
   display: flex;
 }
 
-.userpage__mainContent {
+.userpage__sidebar {
   flex: 1;
+  min-width: 200px;
+  background-color: $dk_grey;
+  // box-shadow: 4px 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.userpage__mainContent {
+  flex: 4;
   background-color: $lt_grey;
-}
-
-.userpage__userInfo {
-  width: 350px;
-  background-color: white;
-  display: block;
-  padding: 10px;
-}
-
-.hidden_userpage__userInfo {
-  height: 0;
-  display: none;
 }
