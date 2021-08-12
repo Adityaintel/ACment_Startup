@@ -81,7 +81,6 @@ function App() {
               type: "ADD_FOLLOWINGS",
               data: userFollowings,
             });
-            console.log(userData);
           })
           .catch((err) => {
             console.log("some error occured in fetching followings");

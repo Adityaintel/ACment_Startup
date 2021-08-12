@@ -15,6 +15,9 @@ function Header() {
   const [userData, dispatch] = UserContextProvider();
   const userInfo = userData.userInfo;
   const followings = userData.followings;
+  console.log(followings);
+  const followingMentorsIds = followings.map((mentor) => mentor._id);
+  console.log(followingMentorsIds);
 
   // =========================  use refs  ==================================================
 
@@ -23,20 +26,29 @@ function Header() {
   const profileBlock = useRef(0);
 
   // ======================== Follow mentor part  =============================================
-  const followMentor = (id) => {
+  const followMentor = (e, id) => {
     console.log(id);
     const jwt = sessionStorage.getItem("jwtToken");
-    axios.post(
-      followMentorUrl,
-      {
-        mentorId: id,
-      },
-      {
-        headers: {
-          authorization: "Bearer " + jwt,
+    axios
+      .post(
+        followMentorUrl,
+        {
+          mentorId: id,
         },
-      }
-    );
+        {
+          headers: {
+            authorization: "Bearer " + jwt,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        e.target.innerHTML = "Following";
+        dispatch({
+          type: "ADD_FOLLOWINGS",
+          data: res.data,
+        });
+      });
   };
 
   // =============================================================================================
@@ -48,11 +60,9 @@ function Header() {
 
   const searchMentor = (e) => {
     e.preventDefault();
-    // document.querySelector(".header__searchDropdown").innerHTML = "";
     const username = e.target.mentorUsername.value;
     const subject = e.target.mentorSubject.value;
     const jwt = sessionStorage.getItem("jwtToken");
-    console.log([username, subject]);
     axios
       .post(
         searchapi,
@@ -87,9 +97,11 @@ function Header() {
                 {mentor.exam}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{mentor.subject}
                 <span
                   className="mentor_follow"
-                  onClick={() => followMentor(mentor._id)}
+                  onClick={(e) => followMentor(e, mentor._id)}
                 >
-                  Follow
+                  {followingMentorsIds.indexOf(mentor._id) >= 0
+                    ? "Following"
+                    : "Follow"}
                 </span>
               </p>
             </div>

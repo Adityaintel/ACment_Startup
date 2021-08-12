@@ -13,7 +13,6 @@ const reducer = (state, action) => {
         ...state,
         category: action.data.category,
         userInfo: action.data.userInfo,
-        followings: [],
       };
     case "REMOVE_USER":
       return {
@@ -29,7 +28,7 @@ const reducer = (state, action) => {
     case "ADD_FOLLOWINGS":
       return {
         ...state,
-        followings: { ...state.followings, ...action.data },
+        followings: [...state.followings, ...action.data],
       };
     default:
       return state;
