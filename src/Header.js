@@ -207,7 +207,7 @@ function Header() {
                   <option value="biology">Biology</option>
                 )}
               </select>
-              <button type="submit">
+              <button type="submit" title="Search mentor">
                 <i className="fa fa-search "></i>
               </button>
             </form>
@@ -219,6 +219,7 @@ function Header() {
         <div
           ref={profileBlock}
           className="header__profile"
+          title="Open user profile"
           onClick={toggleUserInfo}
         >
           <img src={profile} alt="" />

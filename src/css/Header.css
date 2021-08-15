@@ -247,8 +247,8 @@
   top: 50px;
   height: 550px;
   border-radius: 0 0 10px 10px;
-  -webkit-transition: all 2s ease-in-out;
-  transition: all 2s ease-in-out;
+  -webkit-transition: all 1.5s ease-in-out;
+  transition: all 1.5s ease-in-out;
   overflow-y: auto;
   overflow-x: hidden;
   -ms-overflow-style: none;

@@ -4,7 +4,9 @@ import "./css/UserPage.css";
 import UserContextProvider from "./UserContext";
 import Header from "./Header";
 import UserInfo from "./UserInfo";
+import Videos from "./Videos";
 
+const baseUrl = process.env.REACT_APP_BASE_URL;
 function StudentPage() {
   const history = useHistory();
 
@@ -22,14 +24,26 @@ function StudentPage() {
     }
   }, []);
 
+  // Minimizing and maximizing sidebar width
+  const adjustSidebar = () => {
+    const sideBar = document.querySelector(".userpage__sidebar");
+    sideBar.classList.toggle("userpage__sidebar__maximized");
+  };
+
   console.log(userData);
   return (
     <div className="userpage">
       <Header />
       <div className="userpage__content">
-        <div className="userpage__sidebar"></div>
+        <div className="userpage__sidebar">
+          <div className="userpage__hamburger" onClick={adjustSidebar}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
         <div className="userpage__mainContent">
-          <h2>This is the student page</h2>
+          <Videos />
         </div>
       </div>
     </div>
