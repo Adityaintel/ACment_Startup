@@ -1,199 +1,86 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "./css/Videos.css";
 import image from "./images/backwaters.jpg";
+import VideoCard from "./VideoCard";
+import axios from "axios";
+import "font-awesome/css/font-awesome.min.css";
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 function Videos() {
-  const videoData = {
-    thumbnail: image,
-    topic: "This is backwaters",
-    username: "shijith",
-    duration: "10:00",
-    videoUrl:
-      baseUrl +
-      "/videos/video_2021-08-14T17-58-58.058Zbig_buck_bunny_720p_5mb.mp4",
+  const [videos, setVideos] = useState([]);
+  const [videoData, setvideoData] = useState({});
+  const videoLarge = useRef();
+
+  // Fetching all videos from backend to show in frontend
+  const getVideos = () => {
+    const url = baseUrl + "/allvideos";
+    console.log(url);
+    const jwt = sessionStorage.getItem("jwtToken");
+    axios
+      .get(url, {})
+      .then((res) => {
+        console.log(res);
+        setVideos(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
+  useEffect(() => {
+    getVideos();
+  }, []);
+
+  const maximizeVideo = (vidData) => {
+    const largeScreen = document.querySelector(".videos__largeScreen");
+    setvideoData({
+      ...vidData,
+      video: baseUrl + vidData.video,
+    });
+    largeScreen.classList.add("videos__showlargeScreen");
+    videoLarge.current.onloadedmetadata = () => {
+      videoLarge.current.play();
+    };
+  };
+  const minimizeVideo = () => {
+    const largeScreen = document.querySelector(".videos__largeScreen");
+    largeScreen.classList.remove("videos__showlargeScreen");
+    videoLarge.current.pause();
+  };
+
   return (
     <div className="videos">
+      <div className="videos__largeScreen">
+        <div className="videos__largeScreenClose" onClick={minimizeVideo}>
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+        <div className="videos__largeScreenVideo">
+          <video
+            ref={videoLarge}
+            src={videoData.video}
+            height="100%"
+            width="100%"
+            // muted="muted"
+            preload="metadata"
+            playsInline
+            controls
+            poster={videoData.thumbnail}
+            controlsList="nodownload"
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
       <div className="videos__container">
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
-        <div className="videos__card">
-          <VideoCard videoData={videoData} />
-        </div>
+        {videos.map((video) => (
+          <div className="videos__card">
+            <VideoCard videoData={video} maximizeVideo={maximizeVideo} />
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
 export default Videos;
-
-const VideoCard = ({ videoData }) => {
-  return (
-    <div className="videoCard">
-      {/* <div className="videoCard__thumbnail">
-        <img src={videoData.thumbnail} alt="" />
-        <p className="videoCard__videoDuration">{videoData.duration}</p>
-      </div> */}
-      <div className="videoCard__videoSection">
-        <video
-          src={videoData.videoUrl}
-          height="100%"
-          width="100%"
-          poster={videoData.thumbnail}
-          controls
-          controlsList="nodownload"
-        ></video>
-      </div>
-      <div className="videoCard__info">
-        <div className="videoCard__mentorProfile">
-          <img src={image} alt="" />
-        </div>
-        <div className="videoCard__videoData">
-          <h3>{videoData.topic}</h3>
-          <h4>{videoData.username}</h4>
-        </div>
-      </div>
-    </div>
-  );
-};

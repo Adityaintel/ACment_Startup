@@ -106,4 +106,54 @@
 .videoCard .videoCard__info .videoCard__videoData h4 {
   color: rgba(0, 0, 0, 0.6);
 }
+
+.videos__largeScreen {
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: none;
+}
+
+.videos__largeScreen .videos__largeScreenClose {
+  z-index: 5;
+  color: white;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  margin: 10px;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.videos__largeScreen .videos__largeScreenVideo {
+  background-color: red;
+  height: 80%;
+  max-width: 90%;
+  width: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin: auto;
+  overflow: hidden;
+}
+
+.videos__largeScreen .videos__largeScreenVideo video {
+  width: 100%;
+  height: 100%;
+}
+
+.videos__showlargeScreen {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
 /*# sourceMappingURL=Videos.css.map */

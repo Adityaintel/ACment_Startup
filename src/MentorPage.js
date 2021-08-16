@@ -50,7 +50,7 @@ function MentorPage() {
     const category = userData.category;
 
     //  API URL part
-    const videoURL = baseUrl + "/mentor/video";
+    const videoURL = baseUrl + "/videos";
     console.log(videoURL);
 
     axios
@@ -72,11 +72,23 @@ function MentorPage() {
 
   // =========================================================================================
 
+  // Minimizing and maximizing sidebar width
+  const adjustSidebar = () => {
+    const sideBar = document.querySelector(".userpage__sidebar");
+    sideBar.classList.toggle("userpage__sidebar__maximized");
+  };
+
   return (
     <div className="userpage">
       <Header toggleUserInfo={toggle_userInfo} />
       <div className="userpage__content">
-        <div className="userpage__sidebar"></div> 
+        <div className="userpage__sidebar">
+          <div className="userpage__hamburger" onClick={adjustSidebar}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
         <div className="userpage__mainContent">
           <h2>This is the mentor page</h2>
           <form onSubmit={uploadVideo}>
