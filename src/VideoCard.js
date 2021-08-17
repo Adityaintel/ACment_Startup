@@ -14,21 +14,33 @@ const VideoCard = ({ videoData, maximizeVideo }) => {
   useEffect(() => {
     // To set the video duration from video tag
     videotag.current.onloadedmetadata = () => {
-      setDuration(durationFormatter(videotag.current.duration));
+      if (videotag.current) {
+        setDuration(durationFormatter(videotag.current.duration));
+      }
     };
+
+    return (
+      // For clearing the seTimout timer, so that it won't cause any problem afterwards
+      clearTimeout(timer)
+    );
   }, []);
 
+  // For playing a small part of videos while hovering over video card
+  let timer;
   const hoverVideoPlay = () => {
     console.log("playing video");
     videotag.current.play();
-    setTimeout(() => {
-      videotag.current.currentTime = 0;
+    timer = setTimeout(() => {
+      if (videotag.current) {
+        videotag.current.currentTime = 0;
+      }
     }, 5000);
   };
   const hoverVideoPause = () => {
     console.log("pausing video");
     videotag.current.pause();
     videotag.current.currentTime = 0;
+    clearTimeout(timer);
   };
 
   videoData.thumbnail = image;
