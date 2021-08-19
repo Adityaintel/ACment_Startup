@@ -1,0 +1,106 @@
+.tasks {
+  width: 100%;
+  height: 100%;
+  padding-top: 20px;
+  padding-bottom: 50px;
+}
+
+.tasks__header {
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tasks__header .tasks__switchBtn {
+  border: none;
+  outline: none;
+  background-color: #cecece;
+  color: black;
+  font-size: 18px;
+  font-weight: 800;
+  padding: 10px 15px;
+  margin: 0 20px;
+  width: 200px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.tasks__header .tasks__switchBtn__active {
+  background-color: #735ccb;
+  color: white;
+}
+
+.assignedTasks__container {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(300px, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 10px;
+}
+
+.taskCard {
+  width: 300px;
+  height: 200px;
+  background-color: white;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  border-radius: 10px;
+  margin: 10px;
+  cursor: pointer;
+  -webkit-box-shadow: rgba(50, 50, 93, 0.45) 0px 13px 27px -5px, rgba(0, 0, 0, 0.5) 0px 8px 16px -8px;
+          box-shadow: rgba(50, 50, 93, 0.45) 0px 13px 27px -5px, rgba(0, 0, 0, 0.5) 0px 8px 16px -8px;
+}
+
+.taskCard__mentorInfo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.taskCard__mentorInfo .taskCard__mentorProfile {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin: 10px;
+  background-color: #cecece;
+}
+
+.taskCard__mentorInfo .taskCard__mentorProfile img {
+  width: 100%;
+  height: 100%;
+}
+
+@media only screen and (max-width: 500px) {
+  .taskCard {
+    margin: auto;
+  }
+}
+/*# sourceMappingURL=Tasks.css.map */

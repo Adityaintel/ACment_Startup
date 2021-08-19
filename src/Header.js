@@ -174,7 +174,7 @@ function Header() {
   // ====================================================================================
 
   // Profile pic declaring part
-  const profile = userInfo.profile ? baseUrl + userInfo.profile : alt_profile;
+  const profile = userInfo.profile ? userInfo.profile : alt_profile;
 
   return (
     <div className="header">

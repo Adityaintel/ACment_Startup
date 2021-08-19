@@ -44,7 +44,7 @@ const VideoCard = ({ videoData, maximizeVideo }) => {
   };
 
   videoData.thumbnail = image;
-  videoData.username = "shijith";
+  // videoData.username = "shijith";
 
   return (
     <div
@@ -79,7 +79,7 @@ const VideoCard = ({ videoData, maximizeVideo }) => {
         </div>
         <div className="videoCard__videoData">
           <h3>{videoData.topic}</h3>
-          <h4>{videoData.username}</h4>
+          <h4>{videoData.postedByMentor}</h4>
         </div>
       </div>
     </div>

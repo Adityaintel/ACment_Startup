@@ -5,7 +5,7 @@ import UserContextProvider from "./UserContext";
 import Header from "./Header";
 import UserInfo from "./UserInfo";
 import Videos from "./Videos";
-import Tasks from "./Tasks";
+import StudentTasks from "./StudentTasks";
 import videoIcon from "./images/icons/video-icon.png";
 import mentorIcon from "./images/icons/mentor.png";
 import taskIcon from "./images/icons/task-icon.png";
@@ -61,7 +61,7 @@ function StudentPage() {
         break;
       }
       case "tasksBtn": {
-        setMainContent(<Tasks />);
+        setMainContent(<StudentTasks />);
         e.currentTarget.classList.add("userpage__sideBtn__active");
         break;
       }
@@ -78,7 +78,11 @@ function StudentPage() {
       <Header />
       <div className="userpage__content">
         <div className="userpage__sidebar">
-          <div className="userpage__hamburger" onClick={adjustSidebar}>
+          <div
+            className="userpage__hamburger"
+            onClick={adjustSidebar}
+            title="Toggle Sidebar"
+          >
             <span></span>
             <span></span>
             <span></span>
@@ -88,6 +92,7 @@ function StudentPage() {
               id="videoBtn"
               className="userpage__sideBtn__active userpage__sideBtn"
               onClick={mainContentHandler}
+              title="Videos"
             >
               <div className="sidebarBtn__icon">
                 <img src={videoIcon} alt="" />
@@ -98,13 +103,19 @@ function StudentPage() {
               id="tasksBtn"
               className="userpage__sideBtn"
               onClick={mainContentHandler}
+              title="View tasks assigned"
             >
               <div className="sidebarBtn__icon">
                 <img src={taskIcon} alt="" />
               </div>
               <h3>Tasks</h3>
             </button>
-            <button className="userpage__sideBtn">
+            <button
+              id="mentorsBtn"
+              className="userpage__sideBtn"
+              onClick={mainContentHandler}
+              title="View Following Mentors"
+            >
               <div className="sidebarBtn__icon">
                 <img src={mentorIcon} alt="" />
               </div>

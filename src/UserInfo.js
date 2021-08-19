@@ -77,6 +77,9 @@ function UserInfo() {
       baseUrl + (category === "student" ? "/user/profile" : "/mentor/profile");
     console.log(profileURL);
 
+
+    
+
     axios
       .post(profileURL, formData, {
         headers: {
@@ -88,7 +91,7 @@ function UserInfo() {
         console.log(res);
         dispatch({
           type: "ADD_USER_INFO",
-          data: { profile: res.data.profile },
+          data: { profile: baseUrl + res.data.profile },
         });
       })
       .catch((err) => {
@@ -97,7 +100,7 @@ function UserInfo() {
   };
 
   // Profile pic declaring part
-  const profile = userInfo.profile ? baseUrl + userInfo.profile : alt_profile;
+  const profile = userInfo.profile ? userInfo.profile : alt_profile;
 
   // =============================================================================================
 

@@ -3,6 +3,7 @@ export const initialState = {
   userInfo: {},
   videos: [],
   followings: [],
+  followers: [],
 };
 
 const reducer = (state, action) => {

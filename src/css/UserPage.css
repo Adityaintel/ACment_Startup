@@ -68,6 +68,8 @@
   background-color: white;
   overflow: hidden;
   position: relative;
+  -webkit-box-shadow: 4px 0 15px rgba(0, 0, 0, 0.4);
+          box-shadow: 4px 0 15px rgba(0, 0, 0, 0.4);
 }
 
 .userpage__sidebar__maximized {
@@ -80,7 +82,6 @@
   background-color: #e5e5e5;
   overflow-x: hidden;
   overflow-y: auto;
-  padding: 10px;
 }
 
 .userpage__sidebar .userpage__sidebarBtns {

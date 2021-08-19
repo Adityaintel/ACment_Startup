@@ -6,55 +6,33 @@ import NewTask from "./NewTask";
 function Tasks() {
   // =================   states   ======================
   const [tasks, setTasks] = useState([]);
-  const [taskPageType, setTaskPageType] = useState("assigned");
   // ===================================================
 
-  const taskData = {
-    profile: prof,
-    username: "rockyBhai",
-    title: "Complete the website",
-    deadline: "23:59",
-  };
-
-  const taskPageSwitcher = (e, val) => {
-    const btns = document.querySelectorAll(".tasks__switchBtn");
-    btns.forEach((btn) => btn.classList.remove("tasks__switchBtn__active"));
-    e.target.classList.add("tasks__switchBtn__active");
-    setTaskPageType(val);
-  };
+  const taskData = [
+    {
+      profile: prof,
+      username: "RockyBhai",
+      title: "Complete the website",
+      deadline: "24/05/2021 23:59",
+    },
+    {
+      profile: prof,
+      username: "Karnan",
+      title: "We are team Acment",
+      deadline: "20/04/2021 13:59",
+    },
+  ];
 
   useEffect(() => {
-    setTasks([...tasks, taskData]);
+    setTasks([...tasks, ...taskData]);
   }, []);
 
   console.log(tasks);
 
   return (
     <div className="tasks">
-      <div className="tasks__header">
-        <button
-          onClick={(e) => {
-            taskPageSwitcher(e, "assigned");
-          }}
-          className="tasks__switchBtn tasks__switchBtn__active"
-        >
-          Assigned Tasks
-        </button>
-        <button
-          onClick={(e) => {
-            taskPageSwitcher(e, "new");
-          }}
-          className="tasks__switchBtn"
-        >
-          New Task
-        </button>
-      </div>
       <div className="tasks__container">
-        {taskPageType === "assigned" ? (
-          <AssignedTasks tasks={tasks} />
-        ) : (
-          <NewTask />
-        )}
+        <AssignedTasks tasks={tasks} />
       </div>
     </div>
   );
@@ -93,7 +71,7 @@ const TaskCard = ({ taskData }) => {
         <h3>{taskData.title}</h3>
       </div>
       <div className="taskCard__taskDue">
-        <p>{taskData.deadline}</p>
+        <p>Deadline at {taskData.deadline}</p>
       </div>
     </div>
   );

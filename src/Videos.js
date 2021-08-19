@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./css/Videos.css";
-import image from "./images/backwaters.jpg";
 import VideoCard from "./VideoCard";
 import axios from "axios";
 import "font-awesome/css/font-awesome.min.css";
@@ -73,9 +72,13 @@ function Videos() {
         </div>
       </div>
       <div className="videos__container">
-        {videos.map((video) => (
+        {videos.map((video, index) => (
           <div className="videos__card">
-            <VideoCard videoData={video} maximizeVideo={maximizeVideo} />
+            <VideoCard
+              key={index}
+              videoData={video}
+              maximizeVideo={maximizeVideo}
+            />
           </div>
         ))}
       </div>

@@ -8,9 +8,13 @@
 }
 
 .videos__container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+  // display: flex;
+  // flex-wrap: wrap;
+  // justify-content: space-evenly;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 10px;
 }
 
 .videos__card {
@@ -20,7 +24,7 @@
   min-width: 300px;
   max-width: 400px;
   width: 300px;
-  margin: 8px;
+  margin: 8px auto;
   overflow: hidden;
   box-shadow: rgba(50, 50, 93, 0.45) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.5) 0px 8px 16px -8px;
@@ -126,4 +130,95 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+// ***************************** Additional parts in mentor video section  **************************
+
+
+
+.uploadFormBtn{
+  border:none;
+  background-color: $violet;
+  color:white;
+  padding:10px 15px;
+  // width:100px;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  position: absolute;
+  bottom:30px;
+  right:30px;
+  cursor: pointer;
+}
+
+
+.videoUploadForm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+  z-index: 100;
+  form {
+    width: 400px;
+    // height: 500px;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding:20px;
+    border-radius: 6px;
+    h2{
+      margin-bottom: 40px;
+    }
+    input,textarea{
+      width:100%;
+      padding:10px;
+      resize:none;
+      border-radius: 4px;
+      border:1px solid black;
+      outline:none;
+      margin: 20px;
+    }
+    button{
+      padding:10px;
+      background-color: $violet;
+      border: none;
+      outline: none;
+      width:100px;
+      color:white;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 20px;
+    }
+  }
+}
+
+.videos__UploadFormClose {
+  z-index: 5;
+  color: black;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  margin: 10px;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+// ********************************************************************************************
+
+// ###############################################   Responsiveness    ##################################################
+
+@media only screen and (max-width: 500px) {
+  // For showing the card of videos and tasks in centre of screen
+  .videoCard {
+    margin: auto;
+  }
 }
