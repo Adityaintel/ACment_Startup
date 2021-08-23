@@ -7,6 +7,8 @@ import { userContext } from "./UserContext";
 import mentor_icon from "./images/icons/mentor_icon.svg";
 import student_icon from "./images/icons/student_icon.svg";
 
+const base_url = process.env.REACT_APP_BASE_URL;
+
 function Login({ close_register, open_signup, registerCategory }) {
   console.log("opened login in category:" + registerCategory);
 
@@ -34,7 +36,7 @@ function Login({ close_register, open_signup, registerCategory }) {
     e.preventDefault();
 
     if (category === "student") {
-      const url = process.env.REACT_APP_BASE_URL + "/user/login";
+      const url = base_url + "/user/login";
       const data = {
         email: studentCred.email,
         password: studentCred.password,
@@ -51,6 +53,7 @@ function Login({ close_register, open_signup, registerCategory }) {
         .then((res) => {
           // store response returned from server related to user in the context
           const { jwtToken, ...user_info } = res.data;
+          user_info.profile = base_url + user_info.profile;
           console.log(jwtToken);
           console.log(user_info);
           sessionStorage.setItem("jwtToken", jwtToken);
@@ -73,7 +76,7 @@ function Login({ close_register, open_signup, registerCategory }) {
           alert(err.response.data.message);
         });
     } else {
-      const url = process.env.REACT_APP_BASE_URL + "/mentor/login";
+      const url = base_url + "/mentor/login";
       const data = {
         email: mentorCred.email,
         password: mentorCred.password,
@@ -90,6 +93,7 @@ function Login({ close_register, open_signup, registerCategory }) {
         .then((res) => {
           console.log(res);
           const { jwtToken, ...user_info } = res.data;
+          user_info.profile = base_url + user_info.profile;
           console.log(jwtToken);
           console.log(user_info);
           sessionStorage.setItem("jwtToken", jwtToken);

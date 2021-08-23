@@ -104,7 +104,7 @@ function App() {
             // store response returned from server related to user in the context
             const { ...user_info } = res.data;
             // console.log(jwtToken);
-            user_info.profile = user_info.profile;
+            user_info.profile = base_url + user_info.profile;
             console.log(user_info);
 
             // storing data in react context api

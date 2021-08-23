@@ -9,12 +9,52 @@ function NewTask() {
     title: "",
     description: "",
     assigned: [],
+    deadline: "",
   });
 
+  /////////////////////////////////   Function to define the state newtask  ///////////////////////
   const taskDefiner = (event, field) => {
     const temptask = { ...newTask };
     temptask[field] = event.target.value;
     setNewTask(temptask);
+  };
+
+  ///////////////////////////////  Function to upload the new task  ///////////////////////////////
+  const uploadTask = (e) => {
+    e.preventDefault();
+    if (!validate(newTask)) {
+      return false;
+    }
+    const studymaterials = [...e.target.studyMaterial.files];
+    console.log(studymaterials);
+    const taskData = new FormData();
+    taskData.append("title", newTask.title);
+    taskData.append("description", newTask.description);
+    taskData.append("assigned", newTask.assigned);
+    taskData.append("deadline", newTask.deadline);
+    studymaterials.forEach((material) => {
+      taskData.append("studymaterials", material);
+    });
+
+    console.log(...taskData);
+  };
+
+  // /////////////////////////  Function to validate the newtask form  //////////////////////
+
+  const validate = (newtask) => {
+    if (!newtask.title || newtask.title === "") {
+      alert("Title is required");
+      return false;
+    }
+    if (newtask.assigned.length <= 0) {
+      alert("Assign the task to atleast one student");
+      return false;
+    }
+    if (!newtask.deadline) {
+      alert("You haven't assigned any deadline for the task");
+      return false;
+    }
+    return true;
   };
 
   const followers = [
@@ -47,13 +87,14 @@ function NewTask() {
 
   return (
     <div className="newTask">
-      <div className="newTask__container">
+      <form className="newTask__container" onSubmit={uploadTask}>
         <label htmlFor="title">Title</label>
         <input
           type="text"
           name="title"
           id="title"
           placeholder="Title for new task"
+          required
           value={newTask.title}
           onChange={(e) => {
             taskDefiner(e, "title");
@@ -79,9 +120,16 @@ function NewTask() {
         <label htmlFor="studyMaterial">Add study material</label>
         <input type="file" name="studyMaterial" id="studyMaterial" multiple />
         <label htmlFor="deadline">Choose a deadline</label>
-        <input type="datetime-local" name="deadline" id="deadline" />
+        <input
+          type="datetime-local"
+          name="deadline"
+          id="deadline"
+          onChange={(e) => {
+            taskDefiner(e, "deadline");
+          }}
+        />
         <button type="submit">Assign Task</button>
-      </div>
+      </form>
     </div>
   );
 }
@@ -129,9 +177,6 @@ const DropDown = ({ followers, newTask, setNewTask }) => {
       setNewTask({ ...newTask, assigned: [...newTask.assigned, id] });
     }
   };
-
-  // console.log(newTask);
-
   return (
     <div className="dropdown">
       <div className="dropdown__selector" onClick={dropDownHandler}>

@@ -203,13 +203,7 @@ $headerHeight: 50px;
   overflow-y: auto;
   overflow-x: hidden;
 
-  // to hide scroll bar
-  &::-webkit-scrollbar {
-    /*Chrome, Safari and Opera */
-    display: none;
-  }
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  @include hideScrollBar();
 }
 
 .hidden_userpage__userInfo {

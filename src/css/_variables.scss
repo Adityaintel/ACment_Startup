@@ -24,3 +24,25 @@ $ft_black: #26262e;
   background-color: $bg;
   z-index: -100;
 }
+
+@mixin profile($diam: 50px) {
+  width: $diam;
+  height: $diam;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 10px;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@mixin hideScrollBar() {
+  // to hide scroll bar
+  &::-webkit-scrollbar {
+    /*Chrome, Safari and Opera */
+    display: none;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

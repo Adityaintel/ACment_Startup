@@ -162,7 +162,7 @@ function MentorVideos() {
           <input type="file" accept="video/*" name="video" id="video" />
           <button type="submit">Upload</button>
           <div className="videos__UploadFormClose" onClick={showUploadForm}>
-            <i class="fa fa-times" aria-hidden="true"></i>
+            <i className="fa fa-times" aria-hidden="true"></i>
           </div>
         </form>
       </div>
