@@ -12,14 +12,15 @@
 // ==================================== body and background images ==================================================
 body {
   overflow-x: hidden;
+  // width:100%;
 }
 .body {
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  // width: 100%;
 
   // padding:0;
-  min-width: 1280px;
+  // min-width: 1280px;
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
@@ -27,12 +28,18 @@ body {
     position: absolute;
     top: -40px;
     z-index: -100;
+    min-height: 500px;
+    width: auto;
+    object-fit: contain;
+    object-position: center;
+    // transform: translateX(-50%);
   }
   .sideBg {
+    // display: none;
     position: absolute;
     z-index: -100;
     top: 1150px;
-    right: -40px;
+    right: -80px;
     height: 650px;
     width: 300px;
     object-fit: contain;
@@ -47,18 +54,21 @@ body {
     position: absolute;
     top: 565px;
     right: 290px;
+    z-index: -100;
   }
   .big_circle {
     @include circle(350px);
     position: absolute;
     top: 500px;
     right: -120px;
+    z-index: -100;
   }
   .grey_circle {
     @include circle(450px, #e1e1e1);
     position: absolute;
     top: 800px;
     left: -230px;
+    z-index: -100;
   }
 }
 
@@ -70,7 +80,7 @@ body {
   left: 0;
   right: 0;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   z-index: 100;
   visibility: hidden;
   opacity: 0;
@@ -87,7 +97,9 @@ body {
 // ======================================= main wrapper properties ====================================================
 
 .mainwrapper {
-  width: 1280px;
+  width: 100%;
+  padding: 0 20px;
+  // max-width: 1280px;
   margin: 0 auto;
   font-family: "Roboto", sans-serif;
 }
@@ -95,13 +107,16 @@ body {
 // ===================================== header and login button =====================================================
 
 .headerbox {
+  width: auto;
+  margin: 10px;
   margin-top: 30px;
   height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // background-color: salmon;
   .logo {
+    flex-shrink: 0;
+    flex-grow: 0;
     img {
       height: 100%;
       width: 100%;
@@ -111,15 +126,21 @@ body {
     width: 100px;
     margin-left: 10px;
   }
-  ul {
+
+  .headerbox__menu {
     flex: 1;
+    display: block;
+  }
+
+  ul {
     list-style: none;
+    max-width: 550px;
+    margin: auto;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     li {
-      margin: auto 30px;
+      // margin: auto 30px;
       &:hover {
-        // font-size: 20px;
         font-weight: 600;
         text-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2);
       }
@@ -129,25 +150,103 @@ body {
       color: black;
     }
   }
-  button {
+  .header__loginBtn {
     @include btnShape(white, black);
     width: 100px;
   }
 }
 
+// #########################  For dropdown for responsiveness  ##############################
+
+.header__dropdown {
+  display: none;
+  flex: 1;
+  margin-left: auto;
+  .dropdown__cross {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+  }
+  .dropdown__menu {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 30px;
+    transition: all 1s ease;
+    transform: translateX(100%);
+    ul {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      li a {
+        color: white;
+        font-size: 1.5em;
+        &:active {
+          font-size: 1.8em;
+        }
+      }
+      .dropdown__loginBtn {
+        @include btnShape(white, black);
+        width: 100px;
+        &:active {
+          width: 120px;
+        }
+      }
+    }
+  }
+}
+
+.show__dropdown__menu {
+  transform: translateX(0) !important;
+}
+
+// For designing hamburger
+.header__hamburger {
+  $size: 30px;
+  width: $size;
+  height: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  margin: 10px;
+  margin-left: auto;
+  cursor: pointer;
+  span {
+    display: block;
+    width: $size;
+    height: 3px;
+    border-radius: 10px;
+    background: white;
+  }
+}
+
+// ###################################################################################
+
 // ==================================== part 1 ==================================================
 
 .part1 {
   // background-color: yellow;
-  width: 100%;
+  width: auto;
+  margin: 20px;
   margin-top: 30px;
-  // margin-bottom: 40px;
-  height: 400px;
+
+  min-height: 400px;
   position: relative;
   .textPart {
     text-align: left;
     padding: 50px 0;
-    width: 500px;
+    width: auto;
+    max-width: 500px;
     h1 {
       font-size: 3em;
       font-weight: 900;
@@ -157,7 +256,8 @@ body {
       }
     }
     p {
-      width: 400px;
+      max-width: 400px;
+      width: auto;
       font-size: 18px;
     }
     button {
@@ -170,8 +270,10 @@ body {
   .imagePart {
     overflow: hidden;
     object-fit: contain;
+    // float:right;
     position: absolute;
-    right: 200px;
+    z-index: -10;
+    right: 0;
     top: 0;
     width: 400px;
     margin-top: -30px;
@@ -186,83 +288,139 @@ body {
 // ======================================== part2 =============================================
 
 .part2 {
-  // background-color: yellowgreen;
   // padding: 20px 0;
-  height: 500px;
+  // height: 500px;
   overflow: hidden;
-  margin-top: 80px;
-  display: flex;
+  margin-top: 150px;
+  // display: flex;
   .imagePart {
+    float: left;
+    object-fit: contain;
+    height: 400px;
+    // overflow: hidden;
+    order: 1;
     img {
       width: 100%;
       height: 100%;
     }
-    // flex: 1;
-    margin: auto 0;
-    object-fit: contain;
-    width: 48%;
-    height: 400px;
-    // background-color: yellow;
-    overflow: hidden;
   }
   .textPart {
     // flex: 1;
-    margin: auto 0;
+    // width:100%;
+    padding: 30px 20%;
+    // margin: auto 0;
+    margin: auto;
     // margin-left:-80px;
-    width: 52%;
+    // background-color: tomato;
+    // width: 52%;
     h1 {
       margin-bottom: 30px;
+      order: 0;
     }
     p {
-      width: 490px;
+      max-width: 700px;
       font-size: 14px;
       text-align: left;
       line-height: 30px;
+      order: 2;
     }
     button {
       margin-top: 50px;
       @include btnShape();
       width: 170px;
+      order: 3;
     }
   }
 }
 
 // ============================================ part3 =======================================================
 
+// .part3 {
+//   min-height: 425px;
+//   max-width: 950px;
+//   margin: 40px auto;
+//   padding: 30px;
+//   position: relative;
+//   background-color: white;
+//   box-shadow: 5px 10px 20px 15px rgba(0, 0, 0, 0.2);
+//   // =====================
+//   .text1,
+//   .text2 {
+//     font-weight: 500;
+//     width: 700px;
+//     height: 200px;
+//     text-align: left;
+//     // background-color: cyan;
+//     h2 {
+//       margin-bottom: 30px;
+//       font-size: 30px;
+//     }
+//   }
+//   .text1 {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     padding-left: 70px;
+//     padding-top: 70px;
+//   }
+//   .text2 {
+//     position: absolute;
+//     bottom: 0;
+//     right: 0;
+//     padding-left: 70px;
+//     padding-right: 70px;
+//     // padding-top:40px;
+//   }
+//   .image1,
+//   .image2 {
+//     img {
+//       width: 100%;
+//       height: 100%;
+//     }
+//     width: 200px;
+//     height: 200px;
+//     object-fit: contain;
+//     margin: 40px;
+//   }
+//   .image1 {
+//     position: absolute;
+//     right: 0;
+//     top: 0;
+//   }
+//   .image2 {
+//     position: absolute;
+//     left: 0;
+//     bottom: 0;
+//   }
+// }
+
 .part3 {
-  height: 425px;
-  width: 950px;
+  min-height: 425px;
+  max-width: 950px;
   margin: 40px auto;
   padding: 30px;
-  position: relative;
-  box-shadow: 5px 10px 20px 5px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 5px 10px 20px 15px rgba(0, 0, 0, 0.2);
+  // =====================
   .text1,
   .text2 {
     font-weight: 500;
-    width: 700px;
+    width: auto;
     height: 200px;
     text-align: left;
-    // background-color: cyan;
     h2 {
       margin-bottom: 30px;
       font-size: 30px;
     }
   }
-  .text1 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding-left: 70px;
-    padding-top: 70px;
+  .image1 {
+    float: right;
   }
-  .text2 {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    padding-left: 70px;
-    padding-right: 70px;
-    // padding-top:40px;
+  .image2 {
+    float: left;
   }
+
   .image1,
   .image2 {
     img {
@@ -272,17 +430,7 @@ body {
     width: 200px;
     height: 200px;
     object-fit: contain;
-    margin: 40px;
-  }
-  .image1 {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .image2 {
-    position: absolute;
-    left: 0;
-    bottom: 0;
+    margin: 10px;
   }
 }
 
@@ -290,12 +438,13 @@ body {
 
 .part4 {
   // background-color: darkgoldenrod;
-  height: 300px;
-  width: 1200px;
+  min-height: 300px;
+  max-width: 1100px;
+  width: 100%;
   margin: 80px auto;
-  display: flex;
+  // display: flex;
   .textPart {
-    width: 48%;
+    // width: 48%;
     padding: 20px;
     padding-left: 40px;
     h1 {
@@ -316,20 +465,29 @@ body {
       width: 100%;
       height: 100%;
     }
-    width: 52%;
+    // width: 52%;
+    float: right;
     height: 300px;
     object-fit: contain;
     // background-color: darkgray;
+  }
+
+  // clearfix hack
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
   }
 }
 
 // ========================================= part5 =============================================
 
 .part5 {
-  width: 100vw;
-  position: absolute;
-  left: 0;
-  height: 300px;
+  width: auto;
+  // position: absolute;
+  margin: 20px -30px 20px -30px;
+  // left: 0;
+  min-height: 300px;
   background-color: $violet;
   box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
   display: flex;
@@ -347,11 +505,11 @@ body {
     // background-color: yellow;
   }
   .textPart {
-    width: 700px;
+    max-width: 700px;
     font-size: 30px;
     line-height: 40px;
     font-weight: 900;
-    padding: 20px;
+    padding: 40px;
     color: white;
     button {
       @include btnShape(white, black);
@@ -360,17 +518,11 @@ body {
     }
   }
 }
-.part5_dummy {
-  height: 300px;
-  width: 100%;
-  background-color: $violet;
-  margin-bottom: 50px;
-}
 
 // ======================================== part6 ===============================================
 
 .part6 {
-  width: 1280px;
+  // width: 1280px;
   // height: 600px;
   text-align: center;
   margin-top: 80px;
@@ -409,7 +561,7 @@ body {
       h2 {
         font-size: 25px;
         margin-bottom: 20px;
-        height: 70px;
+        // height: 70px;
       }
       p {
         flex: 1;
@@ -457,7 +609,7 @@ body {
   }
 
   .footer_lower {
-    height: 80px;
+    min-height: 80px;
     padding: 0 100px;
     display: flex;
     align-items: center;
@@ -472,6 +624,7 @@ body {
         object-fit: contain;
         height: 60px;
         width: 60px;
+        margin: 10px;
         margin-right: 30px;
         img {
           width: 100%;
@@ -485,6 +638,133 @@ body {
       .logos {
         margin: 10px;
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .header__dropdown {
+    display: block;
+  }
+  .headerbox__menu,
+  .headerbox__menu ul,
+  .header__loginBtn,
+  .small_circle,
+  .part1 .imagePart {
+    display: none;
+  }
+  .body .big_circle {
+    // background-color: red;
+    top: -150px;
+    right: -250px;
+  }
+
+  .part1 {
+    margin-top: 10px;
+    .textPart {
+      padding: 30px 0;
+      button {
+        margin-top: 20px;
+      }
+    }
+  }
+
+  .part2 {
+    margin-top: 20px;
+    .textPart {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      // h1 {
+      //   font-size: 2em;
+      //   font-weight: 800;
+      // }
+      .imagePart {
+        float: none;
+      }
+    }
+  }
+
+  .part4 .textPart {
+    text-align: center;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    button {
+      margin: 30px auto 0;
+    }
+    .imagePart {
+      float: none;
+    }
+  }
+
+  .part5 {
+    flex-direction: column;
+    .textPart {
+      text-align: center;
+    }
+  }
+
+  .part6 {
+    .part6_container {
+      flex-direction: column;
+      & > div {
+        width: auto;
+      }
+    }
+  }
+  .footer {
+    .footer_upper {
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      .footer_list {
+        margin: 10px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .body {
+    font-size: 0.8em;
+  }
+
+  .part3 {
+    // height:1000px;
+    // max-height: none;
+    width: 90%;
+    padding: 30px;
+    .text1,
+    .text2 {
+      height: auto;
+      margin-bottom: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      // background-color: yellow;
+      h2 {
+        order: 0;
+        margin-bottom: 0;
+      }
+      .image1,
+      .image2 {
+        float: none;
+        order: 1;
+      }
+      p {
+        order: 2;
+      }
+    }
+  }
+  .body .sideBg {
+    top: 1500px;
+  }
+  .footer {
+    .footer_lower {
+      padding: 0 10px;
+      flex-direction: column;
     }
   }
 }

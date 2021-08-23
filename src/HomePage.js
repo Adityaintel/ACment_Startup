@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./css/HomePage.css";
+import "font-awesome/css/font-awesome.min.css";
+
 import Login from "./Login";
 import Signup from "./Signup";
 import frontbg from "./images/homepage_illustrations/background.svg";
-import sidebg from "./images/homepage_illustrations/pic_6.svg";
+import sidebg from "./images/homepage_illustrations/sideBg.svg";
 import logo from "./images/homepage_illustrations/logo for cisco.png";
 import image1 from "./images/homepage_illustrations/footer.svg";
 import image2 from "./images/homepage_illustrations/pic_1.svg";
@@ -65,6 +67,14 @@ function HomePage() {
     setRegisterPart("");
   };
 
+  // Opening and closing drop down form
+  const toggleDropDown = () => {
+    console.log("showing dropdown");
+    const dropDown = document.querySelector(".dropdown__menu");
+    dropDown.classList.toggle("show__dropdown__menu");
+    console.log(dropDown.classList);
+  };
+
   return (
     <div className="body">
       <div className="homepageRegister">{registerPart}</div>
@@ -83,32 +93,80 @@ function HomePage() {
               <img src={logo} />
             </a>
           </div>
-
-          <ul>
-            <li>
-              <a href="#">About us</a>
-            </li>
-            <li>
-              <a href="#">Mentorship?</a>
-            </li>
-            <li>
-              <a href="#">Pay Now</a>
-            </li>
-            <li>
-              <a href="#">Pricing</a>
-            </li>
-            <li>
-              <a href="#">Contact us</a>
-            </li>
-          </ul>
+          <div className="headerbox__menu">
+            <ul>
+              <li>
+                <a href="#">About us</a>
+              </li>
+              <li>
+                <a href="#">Mentorship?</a>
+              </li>
+              <li>
+                <a href="#">Pay Now</a>
+              </li>
+              <li>
+                <a href="#">Pricing</a>
+              </li>
+              <li>
+                <a href="#">Contact us</a>
+              </li>
+            </ul>
+          </div>
           <button
+            className="header__loginBtn"
             onClick={() => {
               open_login("student");
             }}
           >
             Log in
           </button>
+
+          {/* *************************  Drop down code  ******************************* */}
+          <div className="header__dropdown">
+            <div className="header__hamburger" onClick={toggleDropDown}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div className="dropdown__menu">
+              <i
+                className="fa fa-times dropdown__cross"
+                aria-hidden="true"
+                onClick={toggleDropDown}
+              ></i>
+              <ul>
+                <li>
+                  <a href="#">About us</a>
+                </li>
+                <li>
+                  <a href="#">Mentorship?</a>
+                </li>
+                <li>
+                  <a href="#">Pay Now</a>
+                </li>
+                <li>
+                  <a href="#">Pricing</a>
+                </li>
+                <li>
+                  <a href="#">Contact us</a>
+                </li>
+                <button
+                  className="dropdown__loginBtn"
+                  onClick={() => {
+                    toggleDropDown();
+                    open_login("student");
+                  }}
+                >
+                  Log in
+                </button>
+              </ul>
+            </div>
+          </div>
+
+          {/* ********************************************************************* */}
         </div>
+
+        {/* ************************************************************************************ */}
 
         <div className="part1">
           <div className="textPart">
@@ -127,11 +185,12 @@ function HomePage() {
         </div>
 
         <div className="part2">
-          <div className="imagePart">
-            <img src={image2} alt="" />
-          </div>
           <div className="textPart">
+            <div className="imagePart">
+              <img src={image2} alt="" />
+            </div>
             <h1>TO BE SUCCESS</h1>
+
             <p>
               We believe in excellence in education and all round development .
               Every student is different and so are their needs. We tap into the
@@ -146,6 +205,9 @@ function HomePage() {
 
         <div className="part3">
           <div className="text1">
+            <div className="image1">
+              <img src={image3} alt="" />
+            </div>
             <h2>Live Sessions &amp; Calls</h2>
             <p>
               One on one Consultation Calls daily to assess your progress. Live
@@ -153,13 +215,11 @@ function HomePage() {
               day.
             </p>
           </div>
-          <div className="image1">
-            <img src={image3} alt="" />
-          </div>
-          <div className="image2">
-            <img src={image4} alt="" />
-          </div>
+
           <div className="text2">
+            <div className="image2">
+              <img src={image4} alt="" />
+            </div>
             <h2>Study Planner</h2>
             <p>
               Ace your preparation with customized study plan &amp; bi-weekly
@@ -171,6 +231,9 @@ function HomePage() {
         <div className="part4">
           <div className="textPart">
             <h1>Constant Motivation And Guidance</h1>
+            <div className="imagePart">
+              <img src={image5} alt="" />
+            </div>
             <p>
               If a mentee ever lack confidence or loses motivation, our mentors
               are always there to cheer them up and help reach their full
@@ -179,9 +242,6 @@ function HomePage() {
               I in paving your way towards success.
             </p>
             <button>LEARN MORE</button>
-          </div>
-          <div className="imagePart">
-            <img src={image5} alt="" />
           </div>
         </div>
 
@@ -198,7 +258,6 @@ function HomePage() {
             <button>Read More</button>
           </div>
         </div>
-        <div className="part5_dummy"></div>
 
         <div className="part6">
           <h1>Features Of Our Acment</h1>

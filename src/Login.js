@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./css/register.css";
 import axios from "axios";
+import "font-awesome/css/font-awesome.min.css";
 import { loginValidator } from "./validator";
 import { userContext } from "./UserContext";
 import mentor_icon from "./images/icons/mentor_icon.svg";
@@ -153,7 +154,8 @@ function Login({ close_register, open_signup, registerCategory }) {
         <div className="purple_circle"></div>
         {/* ================================================= */}
         <div className="cross" onClick={close_register}>
-          &#x274C;
+          <i class="fa fa-times" aria-hidden="true"></i>
+          {/* &#x274C; */}
         </div>
         <div className="register__heading">
           <h1>SIGN IN</h1>

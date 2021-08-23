@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./css/register.css";
+import "font-awesome/css/font-awesome.min.css";
 import StudentSignup from "./StudentSignup";
 import MentorSignup from "./MentorSignup";
 import { studentSignup_validator } from "./validator";
@@ -133,7 +134,8 @@ function Signup({ close_register, open_login, registerCategory }) {
         <div className="purple_circle"></div>
         {/* ================================================= */}
         <div className="cross" onClick={close_register}>
-          &#x274C;
+          <i class="fa fa-times" aria-hidden="true"></i>
+          {/* &#x274C; */}
         </div>
         <div className="register__heading">
           <h1>SIGN UP</h1>

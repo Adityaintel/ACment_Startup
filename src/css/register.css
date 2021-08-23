@@ -31,7 +31,8 @@
 }
 
 .registerSection {
-  width: 600px;
+  max-width: 600px;
+  width: 100%;
   position: absolute;
   overflow: hidden;
   top: 50px;
@@ -293,5 +294,13 @@ select:-webkit-autofill:focus {
   height: 40px;
   width: 100%;
   background-color: greenyellow;
+}
+
+@media only screen and (max-width: 650px) {
+  .registerSection {
+    width: 95%;
+    margin: auto;
+    padding: 10px;
+  }
 }
 /*# sourceMappingURL=register.css.map */

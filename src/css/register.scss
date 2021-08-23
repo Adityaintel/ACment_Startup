@@ -31,7 +31,8 @@ $shadow: 1px 10px 20px 10px rgba(0, 0, 0, 0.2);
 }
 
 .registerSection {
-  width: 600px;
+  max-width: 600px;
+  width: 100%;
   position: absolute;
   overflow: hidden;
   top: 50px;
@@ -207,4 +208,13 @@ select:-webkit-autofill:focus {
   height: 40px;
   width: 100%;
   background-color: greenyellow;
+}
+
+
+@media only screen and (max-width: 650px){
+  .registerSection{
+    width:95%;
+    margin:auto;
+    padding:10px;
+  }
 }

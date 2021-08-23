@@ -3,6 +3,7 @@ import UserContextProvider from "./UserContext";
 import alt_profile from "./images/icons/profile_alt_icon.svg";
 import add_photo from "./images/icons/add_photo.svg";
 import "./css/UserInfo.css";
+import "font-awesome/css/font-awesome.min.css";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import UserInfoUpdater from "./UserInfoUpdater";
@@ -76,9 +77,6 @@ function UserInfo() {
     const profileURL =
       baseUrl + (category === "student" ? "/user/profile" : "/mentor/profile");
     console.log(profileURL);
-
-
-    
 
     axios
       .post(profileURL, formData, {
@@ -217,7 +215,8 @@ const ChangePassword = ({ showHidePwdForm }) => {
   return (
     <div className="userInfo__changepwdForm">
       <div className="userInfo__cross" onClick={showHidePwdForm}>
-        &#x274C;
+        <i class="fa fa-times" aria-hidden="true"></i>
+        {/* &#x274C; */}
       </div>
       <form onSubmit={submitHandler}>
         <label for="">current Password</label>
