@@ -90,6 +90,15 @@
       }
     }
   }
+  .videoCard__trash {
+    margin: 10px;
+    font-size: 20px;
+    color: #555;
+    &:hover {
+      font-size: 22px;
+      color: #000;
+    }
+  }
 }
 
 .videos__largeScreen {
@@ -112,7 +121,6 @@
     cursor: pointer;
   }
   .videos__largeScreenVideo {
-    background-color: red;
     height: 80%;
     max-width: 90%;
     width: auto;
@@ -134,32 +142,29 @@
 
 // ***************************** Additional parts in mentor video section  **************************
 
-
-
-.uploadFormBtn{
-  border:none;
+.uploadFormBtn {
+  border: none;
   background-color: $violet;
-  color:white;
-  padding:10px 15px;
+  color: white;
+  padding: 10px 15px;
   // width:100px;
   border-radius: 6px;
   font-size: 18px;
   font-weight: 600;
   position: absolute;
-  bottom:30px;
-  right:30px;
+  bottom: 30px;
+  right: 30px;
   cursor: pointer;
 }
 
-
 .videoUploadForm {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.8);
-  display: none;
   z-index: 100;
   form {
     width: 400px;
@@ -173,32 +178,37 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    padding:20px;
+    padding: 20px;
     border-radius: 6px;
-    h2{
+    h2 {
       margin-bottom: 40px;
     }
-    input,textarea{
-      width:100%;
-      padding:10px;
-      resize:none;
+    input,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      resize: none;
       border-radius: 4px;
-      border:1px solid black;
-      outline:none;
+      border: 1px solid black;
+      outline: none;
       margin: 20px;
     }
-    button{
-      padding:10px;
+    button {
+      padding: 10px;
       background-color: $violet;
       border: none;
       outline: none;
-      width:100px;
-      color:white;
+      width: 100px;
+      color: white;
       border-radius: 4px;
       cursor: pointer;
       margin: 20px;
     }
   }
+}
+
+.showVideoUploadForm {
+  display: block;
 }
 
 .videos__UploadFormClose {

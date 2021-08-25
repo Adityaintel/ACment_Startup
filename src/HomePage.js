@@ -42,7 +42,10 @@ function HomePage() {
       />
     );
     const homepageRegister = document.querySelector(".homepageRegister");
+    const homepage = document.querySelector(".body");
     homepageRegister.classList.add("show__homepageRegister");
+    homepage.style.overflowY = "hidden";
+    console.log(homepage);
   };
 
   // Code for opening sign up form

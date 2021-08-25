@@ -93,7 +93,7 @@ function App() {
         // ===================================  Mentor part = =============================================
       } else {
         const url = base_url + "/mentor/getdetails";
-
+        console.log(url);
         axios
           .get(url, {
             headers: {

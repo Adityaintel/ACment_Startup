@@ -1,11 +1,15 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./css/Videos.css";
 import image from "./images/backwaters.jpg";
+import alt_profile from "./images/icons/profile_alt_icon.svg";
+import UserContextProvider from "./UserContext";
+import UserInfo from "./UserInfo";
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
-const VideoCard = ({ videoData, maximizeVideo }) => {
+const VideoCard = ({ videoData, maximizeVideo, deleteVideo }) => {
   // ================  states and refs  =======================================
+  const [userData] = UserContextProvider();
   const [duration, setDuration] = useState("00:00:00");
   const videoBlock = useRef();
   const videotag = useRef();
@@ -43,8 +47,8 @@ const VideoCard = ({ videoData, maximizeVideo }) => {
     clearTimeout(timer);
   };
 
+  // Need to be changed later
   videoData.thumbnail = image;
-  // videoData.username = "shijith";
 
   return (
     <div
@@ -75,12 +79,29 @@ const VideoCard = ({ videoData, maximizeVideo }) => {
       </div>
       <div className="videoCard__info">
         <div className="videoCard__mentorProfile">
-          <img src={image} alt="" />
+          <img
+            src={baseUrl + videoData.postedBy.profile}
+            alt=""
+            onError={(e) => {
+              e.target.src = alt_profile;
+              e.target.onError = null;
+            }}
+          />
         </div>
         <div className="videoCard__videoData">
           <h3>{videoData.topic}</h3>
-          <h4>{videoData.postedByMentor}</h4>
+          <h4>{videoData.postedBy.username}</h4>
         </div>
+        {userData.category === "mentor" ? (
+          <div
+            className="videoCard__trash"
+            onClick={(e) => {
+              deleteVideo(e,videoData._id);
+            }}
+          >
+            <i className="fa fa-trash" aria-hidden="true"></i>
+          </div>
+        ) : null}
       </div>
     </div>
   );

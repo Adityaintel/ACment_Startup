@@ -52,7 +52,7 @@ function Videos() {
     <div className="videos">
       <div className="videos__largeScreen">
         <div className="videos__largeScreenClose" onClick={minimizeVideo}>
-          <i class="fa fa-times" aria-hidden="true"></i>
+          <i className="fa fa-times" aria-hidden="true"></i>
         </div>
         <div className="videos__largeScreenVideo">
           <video

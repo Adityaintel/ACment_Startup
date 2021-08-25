@@ -1,4 +1,4 @@
-const validator = require("validator");
+import validator from "validator";
 
 export const loginValidator = ({ email, password }) => {
   if (!email || typeof email !== "string") {
@@ -27,15 +27,10 @@ export const loginValidator = ({ email, password }) => {
   return true;
 };
 
-export const studentSignup_validator = ({
-  username,
-  email,
-  phone,
-  parent_phone,
-  address,
-  password,
-  exam,
-}) => {
+export const studentSignup_validator = (
+  { username, email, phone, parent_phone, address, password, exam },
+  isPasswordRequired = "true"
+) => {
   if (!username || typeof username !== "string") {
     console.log("Username is required");
     alert("Username is required");
@@ -84,13 +79,13 @@ export const studentSignup_validator = ({
     return false;
   }
 
-  if (!password || typeof password !== "string") {
+  if (isPasswordRequired && (!password || typeof password !== "string")) {
     console.log("Password is required");
     alert("Password is required");
     return false;
   }
 
-  if (password.length < 7) {
+  if (isPasswordRequired && password.length < 7) {
     console.log("Password too small. Should be atleast 8 characters");
     alert("Password too small. Should be atleast 8 characters");
     return false;
@@ -105,15 +100,10 @@ export const studentSignup_validator = ({
   return true;
 };
 
-export const mentorSignup_validator = ({
-  username,
-  email,
-  phone,
-  address,
-  password,
-  exam,
-  subject,
-}) => {
+export const mentorSignup_validator = (
+  { username, email, phone, address, password, exam, subject },
+  isPasswordRequired = "true"
+) => {
   if (!username || typeof username !== "string") {
     console.log("Username is required");
     alert("Username is required");
@@ -150,13 +140,13 @@ export const mentorSignup_validator = ({
     return false;
   }
 
-  if (!password || typeof password !== "string") {
+  if (isPasswordRequired && (!password || typeof password !== "string")) {
     console.log("Password is required");
     alert("Password is required");
     return false;
   }
 
-  if (password.length < 7) {
+  if (isPasswordRequired && password.length < 7) {
     console.log("Password too small. Should be atleast 8 characters");
     alert("Password too small. Should be atleast 8 characters");
     return false;

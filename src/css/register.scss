@@ -3,21 +3,13 @@
 $shadow: 1px 10px 20px 10px rgba(0, 0, 0, 0.2);
 
 .register {
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
   overflow-y: auto;
-  top: 0;
-  left: 0;
+  padding: 50px;
   background-color: rgba(0, 0, 0, 0.8);
-}
-
-.purple_circle {
-  position: absolute;
-  top: -140px;
-  right: -120px;
-  z-index: -10;
-  @include circle(400px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .cross {
@@ -33,11 +25,13 @@ $shadow: 1px 10px 20px 10px rgba(0, 0, 0, 0.2);
 .registerSection {
   max-width: 600px;
   width: 100%;
-  position: absolute;
+  position: relative;
+  // position: absolute;
   overflow: hidden;
-  top: 50px;
-  left: 50%;
-  transform: translateX(-50%);
+  // top: 50px;
+  // left: 50%;
+  // transform: translateX(-50%);
+  // margin:50px;
   background: white;
   border-radius: 20px;
   padding: 30px;
@@ -50,6 +44,14 @@ $shadow: 1px 10px 20px 10px rgba(0, 0, 0, 0.2);
   visibility: visible;
   opacity: 1;
   transition: all 1s ease-in-out;
+
+  .purple_circle {
+    position: absolute;
+    top: -150px;
+    right: -110px;
+    @include circle(400px);
+    z-index:0;
+  }
 }
 
 .register__heading {
@@ -57,10 +59,12 @@ $shadow: 1px 10px 20px 10px rgba(0, 0, 0, 0.2);
   margin-top: 40px;
   margin-bottom: 30px;
   font-size: 18px;
+  z-index:10;
 }
 
 .register__formContainer {
   width: 90%;
+  z-index:10;
   hr {
     margin-top: 20px;
     color: rgba(0, 0, 0, 0.8);
@@ -207,14 +211,12 @@ select:-webkit-autofill:focus {
   bottom: -40px;
   height: 40px;
   width: 100%;
-  background-color: greenyellow;
 }
 
-
-@media only screen and (max-width: 650px){
-  .registerSection{
-    width:95%;
-    margin:auto;
-    padding:10px;
+@media only screen and (max-width: 650px) {
+  .registerSection {
+    width: 95%;
+    margin: auto;
+    padding: 10px;
   }
 }

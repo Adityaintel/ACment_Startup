@@ -13,7 +13,6 @@ function MentorVideos() {
   const [videos, setVideos] = useState([]); //To store the data of videos got from server
   const [videoData, setvideoData] = useState({}); //To storing data about video to be shown in large screen
   const videoLarge = useRef();
-  const uploadForm = useRef();
 
   // ==========================   Video Upload part  ====================================
 
@@ -44,7 +43,8 @@ function MentorVideos() {
       .then((res) => {
         console.log(res);
         showUploadForm();
-        alert(res.statusText);
+        getVideos();
+        // alert(res.statusText);
       })
       .catch((err) => {
         console.log(err);
@@ -52,38 +52,63 @@ function MentorVideos() {
       });
   };
 
-  // =========================================================================================
+  // ==================================  Fetching all videos from backend to show in frontend  =======================================================
 
-  // Fetching all videos from backend to show in frontend
-  // const getVideos = () => {
-  //   const url = baseUrl + "/allvideos";
-  //   console.log(url);
-  //   const jwt = sessionStorage.getItem("jwtToken");
-  //   axios
-  //     .get(url, {})
-  //     .then((res) => {
-  //       console.log(res);
-  //       setVideos(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  const getVideos = () => {
+    if (!userData.userInfo.userId) {
+      console.log(
+        "aborting mentor video fetching due to unavailabilty of mentor id"
+      );
+      return;
+    }
+    console.log("collecting mentor videos");
+    console.log(userData);
+    const url = baseUrl + "/myvideos/" + userData.userInfo.userId;
+    console.log(url);
+    const jwt = sessionStorage.getItem("jwtToken");
+    axios
+      .get(url, {
+        headers: {
+          authorization: "Bearer " + jwt,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setVideos(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  // useEffect(() => {
-  //   getVideos();
-  // }, []);
+  // ============================   Deleting a particular video  =====================================
+
+  const deleteVideo = (event, videoId) => {
+    event.stopPropagation();
+    const url = baseUrl + "/video/" + videoId;
+    console.log(url);
+    const jwt = sessionStorage.getItem("jwtToken");
+    axios
+      .delete(url, {
+        headers: {
+          authorization: "Bearer " + jwt,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        getVideos();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   // ====================    Video upload form opener  =========================
 
   const showUploadForm = () => {
-    if (uploadForm.current) {
-      if (uploadForm.current.style.display === "none") {
-        uploadForm.current.style.display = "block";
-      } else {
-        uploadForm.current.style.display = "none";
-      }
-    }
+    const uploadForm = document.querySelector(".videoUploadForm");
+    console.log(uploadForm.style.display);
+    uploadForm.classList.toggle("showVideoUploadForm");
   };
 
   // ====================== maximizing and minimizing the video screen  ========================================
@@ -104,7 +129,12 @@ function MentorVideos() {
     videoLarge.current.pause();
   };
 
-  // ====================================================================================
+  // ============================== To fetch videos when mentor page is loaded  ======================================================
+
+  useEffect(() => {
+    console.log(userData);
+    getVideos();
+  }, [userData.userInfo.userId]);
 
   return (
     <div className="videos">
@@ -136,6 +166,7 @@ function MentorVideos() {
               key={index}
               videoData={video}
               maximizeVideo={maximizeVideo}
+              deleteVideo={deleteVideo}
             />
           </div>
         ))}
@@ -143,7 +174,7 @@ function MentorVideos() {
       <button onClick={showUploadForm} className="uploadFormBtn">
         Upload Video
       </button>
-      <div ref={uploadForm} className="videoUploadForm">
+      <div className="videoUploadForm">
         <form onSubmit={uploadVideo}>
           <h2>Upload Video</h2>
           <input
@@ -171,11 +202,3 @@ function MentorVideos() {
 }
 
 export default MentorVideos;
-
-/* <h2>This is the mentor page</h2>
-        <form onSubmit={uploadVideo}>
-          <label htmlFor="video">Upload video : </label>
-          <input type="file" accept="video/*" name="video" id="video" />
-          <button type="submit">Submit</button>
-        </form> */
-// }

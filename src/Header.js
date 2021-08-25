@@ -10,6 +10,7 @@ import UserInfo from "./UserInfo";
 const baseUrl = process.env.REACT_APP_BASE_URL;
 const searchapi = baseUrl + "/mentor/search";
 const followMentorUrl = baseUrl + "/user/followmentor";
+const unfollowMentorUrl = baseUrl + "/user/unfollowmentor";
 
 function Header() {
   const [userData, dispatch] = UserContextProvider();
@@ -53,6 +54,33 @@ function Header() {
 
   // =============================================================================================
 
+  // ======================== Follow mentor part  =============================================
+  const unfollowMentor = (e, id) => {
+    console.log(id);
+    const jwt = sessionStorage.getItem("jwtToken");
+    axios
+      .post(
+        unfollowMentorUrl,
+        {
+          mentorId: id,
+        },
+        {
+          headers: {
+            authorization: "Bearer " + jwt,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        e.target.innerHTML = "Following";
+        dispatch({
+          type: "ADD_FOLLOWINGS",
+          data: res.data,
+        });
+      });
+  };
+
+  // =============================================================================================
   // =================================   Search mentor part  ========================================
 
   // const [searchResult, setSearchResult] = useState([]);
@@ -195,10 +223,8 @@ function Header() {
                 name="mentorUsername"
                 placeholder="Enter the username of mentor to search..."
               />
-              <select name="mentorSubject">
-                <option value="" selected>
-                  All subject
-                </option>
+              <select name="mentorSubject" defaultValue="">
+                <option value="">All subject</option>
                 <option value="physics">Physics</option>
                 <option value="chemistry">Chemistry</option>
                 {userData.userInfo.exam === "JEE" ? (

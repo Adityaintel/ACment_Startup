@@ -109,7 +109,7 @@ function UserInfo() {
         <div className="userInfo__profilePic">
           <img src={profile} alt="" />
         </div>
-        <label for="profilePicInput">
+        <label htmlFor="profilePicInput">
           <img src={add_photo} alt="" className="userInfo__addProfilePic" />
         </label>
         <input
@@ -215,11 +215,11 @@ const ChangePassword = ({ showHidePwdForm }) => {
   return (
     <div className="userInfo__changepwdForm">
       <div className="userInfo__cross" onClick={showHidePwdForm}>
-        <i class="fa fa-times" aria-hidden="true"></i>
+        <i className="fa fa-times" aria-hidden="true"></i>
         {/* &#x274C; */}
       </div>
       <form onSubmit={submitHandler}>
-        <label for="">current Password</label>
+        <label htmlFor="">current Password</label>
         <input
           type="password"
           name="currPwd"
@@ -227,7 +227,7 @@ const ChangePassword = ({ showHidePwdForm }) => {
           className="userInfo__currentPwd"
           required
         />
-        <label for="">New Password</label>
+        <label htmlFor="">New Password</label>
 
         <input
           type="password"
@@ -236,7 +236,7 @@ const ChangePassword = ({ showHidePwdForm }) => {
           className="userInfo__newPwd"
           required
         />
-        <label for="">Re-type New Password</label>
+        <label htmlFor="">Re-type New Password</label>
 
         <input
           type="password"

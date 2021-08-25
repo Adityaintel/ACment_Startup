@@ -1,63 +1,113 @@
 import React from "react";
-// import "./css/UserInfoUpdater.css";
+import "./css/UserInfoUpdater.css";
+import "font-awesome/css/font-awesome.min.css";
+import { mentorSignup_validator, studentSignup_validator } from "./validator";
 
 function UserInfoUpdater({ closeUpdateInfo, userData }) {
   const userInfo = userData.userInfo;
 
-  const defaultValuePlacer = () => {
-    const username = document.getElementById("username");
-    const email = document.getElementById("email");
-    const phone = document.getElementById("phone");
-    const address = document.getElementById("address");
-    const parent_phone = document.getElementById("parent_phone");
-    const subject = document.getElementById("subject");
-    const exam = document.getElementById("exam");
-    console.log(username);
-    // username.defaultValue = userInfo.username;
+  const updateUser = (e) => {
+    e.preventDefault();
+    console.log("updating data");
+    const updatedData = {
+      username: e.target.username.value,
+      email: e.target.email.value,
+      phone: e.target.phone.value,
+      address: e.target.address.value,
+      exam: e.target.exam.value,
+    };
+    userData.category === "student"
+      ? (updatedData.parent_phone = e.target.parentPhone.value)
+      : (updatedData.subject = e.target.subject.value);
+
+    const validated =
+      userData.category === "student"
+        ? studentSignup_validator(updatedData, false) //Here false is given for mentioning not requiring password in validator
+        : mentorSignup_validator(updatedData, false);
+    console.log("validated:", validated);
+    if (!validated) return;
+    console.log(updatedData);
   };
-  defaultValuePlacer();
   return (
     <div className="userInfoUpdater">
       <div className="userInfoUpdater__container">
         {/* this is for purple circle in background */}
-        <div className="purple_circle"></div>
+        <div className="purple__circle"></div>
         {/* ================================================= */}
-        <div
-          className="userInfoUpdater__cross"
-          // onClick={ close_register }
-        >
-          &#x274C;
+        <div className="cross" onClick={closeUpdateInfo}>
+          <i class="fa fa-times" aria-hidden="true"></i>
         </div>
         <div className="userInfoUpdater__heading">
           <h1>Update Profile</h1>
         </div>
         <div className="userInfoUpdater__formContainer">
-          <form className="userInfoUpdater__form">
+          <form className="userInfoUpdater__form" onSubmit={updateUser}>
             <label htmlFor="username">Username</label>
-            <input type="text" id="username" />
-            <label htmlFor="email">Email</label>
-            <input type="text" id="email" value={userInfo.email} />
-            <label htmlFor="phone">Phone</label>
-            <input type="text" id="phone" value={userInfo.phone} />
-            <label htmlFor="address">Address</label>
-            <input type="text" id="address" value={userInfo.address} />
-            {/* {userData.category===} */}
-            <label htmlFor="parent_phone">Parent Phone</label>
             <input
               type="text"
-              id="parent_phone"
-              value={userInfo.parent_phone}
+              name="username"
+              id="username"
+              defaultValue={userInfo.username}
             />
-            <label htmlFor="subject">Subject</label>
-            <input type="text" id="subject" value={userInfo.subject} />
+            <label htmlFor="email">Email</label>
+            <input
+              type="text"
+              name="email"
+              id="email"
+              defaultValue={userInfo.email}
+            />
+            <label htmlFor="phone">Phone</label>
+            <input
+              type="text"
+              id="phone"
+              name="phone"
+              defaultValue={userInfo.phone}
+            />
+            <label htmlFor="address">Address</label>
+            <input
+              type="text"
+              name="address"
+              id="address"
+              defaultValue={userInfo.address}
+            />
+            {userData.category === "student" ? (
+              <div>
+                <label htmlFor="parentPhone">Parent Phone</label>
+                <input
+                  type="text"
+                  id="parentPhone"
+                  name="parentPhone"
+                  defaultValue={userInfo.parent_phone}
+                />
+              </div>
+            ) : (
+              <div>
+                <label htmlFor="subject">Subject</label>
+                <select
+                  name="subject"
+                  defaultValue={userInfo.mentor__subject}
+                  id="subject"
+                  placeholder="subject"
+                  required
+                >
+                  <option value="physics">Physics</option>
+                  <option value="chemistry">Chemistry</option>
+                  {userInfo.exam === "JEE" ? (
+                    <option value="maths">Maths</option>
+                  ) : (
+                    <option value="biology">Biology</option>
+                  )}
+                </select>
+              </div>
+            )}
 
             {/* exam */}
             <label htmlFor="exam">Exam</label>
             <select
-              name="student__exam"
+              name="exam"
               id="exam"
               placeholder="Exam"
-              value={userInfo.exam}
+              defaultValue={userInfo.exam}
               required
             >
               <option value={userInfo.exam} selected>
@@ -68,11 +118,7 @@ function UserInfoUpdater({ closeUpdateInfo, userData }) {
               </option>
             </select>
 
-            <button
-              type="submit"
-              // onClick={signupUser}
-              className="register__submit"
-            >
+            <button type="submit" className="register__submit">
               Update
             </button>
           </form>
