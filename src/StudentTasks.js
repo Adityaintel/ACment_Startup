@@ -1,30 +1,37 @@
 import React, { useState, useEffect } from "react";
 import "./css/Tasks.css";
-import prof from "./images/backwaters.jpg";
-import NewTask from "./NewTask";
+import UserContextProvider from "./UserContext";
+import axios from "axios";
+import alt_profile from "./images/icons/profile_alt_icon.svg";
+
+const baseUrl = process.env.REACT_APP_BASE_URL;
+const studentTasksUrl = baseUrl + "/tasks";
 
 function Tasks() {
   // =================   states   ======================
+  // const [userData] = UserContextProvider();
   const [tasks, setTasks] = useState([]);
   // ===================================================
 
-  const taskData = [
-    {
-      profile: prof,
-      username: "RockyBhai",
-      title: "Complete the website",
-      deadline: "24/05/2021 23:59",
-    },
-    {
-      profile: prof,
-      username: "Karnan",
-      title: "We are team Acment",
-      deadline: "20/04/2021 13:59",
-    },
-  ];
-
   useEffect(() => {
-    setTasks([...tasks, ...taskData]);
+    const jwt = sessionStorage.getItem("jwtToken");
+    axios
+      .post(
+        studentTasksUrl,
+        {},
+        {
+          headers: {
+            authorization: "Bearer " + jwt,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        setTasks(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   console.log(tasks);
@@ -52,26 +59,52 @@ const AssignedTasks = ({ tasks }) => {
           ))}
         </div>
       ) : (
-        <div className="assignedTasks__notasks">No tasks yet</div>
+        <h1 className="assignedTasks__notasks">No tasks yet</h1>
       )}
     </div>
   );
 };
 
 const TaskCard = ({ taskData }) => {
+  console.log(taskData.postedBy.profile);
   return (
     <div className="taskCard">
       <div className="taskCard__mentorInfo">
         <div className="taskCard__mentorProfile">
-          <img src={taskData.profile} alt="" />
+          <img
+            src={baseUrl + taskData.postedBy.profile}
+            alt=""
+            onError={(e) => {
+              e.target.src = alt_profile;
+              e.target.onError = null;
+            }}
+          />
         </div>
-        <h4>{taskData.username}</h4>
+        <h3>{taskData.postedBy.username}</h3>
       </div>
-      <div className="taskCard__taskTitle">
+      <div className="taskCard__taskData">
         <h3>{taskData.title}</h3>
+        <p>{taskData.info}</p>
+      </div>
+      <div className="taskCard__taskAttachment">
+        <a
+          href={baseUrl + taskData.task}
+          target="_blank"
+          rel="noreferrer"
+          // download={taskData.title}
+        >
+          <button>Attachment</button>
+        </a>
       </div>
       <div className="taskCard__taskDue">
-        <p>Deadline at {taskData.deadline}</p>
+        <p>
+          Deadline:&nbsp;&nbsp;
+          {taskData.deadline
+            ? new Date(taskData.deadline).toDateString() +
+              "\t\t\t\t\t\t" +
+              new Date(taskData.deadline).toLocaleTimeString()
+            : "No due date"}
+        </p>
       </div>
     </div>
   );

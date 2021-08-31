@@ -6,7 +6,7 @@ import Header from "./Header";
 import UserInfo from "./UserInfo";
 import axios from "axios";
 import MentorVideos from "./MentorVideos";
-import Tasks from "./Tasks";
+import MentorTasks from "./MentorTasks";
 import Chats from "./Chats";
 import videoIcon from "./images/icons/video-icon.png";
 import studentIcon from "./images/icons/student_icon.svg";
@@ -59,7 +59,7 @@ function MentorPage() {
         break;
       }
       case "tasksBtn": {
-        setMainContent(<Tasks />);
+        setMainContent(<MentorTasks />);
         e.currentTarget.classList.add("userpage__sideBtn__active");
         break;
       }

@@ -4,6 +4,7 @@ export const initialState = {
   videos: [],
   followings: [],
   followers: [],
+  tasks: [],
 };
 
 const reducer = (state, action) => {
@@ -33,7 +34,13 @@ const reducer = (state, action) => {
       console.log("Adding followings");
       return {
         ...state,
-        followings: [...state.followings, ...action.data],
+        followings: [...action.data],
+      };
+    case "ADD_TASKS":
+      console.log("Adding tasks");
+      return {
+        ...state,
+        tasks: [...action.data],
       };
     default:
       return state;

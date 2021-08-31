@@ -125,6 +125,8 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.9);
   display: none;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .videos__largeScreen .videos__largeScreenClose {

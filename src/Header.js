@@ -14,11 +14,11 @@ const unfollowMentorUrl = baseUrl + "/user/unfollowmentor";
 
 function Header() {
   const [userData, dispatch] = UserContextProvider();
+
+  console.log("Rendering header");
   const userInfo = userData.userInfo;
   const followings = userData.followings;
-  console.log(followings);
   const followingMentorsIds = followings.map((mentor) => mentor._id);
-  console.log(followingMentorsIds);
 
   // =========================  use refs  ==================================================
 
@@ -27,12 +27,20 @@ function Header() {
   const profileBlock = useRef(0);
 
   // ======================== Follow mentor part  =============================================
-  const followMentor = (e, id) => {
-    console.log(id);
+  const followUnFollowMentor = (e, id) => {
+    let followUnFollowURL;
+    if (e.target.innerHTML === "follow") {
+      console.log("Following:", id);
+      followUnFollowURL = followMentorUrl;
+    } else {
+      console.log("Unfollowing:", id);
+      followUnFollowURL = unfollowMentorUrl;
+    }
+
     const jwt = sessionStorage.getItem("jwtToken");
     axios
       .post(
-        followMentorUrl,
+        followUnFollowURL,
         {
           mentorId: id,
         },
@@ -44,43 +52,24 @@ function Header() {
       )
       .then((res) => {
         console.log(res);
-        e.target.innerHTML = "Following";
+
         dispatch({
           type: "ADD_FOLLOWINGS",
           data: res.data,
         });
-      });
-  };
-
-  // =============================================================================================
-
-  // ======================== Follow mentor part  =============================================
-  const unfollowMentor = (e, id) => {
-    console.log(id);
-    const jwt = sessionStorage.getItem("jwtToken");
-    axios
-      .post(
-        unfollowMentorUrl,
-        {
-          mentorId: id,
-        },
-        {
-          headers: {
-            authorization: "Bearer " + jwt,
-          },
+        if (e.target.innerHTML === "follow") {
+          e.target.innerHTML = "unfollow";
+        } else {
+          e.target.innerHTML = "follow";
         }
-      )
-      .then((res) => {
-        console.log(res);
-        e.target.innerHTML = "Following";
-        dispatch({
-          type: "ADD_FOLLOWINGS",
-          data: res.data,
-        });
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
   // =============================================================================================
+
   // =================================   Search mentor part  ========================================
 
   // const [searchResult, setSearchResult] = useState([]);
@@ -125,11 +114,11 @@ function Header() {
                 {mentor.exam}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{mentor.subject}
                 <span
                   className="mentor_follow"
-                  onClick={(e) => followMentor(e, mentor._id)}
+                  onClick={(e) => followUnFollowMentor(e, mentor._id)}
                 >
                   {followingMentorsIds.indexOf(mentor._id) >= 0
-                    ? "Following"
-                    : "Follow"}
+                    ? "unfollow"
+                    : "follow"}
                 </span>
               </p>
             </div>

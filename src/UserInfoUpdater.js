@@ -2,8 +2,13 @@ import React from "react";
 import "./css/UserInfoUpdater.css";
 import "font-awesome/css/font-awesome.min.css";
 import { mentorSignup_validator, studentSignup_validator } from "./validator";
+import axios from "axios";
+import UserContextProvider from "./UserContext";
 
-function UserInfoUpdater({ closeUpdateInfo, userData }) {
+const baseUrl = process.env.REACT_APP_BASE_URL;
+
+function UserInfoUpdater({ closeUpdateInfo }) {
+  const [userData, dispatch] = UserContextProvider();
   const userInfo = userData.userInfo;
 
   const updateUser = (e) => {
@@ -26,7 +31,27 @@ function UserInfoUpdater({ closeUpdateInfo, userData }) {
         : mentorSignup_validator(updatedData, false);
     console.log("validated:", validated);
     if (!validated) return;
+
+    const jwt = sessionStorage.getItem("jwtToken");
+    const category = userData.category;
+    const updateUrl = baseUrl + (category === "student" ? "/user" : "/mentor");
+    console.log(updateUrl);
     console.log(updatedData);
+    axios
+      .patch(updateUrl, updatedData, {
+        headers: {
+          authorization: "Bearer " + jwt,
+        },
+      })
+      .then((res) => {
+        res.data.profile = baseUrl + res.data.profile;
+        console.log(res);
+        dispatch({
+          type: "ADD_USER_INFO",
+          data: res.data,
+        });
+        closeUpdateInfo();
+      });
   };
   return (
     <div className="userInfoUpdater">

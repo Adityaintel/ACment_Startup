@@ -24,15 +24,14 @@
   border-radius: 10px;
 }
 
-.newTask__container label {
+.newTask__containerlabel {
   width: 100%;
   text-align: left;
   margin-left: 10px;
   margin-top: 10px;
 }
 
-.newTask__container input,
-.newTask__container textarea {
+.newTask__containerinput, .newTask__containertextarea {
   resize: none;
   width: 100%;
   margin: 10px;
@@ -40,11 +39,11 @@
   border: none;
   outline: none;
   border-radius: 6px;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
 }
 
-.newTask__container textarea {
+.newTask__containertextarea {
   overflow-y: auto;
 }
 
