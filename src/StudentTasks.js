@@ -11,6 +11,7 @@ function Tasks() {
   // =================   states   ======================
   // const [userData] = UserContextProvider();
   const [tasks, setTasks] = useState([]);
+  const [taskType, settaskType] = useState("pending");
   // ===================================================
 
   useEffect(() => {
@@ -35,6 +36,11 @@ function Tasks() {
   }, []);
 
   console.log(tasks);
+
+  const changeMainContent = (e, flag) => {
+    console.log("changing content");
+    settaskType(flag);
+  };
 
   return (
     <div className="tasks">

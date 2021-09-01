@@ -24,26 +24,27 @@
   border-radius: 10px;
 }
 
-.newTask__containerlabel {
+.newTask__container label {
   width: 100%;
   text-align: left;
   margin-left: 10px;
   margin-top: 10px;
 }
 
-.newTask__containerinput, .newTask__containertextarea {
+.newTask__container input,
+.newTask__container textarea {
   resize: none;
   width: 100%;
   margin: 10px;
   padding: 10px;
-  border: none;
+  border: 1px solid #555;
   outline: none;
   border-radius: 6px;
-  -webkit-box-shadow: none !important;
-          box-shadow: none !important;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
-.newTask__containertextarea {
+.newTask__container textarea {
   overflow-y: auto;
 }
 

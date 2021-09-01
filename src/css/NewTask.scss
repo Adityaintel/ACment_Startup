@@ -15,25 +15,25 @@
   border: 1px solid black;
   border-radius: 10px;
   // background-color: crimson;
-  &label {
+  label {
     width: 100%;
     text-align: left;
     margin-left: 10px;
     margin-top: 10px;
     // background-color: cyan;
   }
-  &input,
-  &textarea {
+  input,
+  textarea {
     resize: none;
     width: 100%;
     margin: 10px;
     padding: 10px;
-    border: none;
+    border: 1px solid #555;
     outline: none;
     border-radius: 6px;
-    box-shadow: none !important;
+    box-shadow: none ;
   }
-  &textarea {
+  textarea {
     overflow-y: auto;
   }
   button {

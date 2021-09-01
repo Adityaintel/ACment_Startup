@@ -88,10 +88,9 @@ export default MentorTasks;
 
 const AssignedTasks = ({ tasks }) => {
   console.log("message from assigned tasks");
-  console.log(tasks.length);
   return (
     <div className="assignedTasks">
-      {tasks.length > 0 ? (
+      {tasks && tasks.length > 0 ? (
         <div className="assignedTasks__container">
           {tasks.map((task, index) => (
             <TaskCard key={index} taskData={task} />
