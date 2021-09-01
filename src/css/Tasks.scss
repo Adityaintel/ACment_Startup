@@ -157,8 +157,11 @@
     padding: 8px;
     margin: 10px;
   }
-  .taskCard__submittedBtn{
+  .taskCard__submittedBtn {
     background-color: #999;
+    &:hover{
+      background-color: #999;
+    }
   }
 }
 

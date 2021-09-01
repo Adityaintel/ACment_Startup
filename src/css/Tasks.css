@@ -225,6 +225,10 @@
   background-color: #999;
 }
 
+.taskCard__taskAttachment .taskCard__submittedBtn:hover {
+  background-color: #999;
+}
+
 .taskCard__bottom {
   font-size: 14px;
   font-weight: 600;

@@ -209,15 +209,20 @@ const TaskCard = ({ taskData, showTaskSubmit, submitted }) => {
           rel="noreferrer"
           // download={taskData.title}
         >
-          <button>Attachment</button>
+          <button title="click to view the attachment with this task">
+            Attachment
+          </button>
         </a>
         {submitted ? (
-          <button className="taskCard__submittedBtn">Submitted</button>
+          <button className="taskCard__submittedBtn" title="Already submitted">
+            Submitted
+          </button>
         ) : (
           <button
             onClick={() => {
               showTaskSubmit(taskData);
             }}
+            title="Submit answer"
           >
             Submit
           </button>
