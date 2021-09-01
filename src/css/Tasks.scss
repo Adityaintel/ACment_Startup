@@ -35,6 +35,58 @@
   }
 }
 
+.assignedTasks__submitForm {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-around;
+  background-color: $violet;
+  color: white;
+  border-radius: 10px;
+  z-index: 100;
+  padding: 10px;
+  box-shadow: rgba(50, 50, 93, 0.45) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.5) 0px 8px 16px -8px;
+  .assignedTasks__submitFormClose {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  label {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 20px;
+  }
+  input,
+  textarea {
+    padding: 10px;
+    resize: none;
+    overflow-y: auto;
+    border-radius: 10px;
+    // border: 1px solid black;
+  }
+  button {
+    @include btnShape(white);
+    color: black;
+    padding: 5px;
+    margin-top: 20px;
+  }
+}
+
+.assignedTasks__submitFormShow {
+  display: flex;
+}
+
 .assignedTasks__container {
   width: 100%;
   max-width: 700px;
@@ -99,10 +151,14 @@
 }
 .taskCard__taskAttachment {
   align-self: flex-end;
-  a button {
+  button {
     @include btnShape();
     border-radius: 4px;
     padding: 8px;
+    margin: 10px;
+  }
+  .taskCard__submittedBtn{
+    background-color: #999;
   }
 }
 

@@ -40,6 +40,83 @@
   color: white;
 }
 
+.assignedTasks__submitForm {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  background-color: #735ccb;
+  color: white;
+  border-radius: 10px;
+  z-index: 100;
+  padding: 10px;
+  -webkit-box-shadow: rgba(50, 50, 93, 0.45) 0px 13px 27px -5px, rgba(0, 0, 0, 0.5) 0px 8px 16px -8px;
+          box-shadow: rgba(50, 50, 93, 0.45) 0px 13px 27px -5px, rgba(0, 0, 0, 0.5) 0px 8px 16px -8px;
+}
+
+.assignedTasks__submitForm .assignedTasks__submitFormClose {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.assignedTasks__submitForm h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.assignedTasks__submitForm label {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+.assignedTasks__submitForm input,
+.assignedTasks__submitForm textarea {
+  padding: 10px;
+  resize: none;
+  overflow-y: auto;
+  border-radius: 10px;
+}
+
+.assignedTasks__submitForm button {
+  background-color: white;
+  color: white;
+  border-radius: 100px;
+  border: none;
+  outline: none;
+  padding: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  font-size: 14px;
+  color: black;
+  padding: 5px;
+  margin-top: 20px;
+}
+
+.assignedTasks__submitForm button:hover {
+  background: #d9d9d9;
+}
+
+.assignedTasks__submitFormShow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .assignedTasks__container {
   width: 100%;
   max-width: 700px;
@@ -125,7 +202,7 @@
       align-self: flex-end;
 }
 
-.taskCard__taskAttachment a button {
+.taskCard__taskAttachment button {
   background-color: #735ccb;
   color: white;
   border-radius: 100px;
@@ -137,10 +214,15 @@
   font-size: 14px;
   border-radius: 4px;
   padding: 8px;
+  margin: 10px;
 }
 
-.taskCard__taskAttachment a button:hover {
+.taskCard__taskAttachment button:hover {
   background: #4c35a6;
+}
+
+.taskCard__taskAttachment .taskCard__submittedBtn {
+  background-color: #999;
 }
 
 .taskCard__bottom {
