@@ -127,3 +127,15 @@
   background-color: $violet !important;
   color: white;
 }
+
+@media only screen and (max-width: 500px) {
+  // For showing the card of videos and tasks in centre of screen
+  // .userpage__sidebar {
+  //   width: 0;
+  // }
+  // .userpage__hamburger {
+  //   position: fixed;
+  //   top: 0;
+  //   left: 1px;
+  // }
+}

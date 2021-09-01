@@ -144,6 +144,8 @@
           justify-content: space-between;
   border-radius: 10px;
   margin: 10px;
+  margin-bottom: 2opx;
+  overflow: hidden;
   -webkit-box-shadow: rgba(50, 50, 93, 0.45) 0px 13px 27px -5px, rgba(0, 0, 0, 0.5) 0px 8px 16px -8px;
           box-shadow: rgba(50, 50, 93, 0.45) 0px 13px 27px -5px, rgba(0, 0, 0, 0.5) 0px 8px 16px -8px;
 }
@@ -242,7 +244,7 @@
 
 @media only screen and (max-width: 500px) {
   .taskCard {
-    margin: auto;
+    margin: 10px auto;
   }
 }
 /*# sourceMappingURL=Tasks.css.map */
