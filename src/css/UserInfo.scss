@@ -47,13 +47,23 @@
 }
 
 .userInfo__heading {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .userInfo__details {
   margin-bottom: 20px;
   & > * {
-    margin: 10px 0;
+    margin: 5px 0;
+  }
+  .userInfo__payment{
+    border-radius: 4px;
+    width:100px;
+    margin:0 10px;
+    padding:5px;
+    background-color: rgb(69, 13, 121);
+    &:hover{
+      background-color: rgb(47, 6, 85);
+    }
   }
 }
 
@@ -69,6 +79,10 @@
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
   display: none;
+  padding: 10px;
+}
+.userInfo__showpwdForm {
+  display: block;
 }
 .userInfo__changepwdForm {
   width: 100%;
@@ -80,13 +94,14 @@
   background-color: white;
   height: 400px;
   padding: 10px;
+  margin: 10px auto 10px;
   border-radius: 20px;
 }
 .userInfo__changepwdForm form {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  label{
+  label {
     margin-top: 10px;
     margin-left: 10px;
   }
@@ -98,8 +113,8 @@
     outline: none;
     box-shadow: -3px 2px 10px rgba(0, 0, 0, 0.4);
   }
-  button{
-    padding:10px;
+  button {
+    padding: 10px;
     margin-top: 20px;
   }
 }
@@ -108,8 +123,8 @@
   font-size: 30px;
   font-weight: 600;
   position: absolute;
-  right:10px;
-  top:10px;
+  right: 10px;
+  top: 10px;
   cursor: pointer;
 }
 

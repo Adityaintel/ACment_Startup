@@ -15,6 +15,10 @@ import FileUploader from "./FileUploader";
 import axios from "axios";
 import UserContextProvider from "./UserContext";
 
+// ===================
+// import Payment from "./Payment";
+// ======================
+
 const base_url = process.env.REACT_APP_BASE_URL;
 
 function App() {
@@ -128,6 +132,9 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
+          {/* <Route path="/pay">
+            <Payment />
+          </Route> */}
           <Route path="/login">
             <Login />
           </Route>

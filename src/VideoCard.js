@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./css/Videos.css";
-import image from "./images/backwaters.jpg";
+// import image from "./images/backwaters.jpg";
 import alt_profile from "./images/icons/profile_alt_icon.svg";
 import UserContextProvider from "./UserContext";
 import UserInfo from "./UserInfo";
@@ -48,7 +48,7 @@ const VideoCard = ({ videoData, maximizeVideo, deleteVideo }) => {
   };
 
   // Need to be changed later
-  videoData.thumbnail = image;
+  // videoData.thumbnail = image;
 
   return (
     <div

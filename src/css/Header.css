@@ -87,9 +87,13 @@
   margin: 0 20px;
 }
 
+.header__searchMentor {
+  margin: auto 50px;
+}
+
 .header__searchBar {
   position: relative;
-  margin: auto 50px;
+  margin: auto;
 }
 
 .header__searchBar form {
@@ -155,6 +159,17 @@
 .header__searchBar form button i {
   color: black;
   font-size: 20px;
+}
+
+.header__searchIcon {
+  display: none;
+  background: none;
+  border: none;
+}
+
+.header__searchIcon i {
+  font-size: 25px;
+  color: white;
 }
 
 .header__searchDropdown {
@@ -265,5 +280,24 @@
 .hidden_userpage__userInfo {
   height: 0;
   visibility: hidden;
+}
+
+@media only screen and (max-width: 600px) {
+  .header__profile {
+    margin: 5px;
+  }
+  .userpage__userInfo {
+    width: 250px;
+    font-size: 14px;
+  }
+  .header__searchMentor {
+    margin: auto 20px;
+  }
+  .header__searchMentor .header__searchBar {
+    display: none;
+  }
+  .header__searchIcon {
+    display: block;
+  }
 }
 /*# sourceMappingURL=Header.css.map */

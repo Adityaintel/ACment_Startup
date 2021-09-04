@@ -70,7 +70,7 @@
 }
 
 .userInfo__heading {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .userInfo__details {
@@ -78,7 +78,19 @@
 }
 
 .userInfo__details > * {
-  margin: 10px 0;
+  margin: 5px 0;
+}
+
+.userInfo__details .userInfo__payment {
+  border-radius: 4px;
+  width: 100px;
+  margin: 0 10px;
+  padding: 5px;
+  background-color: #450d79;
+}
+
+.userInfo__details .userInfo__payment:hover {
+  background-color: #2f0655;
 }
 
 .userInfo__pwdForm {
@@ -89,6 +101,11 @@
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
   display: none;
+  padding: 10px;
+}
+
+.userInfo__showpwdForm {
+  display: block;
 }
 
 .userInfo__changepwdForm {
@@ -102,6 +119,7 @@
   background-color: white;
   height: 400px;
   padding: 10px;
+  margin: 10px auto 10px;
   border-radius: 20px;
 }
 

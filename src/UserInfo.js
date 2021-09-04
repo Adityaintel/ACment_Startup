@@ -7,9 +7,11 @@ import "font-awesome/css/font-awesome.min.css";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import UserInfoUpdater from "./UserInfoUpdater";
+import logo from "./images/homepage_illustrations/Acment_logo.png";
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
-// const profileURL = baseUrl + "/user/profile";
+const orderUrl = baseUrl + "subscription/order";
+const verifyUrl = baseUrl + "/subscription/verify";
 
 function UserInfo() {
   const [userData, dispatch] = UserContextProvider();
@@ -29,14 +31,10 @@ function UserInfo() {
   console.log(userInfo);
 
   // to show and hide password updating form
-  // const [pwdForm, setPwdForm] = useState(["", false]);
   const showHidePwdForm = () => {
     const pwdForm = document.querySelector(".userInfo__pwdForm");
-    if (pwdForm.style.display === "none") {
-      pwdForm.style.display = "block";
-    } else {
-      pwdForm.style.display = "none";
-    }
+
+    pwdForm.classList.toggle("userInfo__showpwdForm");
   };
 
   // ========================= User Info update part  ======================================
@@ -97,17 +95,98 @@ function UserInfo() {
       });
   };
 
-  // Profile pic declaring part
-  const profile = userInfo.profile ? userInfo.profile : alt_profile;
-
   // =============================================================================================
+
+  //  ***************************  payment function  *****************************************************
+
+  // function loadScript(src) {
+  //   return new Promise((resolve) => {
+  //     console.log("inside load script");
+  //     const script = document.createElement("script");
+  //     script.src = src;
+  //     script.onload = () => {
+  //       resolve(true);
+  //     };
+  //     script.onerror = () => {
+  //       console.log("some error occured");
+  //       resolve(false);
+  //     };
+  //     document.body.appendChild(script);
+  //   });
+  // }
+
+  // async function displayRazorpay() {
+  //   console.log("called displayRaxorpay");
+  //   const res = await loadScript(
+  //     "https://checkout.razorpay.com/v1/checkout.js"
+  //   );
+
+  //   if (!res) {
+  //     alert("Razorpay SDK failed to load. Are you online?");
+  //     return;
+  //   }
+
+  //   const result = await axios.post(orderUrl);
+
+  //   if (!result) {
+  //     alert("Server error. Are you online?");
+  //     return;
+  //   }
+
+  //   const { amount, id: order_id, currency } = result.data;
+
+  //   const options = {
+  //     key: "rzp_test_r6FiJfddJh76SI", // Enter the Key ID generated from the Dashboard
+  //     amount: amount.toString(),
+  //     currency: currency,
+  //     name: "Soumya Corp.",
+  //     description: "Test Transaction",
+  //     image: { logo },
+  //     order_id: order_id,
+  //     handler: async function (response) {
+  //       const data = {
+  //         orderCreationId: order_id,
+  //         razorpayPaymentId: response.razorpay_payment_id,
+  //         razorpayOrderId: response.razorpay_order_id,
+  //         razorpaySignature: response.razorpay_signature,
+  //       };
+
+  //       const result = await axios.post(verifyUrl, data);
+
+  //       alert(result.data.msg);
+  //     },
+  //     prefill: {
+  //       name: "Soumya Dey",
+  //       email: "SoumyaDey@example.com",
+  //       contact: "9999999999",
+  //     },
+  //     notes: {
+  //       address: "Soumya Dey Corporate Office",
+  //     },
+  //     theme: {
+  //       color: "#61dafb",
+  //     },
+  //   };
+
+  //   const paymentObject = new window.Razorpay(options);
+  //   paymentObject.open();
+  // }
+
+  // **************************************************************************************************
 
   return (
     <div className="userInfo">
       <div className="userInfo__updateInfo">{userInfoUpdate}</div>
       <div className="userInfo__profile">
         <div className="userInfo__profilePic">
-          <img src={profile} alt="" />
+          <img
+            src={userInfo.profile}
+            alt=""
+            onError={(e) => {
+              e.target.src = alt_profile;
+              e.target.onError = null;
+            }}
+          />
         </div>
         <label htmlFor="profilePicInput">
           <img src={add_photo} alt="" className="userInfo__addProfilePic" />
@@ -133,6 +212,14 @@ function UserInfo() {
         <h3>Exam : {userInfo.exam}</h3>
         {userData.category === "mentor" ? (
           <h3>Subject : {userInfo.subject}</h3>
+        ) : (
+          ""
+        )}
+        {userData.category === "student" ? (
+          <h3>
+            Subscription:
+            <button className="userInfo__payment">Payment</button>
+          </h3>
         ) : (
           ""
         )}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import "./css/UserPage.css";
 import UserContextProvider from "./UserContext";
@@ -17,6 +17,8 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
 function MentorPage() {
   const history = useHistory();
   const [mainContent, setMainContent] = useState(<MentorVideos />);
+  const sideBar = useRef();
+
   // taking data from userContext
   const [userData, dispatch] = UserContextProvider();
   const userInfo = userData.userInfo; //accessing userinfo part inside reducer
@@ -44,6 +46,40 @@ function MentorPage() {
       });
     }
     sideBar.classList.toggle("userpage__sidebar__maximized");
+  };
+
+  // To add event listeners only after component mounted
+  useEffect(() => {
+    document.addEventListener("click", (e) => {
+      closeSidebar(e);
+    });
+    return () => {
+      document.removeEventListener("click", (e) => {
+        closeSidebar(e);
+      });
+    };
+  }, []);
+
+  const closeSidebar = (e) => {
+    console.log("closing sidebar");
+    const hamburger = document.querySelector(".userpage__hamburger");
+   
+    if (
+      sideBar.current &&
+      hamburger &&
+      hamburger !== e.target &&
+      !hamburger.contains(e.target) &&
+      sideBar.current.classList.contains("userpage__sidebar__maximized")
+    ) {
+      if (
+        sideBar.current &&
+        sideBar.current !== e.target &&
+        !sideBar.current.contains(e.target)
+      ) {
+        // sideBar.current.classList.remove("userpage__sidebar__maximized");
+        adjustSidebar();
+      }
+    }
   };
 
   // Switching between various sections
@@ -74,7 +110,7 @@ function MentorPage() {
     <div className="userpage">
       <Header />
       <div className="userpage__content">
-        <div className="userpage__sidebar">
+        <div ref={sideBar} className="userpage__sidebar">
           <div className="userpage__hamburger" onClick={adjustSidebar}>
             <span></span>
             <span></span>

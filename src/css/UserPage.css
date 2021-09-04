@@ -23,6 +23,7 @@
   display: flex;
   height: 100%;
   overflow: hidden;
+  position: relative;
 }
 
 .userpage__hamburger {
@@ -161,5 +162,15 @@
 .userpage__sideBtn__active {
   background-color: #735ccb !important;
   color: white;
+}
+
+@media only screen and (max-width: 600px) {
+  .userpage__sidebar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 30;
+  }
 }
 /*# sourceMappingURL=UserPage.css.map */

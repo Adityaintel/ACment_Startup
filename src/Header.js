@@ -205,30 +205,35 @@ function Header() {
         {userData.category === "mentor" ? (
           ""
         ) : (
-          <div className="header__searchBar">
-            <form onSubmit={searchMentor}>
-              <input
-                type="text"
-                name="mentorUsername"
-                placeholder="Enter the username of mentor to search..."
-              />
-              <select name="mentorSubject" defaultValue="">
-                <option value="">All subject</option>
-                <option value="physics">Physics</option>
-                <option value="chemistry">Chemistry</option>
-                {userData.userInfo.exam === "JEE" ? (
-                  <option value="maths">Maths</option>
-                ) : (
-                  <option value="biology">Biology</option>
-                )}
-              </select>
-              <button type="submit" title="Search mentor">
-                <i className="fa fa-search "></i>
-              </button>
-            </form>
-            <div ref={dropDownBlock} className="header__searchDropdown ">
-              {dropdown}
+          <div className="header__searchMentor">
+            <div className="header__searchBar">
+              <form onSubmit={searchMentor}>
+                <input
+                  type="text"
+                  name="mentorUsername"
+                  placeholder="Enter the username of mentor to search..."
+                />
+                <select name="mentorSubject" defaultValue="">
+                  <option value="">All subject</option>
+                  <option value="physics">Physics</option>
+                  <option value="chemistry">Chemistry</option>
+                  {userData.userInfo.exam === "JEE" ? (
+                    <option value="maths">Maths</option>
+                  ) : (
+                    <option value="biology">Biology</option>
+                  )}
+                </select>
+                <button type="submit" title="Search mentor">
+                  <i className="fa fa-search" aria-hidden="true"></i>
+                </button>
+              </form>
+              <div ref={dropDownBlock} className="header__searchDropdown ">
+                {dropdown}
+              </div>
             </div>
+            <button className="header__searchIcon">
+              <i className="fa fa-search" aria-hidden="true"></i>
+            </button>
           </div>
         )}
         <div
@@ -237,7 +242,14 @@ function Header() {
           title="Open user profile"
           onClick={toggleUserInfo}
         >
-          <img src={profile} alt="" />
+          <img
+            src={profile}
+            alt=""
+            onError={(e) => {
+              e.target.src = alt_profile;
+              e.target.onError = null;
+            }}
+          />
         </div>
       </div>
       <div

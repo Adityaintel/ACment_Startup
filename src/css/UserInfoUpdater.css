@@ -24,7 +24,6 @@
       -ms-flex-direction: column;
           flex-direction: column;
   padding: 20px;
-  margin: 30px;
   overflow-y: auto;
   overflow-x: hidden;
   position: relative;
@@ -103,5 +102,11 @@
 .userInfoUpdater__formContainer .userInfoUpdater__form select:focus {
   border: 1px solid black;
   outline: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .userInfoUpdater {
+    padding: 50px 10px;
+  }
 }
 /*# sourceMappingURL=UserInfoUpdater.css.map */

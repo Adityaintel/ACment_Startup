@@ -62,7 +62,7 @@ function HomePage() {
     homepageRegister.classList.add("show__homepageRegister");
   };
 
-  // Code for closing the register form
+  // Code for closing the register form 
   const close_register = () => {
     console.log("closing register form");
     const homepageRegister = document.querySelector(".homepageRegister");

@@ -159,6 +159,7 @@ function Login({ close_register, open_signup, registerCategory }) {
         </div>
         <div className="register__heading">
           <h1>SIGN IN</h1>
+          <h4>{category.toUpperCase() + " SIGN IN"}</h4>
         </div>
 
         <div className="register__formContainer">

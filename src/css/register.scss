@@ -50,21 +50,29 @@ $shadow: 1px 10px 20px 10px rgba(0, 0, 0, 0.2);
     top: -150px;
     right: -110px;
     @include circle(400px);
-    z-index:0;
+    z-index: 0;
   }
 }
 
 .register__heading {
   padding: 10px 20px;
   margin-top: 40px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   font-size: 18px;
-  z-index:10;
+  z-index: 10;
+  text-align: center;
+  h4 {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding:5px 10px;
+    color:white;
+    border-radius: 50px;
+    margin-top: 20px;
+  }
 }
 
 .register__formContainer {
   width: 90%;
-  z-index:10;
+  z-index: 10;
   hr {
     margin-top: 20px;
     color: rgba(0, 0, 0, 0.8);
@@ -187,6 +195,7 @@ select:-webkit-autofill:focus {
   align-items: center;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 20px;
   font-size: 16px;
   box-shadow: $shadow;
   &:hover {

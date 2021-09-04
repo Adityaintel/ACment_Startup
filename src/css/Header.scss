@@ -67,10 +67,12 @@ $headerHeight: 50px;
   margin: 0 20px;
   // background-color: coral;
 }
-
+.header__searchMentor {
+  margin: auto 50px;
+}
 .header__searchBar {
   position: relative;
-  margin: auto 50px;
+  margin: auto;
 }
 
 .header__searchBar form {
@@ -116,6 +118,16 @@ $headerHeight: 50px;
       color: black;
       font-size: 20px;
     }
+  }
+}
+
+.header__searchIcon {
+  display: none;
+  background: none;
+  border:none;
+  i{
+    font-size:25px;
+    color:white;
   }
 }
 
@@ -210,4 +222,23 @@ $headerHeight: 50px;
   height: 0;
   // display: none;
   visibility: hidden;
+}
+
+@media only screen and (max-width: 600px) {
+  .header__profile{
+    margin:5px;
+  }
+  .userpage__userInfo{
+    width:250px;
+    font-size:14px;
+  }
+  .header__searchMentor {
+    margin:auto 20px;
+    .header__searchBar {
+      display: none;
+    }
+  }
+  .header__searchIcon {
+    display: block;
+  }
 }

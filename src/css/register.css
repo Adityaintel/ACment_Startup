@@ -68,9 +68,18 @@
 .register__heading {
   padding: 10px 20px;
   margin-top: 40px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   font-size: 18px;
   z-index: 10;
+  text-align: center;
+}
+
+.register__heading h4 {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 5px 10px;
+  color: white;
+  border-radius: 50px;
+  margin-top: 20px;
 }
 
 .register__formContainer {
@@ -265,6 +274,7 @@ select:-webkit-autofill:focus {
       -ms-flex-pack: center;
           justify-content: center;
   margin-top: 20px;
+  margin-bottom: 20px;
   font-size: 16px;
   -webkit-box-shadow: 1px 10px 20px 10px rgba(0, 0, 0, 0.2);
           box-shadow: 1px 10px 20px 10px rgba(0, 0, 0, 0.2);
