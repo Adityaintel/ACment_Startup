@@ -1,115 +1,115 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useHistory } from "react-router-dom";
-import "./css/UserPage.css";
-import UserContextProvider from "./UserContext";
-import Header from "./Header";
-import UserInfo from "./UserInfo";
-import Videos from "./Videos";
-import StudentTasks from "./StudentTasks";
-import videoIcon from "./images/icons/video-icon.png";
-import mentorIcon from "./images/icons/mentor.png";
-import taskIcon from "./images/icons/task-icon.png";
+import React, {useEffect, useRef, useState} from 'react';
+import {useHistory} from 'react-router-dom';
+import './css/UserPage.css';
+import UserContextProvider from './UserContext';
+import Header from './Header';
+import UserInfo from './UserInfo';
+import Videos from './Videos';
+import StudentTasks from './StudentTasks';
+import videoIcon from './images/icons/video-icon.png';
+import mentorIcon from './images/icons/mentor.png';
+import taskIcon from './images/icons/task-icon.png';
 
-const baseUrl = process.env.REACT_APP_BASE_URL;
-function StudentPage() {
-  const history = useHistory();
-  const [mainContent, setMainContent] = useState(<Videos />);
-  const sideBar = useRef();
+const baseUrl = process.env.REACT_APP_BASE_URL + '/api';
+function StudentPage () {
+  const history = useHistory ();
+  const [mainContent, setMainContent] = useState (<Videos />);
+  const sideBar = useRef ();
 
   // taking data from userContext
-  const [userData, dispatch] = UserContextProvider();
+  const [userData, dispatch] = UserContextProvider ();
   const userInfo = userData.userInfo; //accessing userinfo part inside reducer
 
   // checking if user is authenticated,else it will redirect to homepage
-  useEffect(() => {
-    const jwt = sessionStorage.getItem("jwtToken");
-    console.log(jwt);
+  useEffect (() => {
+    const jwt = sessionStorage.getItem ('jwtToken');
+    console.log (jwt);
 
     if (!jwt) {
-      history.push("/");
+      history.push ('/');
     }
   }, []);
 
   // Minimizing and maximizing sidebar width
   const adjustSidebar = () => {
-    console.log("toggling sidebar");
+    console.log ('toggling sidebar');
     // const sideBar = document.querySelector(".userpage__sidebar");
-    const btnTexts = document.querySelectorAll(".userpage__sideBtn h3");
-    if (btnTexts[0].style.display === "block") {
-      btnTexts.forEach((btn) => {
-        btn.style.display = "none";
+    const btnTexts = document.querySelectorAll ('.userpage__sideBtn h3');
+    if (btnTexts[0].style.display === 'block') {
+      btnTexts.forEach (btn => {
+        btn.style.display = 'none';
       });
     } else {
-      btnTexts.forEach((btn) => {
-        btn.style.display = "block";
+      btnTexts.forEach (btn => {
+        btn.style.display = 'block';
       });
     }
     if (sideBar.current)
-      sideBar.current.classList.toggle("userpage__sidebar__maximized");
+      sideBar.current.classList.toggle ('userpage__sidebar__maximized');
   };
 
   // To add event listeners only after component mounted
-  useEffect(() => {
-    document.addEventListener("click", (e) => {
-      closeSidebar(e);
+  useEffect (() => {
+    document.addEventListener ('click', e => {
+      closeSidebar (e);
     });
     return () => {
-      document.removeEventListener("click", (e) => {
-        closeSidebar(e);
+      document.removeEventListener ('click', e => {
+        closeSidebar (e);
       });
     };
   }, []);
 
-  const closeSidebar = (e) => {
-    console.log("closing sidebar");
-    const hamburger = document.querySelector(".userpage__hamburger");
+  const closeSidebar = e => {
+    console.log ('closing sidebar');
+    const hamburger = document.querySelector ('.userpage__hamburger');
 
     if (
       sideBar.current &&
       hamburger &&
       hamburger !== e.target &&
-      !hamburger.contains(e.target) &&
-      sideBar.current.classList.contains("userpage__sidebar__maximized")
+      !hamburger.contains (e.target) &&
+      sideBar.current.classList.contains ('userpage__sidebar__maximized')
     ) {
       if (
         sideBar.current &&
         sideBar.current !== e.target &&
-        !sideBar.current.contains(e.target)
+        !sideBar.current.contains (e.target)
       ) {
         // sideBar.current.classList.remove("userpage__sidebar__maximized");
-        adjustSidebar();
+        adjustSidebar ();
       }
     }
   };
 
   // Switching between various sections
-  const mainContentHandler = (e) => {
-    const sideBtns = document.querySelectorAll(".userpage__sideBtn");
-    console.log(sideBtns);
-    sideBtns.forEach((btn) => {
-      console.log(btn.classList);
-      btn.classList.remove("userpage__sideBtn__active");
+  const mainContentHandler = e => {
+    const sideBtns = document.querySelectorAll ('.userpage__sideBtn');
+    console.log (sideBtns);
+    sideBtns.forEach (btn => {
+      console.log (btn.classList);
+      btn.classList.remove ('userpage__sideBtn__active');
     });
-    console.log(e.currentTarget);
+    console.log (e.currentTarget);
     switch (e.currentTarget.id) {
-      case "videoBtn": {
-        setMainContent(<Videos />);
-        e.currentTarget.classList.add("userpage__sideBtn__active");
+      case 'videoBtn': {
+        setMainContent (<Videos />);
+        e.currentTarget.classList.add ('userpage__sideBtn__active');
         break;
       }
-      case "tasksBtn": {
-        setMainContent(<StudentTasks />);
-        e.currentTarget.classList.add("userpage__sideBtn__active");
+      case 'tasksBtn': {
+        setMainContent (<StudentTasks />);
+        e.currentTarget.classList.add ('userpage__sideBtn__active');
         break;
       }
       default: {
-        setMainContent(<Videos />);
-        e.currentTarget.classList.add("userpage__sideBtn__active");
+        setMainContent (<Videos />);
+        e.currentTarget.classList.add ('userpage__sideBtn__active');
       }
     }
   };
 
-  console.log(userData);
+  console.log (userData);
   return (
     <div className="userpage">
       <Header />
@@ -120,9 +120,9 @@ function StudentPage() {
             onClick={adjustSidebar}
             title="Toggle Sidebar"
           >
-            <span></span>
-            <span></span>
-            <span></span>
+            <span />
+            <span />
+            <span />
           </div>
           <div className="userpage__sidebarBtns">
             <button

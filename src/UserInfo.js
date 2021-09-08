@@ -1,178 +1,101 @@
-import React, { useState } from "react";
-import UserContextProvider from "./UserContext";
-import alt_profile from "./images/icons/profile_alt_icon.svg";
-import add_photo from "./images/icons/add_photo.svg";
-import "./css/UserInfo.css";
-import "font-awesome/css/font-awesome.min.css";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
-import UserInfoUpdater from "./UserInfoUpdater";
-import logo from "./images/homepage_illustrations/Acment_logo.png";
+import React, {useState} from 'react';
+import UserContextProvider from './UserContext';
+import alt_profile from './images/icons/profile_alt_icon.svg';
+import add_photo from './images/icons/add_photo.svg';
+import './css/UserInfo.css';
+import 'font-awesome/css/font-awesome.min.css';
+import {useHistory} from 'react-router-dom';
+import axios from 'axios';
+import UserInfoUpdater from './UserInfoUpdater';
+import logo from './images/homepage_illustrations/Acment_logo.png';
 
-const baseUrl = process.env.REACT_APP_BASE_URL;
-const orderUrl = baseUrl + "subscription/order";
-const verifyUrl = baseUrl + "/subscription/verify";
+const baseUrl = process.env.REACT_APP_BASE_URL + '/api';
+const orderUrl = baseUrl + 'subscription/order';
+const verifyUrl = baseUrl + '/subscription/verify';
 
-function UserInfo() {
-  const [userData, dispatch] = UserContextProvider();
+function UserInfo () {
+  const [userData, dispatch] = UserContextProvider ();
 
-  const history = useHistory();
-  console.log(userData);
+  const history = useHistory ();
+  console.log (userData);
   const userInfo = userData.userInfo;
 
   const logout = () => {
-    sessionStorage.clear();
-    dispatch({
-      type: "REMOVE_USER",
+    sessionStorage.clear ();
+    dispatch ({
+      type: 'REMOVE_USER',
     });
-    history.push("/");
+    history.push ('/');
   };
 
-  console.log(userInfo);
+  console.log (userInfo);
 
   // to show and hide password updating form
   const showHidePwdForm = () => {
-    const pwdForm = document.querySelector(".userInfo__pwdForm");
+    const pwdForm = document.querySelector ('.userInfo__pwdForm');
 
-    pwdForm.classList.toggle("userInfo__showpwdForm");
+    pwdForm.classList.toggle ('userInfo__showpwdForm');
   };
 
   // ========================= User Info update part  ======================================
 
   // To show the user info update  part
-  const [userInfoUpdate, setUserInfoUpdate] = useState("");
+  const [userInfoUpdate, setUserInfoUpdate] = useState ('');
   const openUpdateInfo = () => {
-    const field = document.querySelector(".userInfo__updateInfo");
-    field.style.display = "block";
-    setUserInfoUpdate(
+    const field = document.querySelector ('.userInfo__updateInfo');
+    field.style.display = 'block';
+    setUserInfoUpdate (
       <UserInfoUpdater closeUpdateInfo={closeUpdateInfo} userData={userData} />
     );
   };
 
   const closeUpdateInfo = () => {
-    const field = document.querySelector(".userInfo__updateInfo");
-    field.style.display = "none";
-    setUserInfoUpdate("");
+    const field = document.querySelector ('.userInfo__updateInfo');
+    field.style.display = 'none';
+    setUserInfoUpdate ('');
   };
   // ======================================================================================
 
   // ============================  Profile picture part ===========================================
 
   // to upload profile picture
-  const profileUploader = (e) => {
-    console.log("uploading image profile");
+  const profileUploader = e => {
+    console.log ('uploading image profile');
     //   Form data preparation part
     const file = e.target.files[0]; //this returns an array of files,we need only single one
-    console.log(file);
-    const formData = new FormData();
-    formData.append("image", file);
-    console.log(formData.get("image"));
+    console.log (file);
+    const formData = new FormData ();
+    formData.append ('image', file);
+    console.log (formData.get ('image'));
 
-    const jwt = sessionStorage.getItem("jwtToken");
+    const jwt = sessionStorage.getItem ('jwtToken');
     const category = userData.category;
 
     //  API URL part
     const profileURL =
-      baseUrl + (category === "student" ? "/user/profile" : "/mentor/profile");
-    console.log(profileURL);
+      baseUrl + (category === 'student' ? '/user/profile' : '/mentor/profile');
+    console.log (profileURL);
 
     axios
-      .post(profileURL, formData, {
+      .post (profileURL, formData, {
         headers: {
-          authorization: "Bearer " + jwt,
-          "content-type": "multipart/form-data",
+          authorization: 'Bearer ' + jwt,
+          'content-type': 'multipart/form-data',
         },
       })
-      .then((res) => {
-        console.log(res);
-        dispatch({
-          type: "ADD_USER_INFO",
-          data: { profile: baseUrl + res.data.profile },
+      .then (res => {
+        console.log (res);
+        dispatch ({
+          type: 'ADD_USER_INFO',
+          data: {profile: baseUrl + res.data.profile},
         });
       })
-      .catch((err) => {
-        console.log(err);
+      .catch (err => {
+        console.log (err);
       });
   };
 
   // =============================================================================================
-
-  //  ***************************  payment function  *****************************************************
-
-  // function loadScript(src) {
-  //   return new Promise((resolve) => {
-  //     console.log("inside load script");
-  //     const script = document.createElement("script");
-  //     script.src = src;
-  //     script.onload = () => {
-  //       resolve(true);
-  //     };
-  //     script.onerror = () => {
-  //       console.log("some error occured");
-  //       resolve(false);
-  //     };
-  //     document.body.appendChild(script);
-  //   });
-  // }
-
-  // async function displayRazorpay() {
-  //   console.log("called displayRaxorpay");
-  //   const res = await loadScript(
-  //     "https://checkout.razorpay.com/v1/checkout.js"
-  //   );
-
-  //   if (!res) {
-  //     alert("Razorpay SDK failed to load. Are you online?");
-  //     return;
-  //   }
-
-  //   const result = await axios.post(orderUrl);
-
-  //   if (!result) {
-  //     alert("Server error. Are you online?");
-  //     return;
-  //   }
-
-  //   const { amount, id: order_id, currency } = result.data;
-
-  //   const options = {
-  //     key: "rzp_test_r6FiJfddJh76SI", // Enter the Key ID generated from the Dashboard
-  //     amount: amount.toString(),
-  //     currency: currency,
-  //     name: "Soumya Corp.",
-  //     description: "Test Transaction",
-  //     image: { logo },
-  //     order_id: order_id,
-  //     handler: async function (response) {
-  //       const data = {
-  //         orderCreationId: order_id,
-  //         razorpayPaymentId: response.razorpay_payment_id,
-  //         razorpayOrderId: response.razorpay_order_id,
-  //         razorpaySignature: response.razorpay_signature,
-  //       };
-
-  //       const result = await axios.post(verifyUrl, data);
-
-  //       alert(result.data.msg);
-  //     },
-  //     prefill: {
-  //       name: "Soumya Dey",
-  //       email: "SoumyaDey@example.com",
-  //       contact: "9999999999",
-  //     },
-  //     notes: {
-  //       address: "Soumya Dey Corporate Office",
-  //     },
-  //     theme: {
-  //       color: "#61dafb",
-  //     },
-  //   };
-
-  //   const paymentObject = new window.Razorpay(options);
-  //   paymentObject.open();
-  // }
-
-  // **************************************************************************************************
 
   return (
     <div className="userInfo">
@@ -182,7 +105,7 @@ function UserInfo() {
           <img
             src={userInfo.profile}
             alt=""
-            onError={(e) => {
+            onError={e => {
               e.target.src = alt_profile;
               e.target.onError = null;
             }}
@@ -203,26 +126,20 @@ function UserInfo() {
       <div className="userInfo__details">
         <h3>Email : {userInfo.email}</h3>
         <h3>Phone : {userInfo.phone}</h3>
-        {userData.category === "student" ? (
-          <h3>Parent's Phone : {userInfo.parent_phone}</h3>
-        ) : (
-          ""
-        )}
+        {userData.category === 'student'
+          ? <h3>Parent's Phone : {userInfo.parent_phone}</h3>
+          : ''}
         <h3>Address : {userInfo.address}</h3>
         <h3>Exam : {userInfo.exam}</h3>
-        {userData.category === "mentor" ? (
-          <h3>Subject : {userInfo.subject}</h3>
-        ) : (
-          ""
-        )}
-        {userData.category === "student" ? (
-          <h3>
-            Subscription:
-            <button className="userInfo__payment">Payment</button>
-          </h3>
-        ) : (
-          ""
-        )}
+        {userData.category === 'mentor'
+          ? <h3>Subject : {userInfo.subject}</h3>
+          : ''}
+        {userData.category === 'student'
+          ? <h3>
+              Subscription:
+              <button className="userInfo__payment">Payment</button>
+            </h3>
+          : ''}
       </div>
       <button className="userInfo__updateInfoBtn" onClick={openUpdateInfo}>
         Update Profile
@@ -244,12 +161,12 @@ function UserInfo() {
 export default UserInfo;
 
 // Form for changing password
-const ChangePassword = ({ showHidePwdForm }) => {
-  console.log("message from password form");
+const ChangePassword = ({showHidePwdForm}) => {
+  console.log ('message from password form');
   // handling update password request
-  const submitHandler = (e) => {
-    e.preventDefault();
-    console.log("submit request recieved");
+  const submitHandler = e => {
+    e.preventDefault ();
+    console.log ('submit request recieved');
     // console.log(e.target.currPwd.value);
     const currPwd = e.target.currPwd.value;
     const newPwd = e.target.newPwd.value;
@@ -257,14 +174,14 @@ const ChangePassword = ({ showHidePwdForm }) => {
 
     // validating passwords
     if (newPwd !== renewPwd) {
-      alert("Re-type the same password only");
+      alert ('Re-type the same password only');
       return;
     }
     if (newPwd === currPwd) {
-      alert("Old and new passwords are same");
+      alert ('Old and new passwords are same');
       return;
     }
-    if (!passwordValidator(newPwd)) {
+    if (!passwordValidator (newPwd)) {
       return;
     }
     // creating data for submission
@@ -272,37 +189,36 @@ const ChangePassword = ({ showHidePwdForm }) => {
       currentPassword: currPwd,
       newPassword: newPwd,
     };
-    const category = sessionStorage.getItem("usertype");
+    const category = sessionStorage.getItem ('usertype');
     // selecting sending users according to the current user type
-    let url =
-      category === "student"
-        ? "/user/change-password"
-        : "/mentor/change-password";
+    let url = category === 'student'
+      ? '/user/change-password'
+      : '/mentor/change-password';
     url = baseUrl + url;
-    const jwt = sessionStorage.getItem("jwtToken");
+    const jwt = sessionStorage.getItem ('jwtToken');
 
     // sending new password to server
     axios
-      .post(url, data, {
+      .post (url, data, {
         headers: {
-          authorization: "Bearer " + jwt,
+          authorization: 'Bearer ' + jwt,
         },
       })
-      .then((res) => {
-        console.log(res);
-        alert(res.data.message);
-        showHidePwdForm();
+      .then (res => {
+        console.log (res);
+        alert (res.data.message);
+        showHidePwdForm ();
         // setPwdForm(["", false]); //to hide the passsword form after updating password
       })
-      .catch((err) => {
-        console.log(err);
-        alert(err.response.data.message);
+      .catch (err => {
+        console.log (err);
+        alert (err.response.data.message);
       });
   };
   return (
     <div className="userInfo__changepwdForm">
       <div className="userInfo__cross" onClick={showHidePwdForm}>
-        <i className="fa fa-times" aria-hidden="true"></i>
+        <i className="fa fa-times" aria-hidden="true" />
         {/* &#x274C; */}
       </div>
       <form onSubmit={submitHandler}>
@@ -344,16 +260,16 @@ const ChangePassword = ({ showHidePwdForm }) => {
   );
 };
 
-const passwordValidator = (password) => {
-  if (!password || typeof password !== "string") {
-    console.log("Password is required");
-    alert("Password is required");
+const passwordValidator = password => {
+  if (!password || typeof password !== 'string') {
+    console.log ('Password is required');
+    alert ('Password is required');
     return false;
   }
 
   if (password.length < 7) {
-    console.log("Password too small. Should be atleast 8 characters");
-    alert("Password too small. Should be atleast 8 characters");
+    console.log ('Password too small. Should be atleast 8 characters');
+    alert ('Password too small. Should be atleast 8 characters');
     return false;
   }
   return true;

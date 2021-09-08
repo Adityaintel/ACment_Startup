@@ -1,85 +1,61 @@
-import React, { useState } from "react";
-import UserContextProvider from "./UserContext";
-import "./css/NewTask.css";
-import prof from "./images/backwaters.jpg";
-import axios from "axios";
+import React, {useState} from 'react';
+import UserContextProvider from './UserContext';
+import './css/NewTask.css';
+import prof from './images/backwaters.jpg';
+import axios from 'axios';
 
-const baseUrl = process.env.REACT_APP_BASE_URL;
-const newTaskUrl = baseUrl + "/task/add";
+const baseUrl = process.env.REACT_APP_BASE_URL + '/api';
+const newTaskUrl = baseUrl + '/task/add';
 
-function NewTask() {
-  const [userData, dispatch] = UserContextProvider();
-  const [newTask, setNewTask] = useState({
-    title: "",
-    description: "",
+function NewTask () {
+  const [userData, dispatch] = UserContextProvider ();
+  const [newTask, setNewTask] = useState ({
+    title: '',
+    description: '',
     assigned: [],
-    deadline: "",
+    deadline: '',
   });
 
   /////////////////////////////////   Function to define the state newtask  ///////////////////////
   const taskDefiner = (event, field) => {
-    const temptask = { ...newTask };
+    const temptask = {...newTask};
     temptask[field] = event.target.value;
-    setNewTask(temptask);
+    setNewTask (temptask);
   };
 
   ///////////////////////////////  Function to upload the new task  ///////////////////////////////
-  const uploadTask = (e) => {
-    e.preventDefault();
-    // if (!validate(newTask)) {
-    //   return false;
-    // }
-    // const attachments = [...e.target.attachment.files];
-    // console.log(attachments);
-    const taskData = new FormData();
-    taskData.append("title", newTask.title);
-    taskData.append("info", newTask.description);
-    // taskData.append("assigned", newTask.assigned);
-    taskData.append("deadline", newTask.deadline);
-    // attachments.forEach((material) => {
-    //   taskData.append("task", material);
-    // });
-    taskData.append("fullMarks", e.target.totalPoints.value);
-    taskData.append("task", e.target.attachment.files[0]);
+  const uploadTask = e => {
+    e.preventDefault ();
 
-    console.log(...taskData);
-    const jwt = sessionStorage.getItem("jwtToken");
+    const taskData = new FormData ();
+    taskData.append ('title', newTask.title);
+    taskData.append ('info', newTask.description);
+    // taskData.append("assigned", newTask.assigned);
+    taskData.append ('deadline', newTask.deadline);
+
+    taskData.append ('fullMarks', e.target.totalPoints.value);
+    taskData.append ('task', e.target.attachment.files[0]);
+
+    console.log (...taskData);
+    const jwt = sessionStorage.getItem ('jwtToken');
     axios
-      .post(newTaskUrl, taskData, {
+      .post (newTaskUrl, taskData, {
         headers: {
-          authorization: "Bearer " + jwt,
+          authorization: 'Bearer ' + jwt,
         },
       })
-      .then((res) => {
-        console.log(res);
-        dispatch({
-          type: "ADD_TASKS",
+      .then (res => {
+        console.log (res);
+        dispatch ({
+          type: 'ADD_TASKS',
           data: [...userData.tasks, res.data],
         });
-        alert("New task succesfully created");
+        alert ('New task succesfully created');
       })
-      .catch((err) => {
-        console.log(err.response.data);
+      .catch (err => {
+        console.log (err.response.data);
       });
   };
-
-  // /////////////////////////  Function to validate the newtask form  //////////////////////
-
-  // const validate = (newtask) => {
-  //   if (!newtask.title || newtask.title === "") {
-  //     alert("Title is required");
-  //     return false;
-  //   }
-  //   // if (newtask.assigned.length <= 0) {
-  //   //   alert("Assign the task to atleast one student");
-  //   //   return false;
-  //   // }
-  //   if (!newtask.deadline) {
-  //     alert("You haven't assigned any deadline for the task");
-  //     return false;
-  //   }
-  //   return true;
-  // };
 
   return (
     <div className="newTask">
@@ -92,8 +68,8 @@ function NewTask() {
           placeholder="Title for new task"
           required
           value={newTask.title}
-          onChange={(e) => {
-            taskDefiner(e, "title");
+          onChange={e => {
+            taskDefiner (e, 'title');
           }}
         />
         <label htmlFor="description">Description</label>
@@ -103,8 +79,8 @@ function NewTask() {
           rows="5"
           placeholder="Description for new task"
           value={newTask.description}
-          onChange={(e) => {
-            taskDefiner(e, "description");
+          onChange={e => {
+            taskDefiner (e, 'description');
           }}
         />
         {/* <label htmlFor="followers">Assign this task to</label>
@@ -126,8 +102,8 @@ function NewTask() {
           type="datetime-local"
           name="deadline"
           id="deadline"
-          onChange={(e) => {
-            taskDefiner(e, "deadline");
+          onChange={e => {
+            taskDefiner (e, 'deadline');
           }}
         />
         <label htmlFor="totalPoints">Enter Total marks</label>

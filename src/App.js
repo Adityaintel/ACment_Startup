@@ -1,129 +1,124 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from 'react';
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
   useHistory,
-} from "react-router-dom";
-import "./css/App.css";
-import HomePage from "./HomePage";
-import Login from "./Login";
-import StudentPage from "./StudentPage";
-import MentorPage from "./MentorPage";
-import FileUploader from "./FileUploader";
-import axios from "axios";
-import UserContextProvider from "./UserContext";
+} from 'react-router-dom';
+import './css/App.css';
+import HomePage from './HomePage';
+import Login from './Login';
+import StudentPage from './StudentPage';
+import MentorPage from './MentorPage';
+import axios from 'axios';
+import UserContextProvider from './UserContext';
 
-// ===================
-// import Payment from "./Payment";
-// ======================
+const base_url = process.env.REACT_APP_BASE_URL + '/api';
 
-const base_url = process.env.REACT_APP_BASE_URL;
-
-function App() {
-  const [userData, dispatch] = UserContextProvider();
-  const history = useHistory();
+function App () {
+  const [userData, dispatch] = UserContextProvider ();
+  const history = useHistory ();
 
   // To fetch all the data again during refresh and store in react context api
-  useEffect(() => {
-    const jwt = sessionStorage.getItem("jwtToken");
-    const category = sessionStorage.getItem("usertype");
+  useEffect (() => {
+    const jwt = sessionStorage.getItem ('jwtToken');
+    const category = sessionStorage.getItem ('usertype');
     if (jwt) {
       // ==========================   Student part (user part) =======================================
-      if (category === "student") {
+      if (category === 'student') {
         // To get user info and profile
-        const infourl = base_url + "/user/getdetails";
+        const infourl = base_url + '/user/getdetails';
         axios
-          .get(infourl, {
+          .get (infourl, {
             headers: {
-              authorization: "Bearer " + jwt,
+              authorization: 'Bearer ' + jwt,
             },
           })
-          .then((res) => {
+          .then (res => {
             // store response returned from server related to user in the context
-            const { ...user_info } = res.data;
+            const {...user_info} = res.data;
             // console.log(jwtToken);
             user_info.profile = base_url + user_info.profile;
-            console.log(user_info);
+            console.log (user_info);
 
             // storing data in react context api
-            dispatch({
-              type: "ADD_USER",
+            dispatch ({
+              type: 'ADD_USER',
               data: {
-                category: "student",
+                category: 'student',
                 userInfo: user_info,
               },
             });
-            console.log(userData);
+            console.log (userData);
           })
-          .catch((err) => {
-            console.log(err.message);
-            alert(err.message);
+          .catch (err => {
+            console.log (err.message);
+            alert (err.message);
           });
-        console.log("userinfo fetched");
+        console.log ('userinfo fetched');
         // to get followings of student
-        const followingsurl = base_url + "/user/followings";
+        const followingsurl = base_url + '/user/followings';
         axios
-          .post(
+          .post (
             followingsurl,
             {},
             {
               headers: {
-                authorization: "Bearer " + jwt,
+                authorization: 'Bearer ' + jwt,
               },
             }
           )
-          .then((res) => {
+          .then (res => {
             // store response returned from server related to user in the context
-            console.log("followings fetched");
+            console.log ('followings fetched');
             const userFollowings = res.data;
-            console.log(userFollowings);
+            console.log (userFollowings);
 
             // storing data in react context api
-            dispatch({
-              type: "ADD_FOLLOWINGS",
+            dispatch ({
+              type: 'ADD_FOLLOWINGS',
               data: userFollowings,
             });
           })
-          .catch((err) => {
-            console.log("some error occured in fetching followings");
-            console.log(err.message);
-            alert(err.message);
+          .catch (err => {
+            console.log ('some error occured in fetching followings');
+            console.log (err.message);
+            alert (err.message);
           });
 
         // =================================================================================
 
         // ===================================  Mentor part = =============================================
       } else {
-        const url = base_url + "/mentor/getdetails";
-        console.log(url);
+        const url = base_url + '/mentor/getdetails';
+        console.log (url);
         axios
-          .get(url, {
+          .get (url, {
             headers: {
-              authorization: "Bearer " + jwt,
+              authorization: 'Bearer ' + jwt,
             },
           })
-          .then((res) => {
+          .then (res => {
             // store response returned from server related to user in the context
-            const { ...user_info } = res.data;
+            const {...user_info} = res.data;
             // console.log(jwtToken);
             user_info.profile = base_url + user_info.profile;
-            console.log(user_info);
+            console.log (user_info);
 
             // storing data in react context api
-            dispatch({
-              type: "ADD_USER",
+            dispatch ({
+              type: 'ADD_USER',
               data: {
-                category: "mentor",
+                category: 'mentor',
                 userInfo: user_info,
               },
             });
-            console.log(userData);
+            console.log (userData);
           })
-          .catch((err) => {
-            console.log(err.message);
-            alert(err.message);
+          .catch (err => {
+            console.log (err.message);
+            alert (err.message);
           });
       }
     }
@@ -132,9 +127,6 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          {/* <Route path="/pay">
-            <Payment />
-          </Route> */}
           <Route path="/login">
             <Login />
           </Route>

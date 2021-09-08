@@ -1,58 +1,58 @@
-import React, { useRef, useState, useEffect } from "react";
-import "./css/Videos.css";
-import VideoCard from "./VideoCard";
-import axios from "axios";
-import "font-awesome/css/font-awesome.min.css";
+import React, {useRef, useState, useEffect} from 'react';
+import './css/Videos.css';
+import VideoCard from './VideoCard';
+import axios from 'axios';
+import 'font-awesome/css/font-awesome.min.css';
 
-const baseUrl = process.env.REACT_APP_BASE_URL;
+const baseUrl = process.env.REACT_APP_BASE_URL + '/api';
 
-function Videos() {
-  const [videos, setVideos] = useState([]);
-  const [videoData, setvideoData] = useState({});
-  const videoLarge = useRef();
+function Videos () {
+  const [videos, setVideos] = useState ([]);
+  const [videoData, setvideoData] = useState ({});
+  const videoLarge = useRef ();
 
   // Fetching all videos from backend to show in frontend
   const getVideos = () => {
-    const url = baseUrl + "/allvideos";
-    console.log(url);
-    const jwt = sessionStorage.getItem("jwtToken");
+    const url = baseUrl + '/allvideos';
+    console.log (url);
+    const jwt = sessionStorage.getItem ('jwtToken');
     axios
-      .get(url, {})
-      .then((res) => {
-        console.log(res);
-        setVideos(res.data);
+      .get (url, {})
+      .then (res => {
+        console.log (res);
+        setVideos (res.data);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch (err => {
+        console.log (err);
       });
   };
 
-  useEffect(() => {
-    getVideos();
+  useEffect (() => {
+    getVideos ();
   }, []);
 
-  const maximizeVideo = (vidData) => {
-    const largeScreen = document.querySelector(".videos__largeScreen");
-    setvideoData({
+  const maximizeVideo = vidData => {
+    const largeScreen = document.querySelector ('.videos__largeScreen');
+    setvideoData ({
       ...vidData,
       video: baseUrl + vidData.video,
     });
-    largeScreen.classList.add("videos__showlargeScreen");
+    largeScreen.classList.add ('videos__showlargeScreen');
     videoLarge.current.onloadedmetadata = () => {
-      videoLarge.current.play();
+      videoLarge.current.play ();
     };
   };
   const minimizeVideo = () => {
-    const largeScreen = document.querySelector(".videos__largeScreen");
-    largeScreen.classList.remove("videos__showlargeScreen");
-    videoLarge.current.pause();
+    const largeScreen = document.querySelector ('.videos__largeScreen');
+    largeScreen.classList.remove ('videos__showlargeScreen');
+    videoLarge.current.pause ();
   };
 
   return (
     <div className="videos">
       <div className="videos__largeScreen">
         <div className="videos__largeScreenClose" onClick={minimizeVideo}>
-          <i className="fa fa-times" aria-hidden="true"></i>
+          <i className="fa fa-times" aria-hidden="true" />
         </div>
         <div className="videos__largeScreenVideo">
           <video
@@ -72,7 +72,7 @@ function Videos() {
         </div>
       </div>
       <div className="videos__container">
-        {videos.map((video, index) => (
+        {videos.map ((video, index) => (
           <div className="videos__card">
             <VideoCard
               key={index}

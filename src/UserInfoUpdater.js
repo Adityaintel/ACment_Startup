@@ -1,19 +1,19 @@
-import React from "react";
-import "./css/UserInfoUpdater.css";
-import "font-awesome/css/font-awesome.min.css";
-import { mentorSignup_validator, studentSignup_validator } from "./validator";
-import axios from "axios";
-import UserContextProvider from "./UserContext";
+import React from 'react';
+import './css/UserInfoUpdater.css';
+import 'font-awesome/css/font-awesome.min.css';
+import {mentorSignup_validator, studentSignup_validator} from './validator';
+import axios from 'axios';
+import UserContextProvider from './UserContext';
 
-const baseUrl = process.env.REACT_APP_BASE_URL;
+const baseUrl = process.env.REACT_APP_BASE_URL + '/api';
 
-function UserInfoUpdater({ closeUpdateInfo }) {
-  const [userData, dispatch] = UserContextProvider();
+function UserInfoUpdater({closeUpdateInfo}) {
+  const [userData, dispatch] = UserContextProvider ();
   const userInfo = userData.userInfo;
 
-  const updateUser = (e) => {
-    e.preventDefault();
-    console.log("updating data");
+  const updateUser = e => {
+    e.preventDefault ();
+    console.log ('updating data');
     const updatedData = {
       username: e.target.username.value,
       email: e.target.email.value,
@@ -21,46 +21,45 @@ function UserInfoUpdater({ closeUpdateInfo }) {
       address: e.target.address.value,
       exam: e.target.exam.value,
     };
-    userData.category === "student"
+    userData.category === 'student'
       ? (updatedData.parent_phone = e.target.parentPhone.value)
       : (updatedData.subject = e.target.subject.value);
 
-    const validated =
-      userData.category === "student"
-        ? studentSignup_validator(updatedData, false) //Here false is given for mentioning not requiring password in validator
-        : mentorSignup_validator(updatedData, false);
-    console.log("validated:", validated);
+    const validated = userData.category === 'student'
+      ? studentSignup_validator (updatedData, false) //Here false is given for mentioning not requiring password in validator
+      : mentorSignup_validator (updatedData, false);
+    console.log ('validated:', validated);
     if (!validated) return;
 
-    const jwt = sessionStorage.getItem("jwtToken");
+    const jwt = sessionStorage.getItem ('jwtToken');
     const category = userData.category;
-    const updateUrl = baseUrl + (category === "student" ? "/user" : "/mentor");
-    console.log(updateUrl);
-    console.log(updatedData);
+    const updateUrl = baseUrl + (category === 'student' ? '/user' : '/mentor');
+    console.log (updateUrl);
+    console.log (updatedData);
     axios
-      .patch(updateUrl, updatedData, {
+      .patch (updateUrl, updatedData, {
         headers: {
-          authorization: "Bearer " + jwt,
+          authorization: 'Bearer ' + jwt,
         },
       })
-      .then((res) => {
+      .then (res => {
         res.data.profile = baseUrl + res.data.profile;
-        console.log(res);
-        dispatch({
-          type: "ADD_USER_INFO",
+        console.log (res);
+        dispatch ({
+          type: 'ADD_USER_INFO',
           data: res.data,
         });
-        closeUpdateInfo();
+        closeUpdateInfo ();
       });
   };
   return (
     <div className="userInfoUpdater">
       <div className="userInfoUpdater__container">
         {/* this is for purple circle in background */}
-        <div className="purple__circle"></div>
+        <div className="purple__circle" />
         {/* ================================================= */}
         <div className="cross" onClick={closeUpdateInfo}>
-          <i class="fa fa-times" aria-hidden="true"></i>
+          <i class="fa fa-times" aria-hidden="true" />
         </div>
         <div className="userInfoUpdater__heading">
           <h1>Update Profile</h1>
@@ -95,36 +94,32 @@ function UserInfoUpdater({ closeUpdateInfo }) {
               id="address"
               defaultValue={userInfo.address}
             />
-            {userData.category === "student" ? (
-              <div>
-                <label htmlFor="parentPhone">Parent Phone</label>
-                <input
-                  type="text"
-                  id="parentPhone"
-                  name="parentPhone"
-                  defaultValue={userInfo.parent_phone}
-                />
-              </div>
-            ) : (
-              <div>
-                <label htmlFor="subject">Subject</label>
-                <select
-                  name="subject"
-                  defaultValue={userInfo.mentor__subject}
-                  id="subject"
-                  placeholder="subject"
-                  required
-                >
-                  <option value="physics">Physics</option>
-                  <option value="chemistry">Chemistry</option>
-                  {userInfo.exam === "JEE" ? (
-                    <option value="maths">Maths</option>
-                  ) : (
-                    <option value="biology">Biology</option>
-                  )}
-                </select>
-              </div>
-            )}
+            {userData.category === 'student'
+              ? <div>
+                  <label htmlFor="parentPhone">Parent Phone</label>
+                  <input
+                    type="text"
+                    id="parentPhone"
+                    name="parentPhone"
+                    defaultValue={userInfo.parent_phone}
+                  />
+                </div>
+              : <div>
+                  <label htmlFor="subject">Subject</label>
+                  <select
+                    name="subject"
+                    defaultValue={userInfo.mentor__subject}
+                    id="subject"
+                    placeholder="subject"
+                    required
+                  >
+                    <option value="physics">Physics</option>
+                    <option value="chemistry">Chemistry</option>
+                    {userInfo.exam === 'JEE'
+                      ? <option value="maths">Maths</option>
+                      : <option value="biology">Biology</option>}
+                  </select>
+                </div>}
 
             {/* exam */}
             <label htmlFor="exam">Exam</label>
@@ -138,8 +133,8 @@ function UserInfoUpdater({ closeUpdateInfo }) {
               <option value={userInfo.exam} selected>
                 {userInfo.exam}
               </option>
-              <option value={userInfo.exam === "JEE" ? "NEET" : "JEE"}>
-                {userInfo.exam === "JEE" ? "NEET" : "JEE"}
+              <option value={userInfo.exam === 'JEE' ? 'NEET' : 'JEE'}>
+                {userInfo.exam === 'JEE' ? 'NEET' : 'JEE'}
               </option>
             </select>
 

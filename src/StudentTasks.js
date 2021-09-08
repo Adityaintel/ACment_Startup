@@ -1,83 +1,82 @@
-import React, { useState, useEffect, useRef } from "react";
-import "./css/Tasks.css";
-import UserContextProvider from "./UserContext";
-import axios from "axios";
-import alt_profile from "./images/icons/profile_alt_icon.svg";
-import "font-awesome/css/font-awesome.min.css";
+import React, {useState, useEffect, useRef} from 'react';
+import './css/Tasks.css';
+import UserContextProvider from './UserContext';
+import axios from 'axios';
+import alt_profile from './images/icons/profile_alt_icon.svg';
+import 'font-awesome/css/font-awesome.min.css';
 
-const baseUrl = process.env.REACT_APP_BASE_URL;
-const studentTasksUrl = baseUrl + "/tasks";
-const submitTasksUrl = baseUrl + "/task/answer";
+const baseUrl = process.env.REACT_APP_BASE_URL + '/api';
+const studentTasksUrl = baseUrl + '/tasks';
+const submitTasksUrl = baseUrl + '/task/answer';
 
-function Tasks() {
+function Tasks () {
   // =================   states   ======================
-  const [userData] = UserContextProvider();
-  const [pendingTasks, setpendingTasks] = useState([]);
-  const [completedTasks, setcompletedTasks] = useState([]);
-  const [taskType, settaskType] = useState("pending");
+  const [userData] = UserContextProvider ();
+  const [pendingTasks, setpendingTasks] = useState ([]);
+  const [completedTasks, setcompletedTasks] = useState ([]);
+  const [taskType, settaskType] = useState ('pending');
   // ===================================================
 
-  useEffect(() => {
-    const jwt = sessionStorage.getItem("jwtToken");
+  useEffect (() => {
+    const jwt = sessionStorage.getItem ('jwtToken');
     axios
-      .post(
+      .post (
         studentTasksUrl,
         {},
         {
           headers: {
-            authorization: "Bearer " + jwt,
+            authorization: 'Bearer ' + jwt,
           },
         }
       )
-      .then((res) => {
-        console.log(res);
-        sortTasks(res.data);
+      .then (res => {
+        console.log (res);
+        sortTasks (res.data);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch (err => {
+        console.log (err);
       });
   }, []);
 
-  const sortTasks = (tasks) => {
-    let completed = [],
-      pending = [];
-    tasks.forEach((task) => {
-      let pos = task.answers.findIndex(
-        (ans) => ans.answerBy.toString() === userData.userInfo.userId.toString()
+  const sortTasks = tasks => {
+    let completed = [], pending = [];
+    tasks.forEach (task => {
+      let pos = task.answers.findIndex (
+        ans => ans.answerBy.toString () === userData.userInfo.userId.toString ()
       );
       if (pos >= 0) completed = [...completed, task];
       else {
         pending = [...pending, task];
       }
     });
-    setpendingTasks(pending);
-    setcompletedTasks(completed);
-    console.log("pending tasks", pending);
-    console.log("completed tasks", completed);
+    setpendingTasks (pending);
+    setcompletedTasks (completed);
+    console.log ('pending tasks', pending);
+    console.log ('completed tasks', completed);
   };
 
   const changeMainContent = (e, flag) => {
-    console.log("changing content");
-    settaskType(flag);
-    const btns = document.querySelectorAll(".tasks__switchBtn");
-    btns.forEach((btn) => btn.classList.remove("tasks__switchBtn__active"));
-    e.target.classList.add("tasks__switchBtn__active");
+    console.log ('changing content');
+    settaskType (flag);
+    const btns = document.querySelectorAll ('.tasks__switchBtn');
+    btns.forEach (btn => btn.classList.remove ('tasks__switchBtn__active'));
+    e.target.classList.add ('tasks__switchBtn__active');
   };
 
   return (
     <div className="tasks">
       <div className="tasks__header">
         <button
-          onClick={(e) => {
-            changeMainContent(e, "pending");
+          onClick={e => {
+            changeMainContent (e, 'pending');
           }}
           className="tasks__switchBtn tasks__switchBtn__active"
         >
           Pending
         </button>
         <button
-          onClick={(e) => {
-            changeMainContent(e, "completed");
+          onClick={e => {
+            changeMainContent (e, 'completed');
           }}
           className="tasks__switchBtn"
         >
@@ -85,11 +84,9 @@ function Tasks() {
         </button>
       </div>
       <div className="tasks__container">
-        {taskType === "pending" ? (
-          <AssignedTasks tasks={pendingTasks} submitted={false} />
-        ) : (
-          <AssignedTasks tasks={completedTasks} submitted={true} />
-        )}
+        {taskType === 'pending'
+          ? <AssignedTasks tasks={pendingTasks} submitted={false} />
+          : <AssignedTasks tasks={completedTasks} submitted={true} />}
       </div>
     </div>
   );
@@ -97,42 +94,42 @@ function Tasks() {
 
 export default Tasks;
 
-const AssignedTasks = ({ tasks, submitted }) => {
+const AssignedTasks = ({tasks, submitted}) => {
   // Function for submitting answers
   // State for storing the currently submitting task data
-  const submissionRef = useRef();
-  const [submittingTask, setSubmittingTask] = useState(null);
+  const submissionRef = useRef ();
+  const [submittingTask, setSubmittingTask] = useState (null);
 
-  const showTaskSubmit = (task) => {
-    submissionRef.current.classList.add("assignedTasks__submitFormShow");
-    setSubmittingTask(task);
+  const showTaskSubmit = task => {
+    submissionRef.current.classList.add ('assignedTasks__submitFormShow');
+    setSubmittingTask (task);
   };
   const hideTaskSubmit = () => {
-    submissionRef.current.classList.remove("assignedTasks__submitFormShow");
-    setSubmittingTask(null);
+    submissionRef.current.classList.remove ('assignedTasks__submitFormShow');
+    setSubmittingTask (null);
   };
-  console.log(submittingTask);
+  console.log (submittingTask);
 
-  const submitTask = (e) => {
-    e.preventDefault();
-    const jwt = sessionStorage.getItem("jwtToken");
-    const answerForm = new FormData();
-    answerForm.append("taskId", submittingTask._id);
-    answerForm.append("remarks", e.target.remarks.value);
-    answerForm.append("answer", e.target.answer.files[0]);
+  const submitTask = e => {
+    e.preventDefault ();
+    const jwt = sessionStorage.getItem ('jwtToken');
+    const answerForm = new FormData ();
+    answerForm.append ('taskId', submittingTask._id);
+    answerForm.append ('remarks', e.target.remarks.value);
+    answerForm.append ('answer', e.target.answer.files[0]);
     axios
-      .post(submitTasksUrl, answerForm, {
+      .post (submitTasksUrl, answerForm, {
         headers: {
-          authorization: "Bearer " + jwt,
+          authorization: 'Bearer ' + jwt,
         },
       })
-      .then((res) => {
-        console.log(res);
-        hideTaskSubmit();
+      .then (res => {
+        console.log (res);
+        hideTaskSubmit ();
       })
-      .catch((err) => {
-        console.log(err.response.data.error);
-        alert(err.response.data.error);
+      .catch (err => {
+        console.log (err.response.data.error);
+        alert (err.response.data.error);
       });
   };
 
@@ -147,7 +144,7 @@ const AssignedTasks = ({ tasks, submitted }) => {
           className="assignedTasks__submitFormClose"
           onClick={hideTaskSubmit}
         >
-          <i class="fa fa-times" aria-hidden="true"></i>
+          <i class="fa fa-times" aria-hidden="true" />
         </div>
         <h2>Submission Form</h2>
         <label htmlFor="answer">Upload the submission:</label>
@@ -162,26 +159,24 @@ const AssignedTasks = ({ tasks, submitted }) => {
         <textarea rows="3" name="remarks" id="remarks" placeholder="remarks" />
         <button type="submit">Submit</button>
       </form>
-      {tasks && tasks.length > 0 ? (
-        <div className="assignedTasks__container">
-          {tasks.map((task, index) => (
-            <TaskCard
-              key={index}
-              taskData={task}
-              showTaskSubmit={showTaskSubmit}
-              submitted={submitted}
-            />
-          ))}
-        </div>
-      ) : (
-        <h1 className="assignedTasks__notasks">No tasks yet</h1>
-      )}
+      {tasks && tasks.length > 0
+        ? <div className="assignedTasks__container">
+            {tasks.map ((task, index) => (
+              <TaskCard
+                key={index}
+                taskData={task}
+                showTaskSubmit={showTaskSubmit}
+                submitted={submitted}
+              />
+            ))}
+          </div>
+        : <h1 className="assignedTasks__notasks">No tasks yet</h1>}
     </div>
   );
 };
 
-const TaskCard = ({ taskData, showTaskSubmit, submitted }) => {
-  console.log(taskData.postedBy.profile);
+const TaskCard = ({taskData, showTaskSubmit, submitted}) => {
+  console.log (taskData.postedBy.profile);
 
   return (
     <div className="taskCard">
@@ -190,7 +185,7 @@ const TaskCard = ({ taskData, showTaskSubmit, submitted }) => {
           <img
             src={baseUrl + taskData.postedBy.profile}
             alt=""
-            onError={(e) => {
+            onError={e => {
               e.target.src = alt_profile;
               e.target.onError = null;
             }}
@@ -213,29 +208,30 @@ const TaskCard = ({ taskData, showTaskSubmit, submitted }) => {
             Attachment
           </button>
         </a>
-        {submitted ? (
-          <button className="taskCard__submittedBtn" title="Already submitted">
-            Submitted
-          </button>
-        ) : (
-          <button
-            onClick={() => {
-              showTaskSubmit(taskData);
-            }}
-            title="Submit answer"
-          >
-            Submit
-          </button>
-        )}
+        {submitted
+          ? <button
+              className="taskCard__submittedBtn"
+              title="Already submitted"
+            >
+              Submitted
+            </button>
+          : <button
+              onClick={() => {
+                showTaskSubmit (taskData);
+              }}
+              title="Submit answer"
+            >
+              Submit
+            </button>}
       </div>
       <div className="taskCard__taskDue">
         <p>
           Deadline:&nbsp;&nbsp;
           {taskData.deadline
-            ? new Date(taskData.deadline).toDateString() +
-              "\t\t\t\t\t\t" +
-              new Date(taskData.deadline).toLocaleTimeString()
-            : "No due date"}
+            ? new Date (taskData.deadline).toDateString () +
+                '\t\t\t\t\t\t' +
+                new Date (taskData.deadline).toLocaleTimeString ()
+            : 'No due date'}
         </p>
       </div>
     </div>
