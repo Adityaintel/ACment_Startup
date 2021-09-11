@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home_icon"
+        android:icon="@drawable/ic_home_icon"
+        android:title="Home" />
+    <item
+        android:id="@+id/searchmentor_icon"
+        android:icon="@drawable/ic_mentor"
+        android:title="Mentor" />
+    <item
+        android:id="@+id/studymaterial"
+        android:icon="@drawable/ic_baseline_study"
+        android:title="Study Material" />
+    <item
+        android:id="@+id/studentchat"
+        android:icon="@drawable/ic_baseline_chat"
+        android:title="message" />
+</menu>

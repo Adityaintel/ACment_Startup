@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.fragment.student.mentorSerachFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/relativelatout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp">
+
+            <EditText
+                android:id="@+id/serachuser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Mentor Name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/serachsubject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/serachuser"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Subject"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/serchbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/serachsubject"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="search" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/relativelatout1">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclementor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</FrameLayout>

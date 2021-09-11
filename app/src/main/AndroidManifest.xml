@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.mgt">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:allowBackup="true"
+        android:requestLegacyExternalStorage="true"
+        android:icon="@drawable/logoteo"
+        android:label="ACment"
+        android:roundIcon="@drawable/logoteo"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MGT"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".view.activity.student.userProfileImage"></activity>
+        <activity
+            android:name=".view.activity.mentor.profileactivitymentor"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".view.activity.mentor.MentorMainActivity"
+            android:label="Home"
+             />
+        <activity android:name=".view.activity.mentor.mentorRegister" />
+        <activity android:name=".view.activity.student.StudentRegister" />
+        <activity
+            android:name=".view.activity.student.RegisterActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".view.activity.Login"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:usesCleartextTraffic="true" />
+        <activity
+            android:name=".view.activity.splashScreen"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.activity.student.MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+    </application>
+
+</manifest>

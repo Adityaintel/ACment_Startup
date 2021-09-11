@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.fragment.mentor.TaskFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:orientation="vertical"
+        android:padding="@dimen/_10sdp">
+
+        <EditText
+            android:id="@+id/pdftitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Enter subject"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/pdfinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Enter Info"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/dateinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Enter Date"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/selectpdfBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="select Task pdf" />
+
+        <Button
+            android:id="@+id/uploadpdfBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="uplaod TAsk" />
+    </LinearLayout>
+
+</FrameLayout>
