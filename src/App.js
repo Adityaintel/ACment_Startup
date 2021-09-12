@@ -14,6 +14,12 @@ import MentorPage from './MentorPage';
 import axios from 'axios';
 import UserContextProvider from './UserContext';
 
+// ===================== Different pages in navbar  ===========================
+import AboutUs from './homepage contents/AboutUs';
+import PayNow from './homepage contents/PayNow';
+import Mentorship from './homepage contents/Mentorship';
+// ===================================================
+
 const base_url = process.env.REACT_APP_BASE_URL + '/api';
 
 function App () {
@@ -135,6 +141,15 @@ function App () {
           </Route>
           <Route path="/studentpage">
             <StudentPage />
+          </Route>
+          <Route exact path="/aboutus">
+            <AboutUs />
+          </Route>
+          <Route exact path="/paynow">
+            <PayNow />
+          </Route>
+          <Route exact path="/mentorship">
+            <Mentorship />
           </Route>
           <Route exact path="/">
             <HomePage />

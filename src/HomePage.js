@@ -1,93 +1,93 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import "./css/HomePage.css";
-import "font-awesome/css/font-awesome.min.css";
+import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
+import './css/HomePage.css';
+import 'font-awesome/css/font-awesome.min.css';
 
-import Login from "./Login";
-import Signup from "./Signup";
-import frontbg from "./images/homepage_illustrations/background.svg";
-import sidebg from "./images/homepage_illustrations/sideBg.svg";
-import logo from "./images/homepage_illustrations/logo for cisco.png";
-import image1 from "./images/homepage_illustrations/footer.svg";
-import image2 from "./images/homepage_illustrations/pic_1.svg";
-import image3 from "./images/homepage_illustrations/pic_2.svg";
-import image4 from "./images/homepage_illustrations/pic_3.svg";
-import image5 from "./images/homepage_illustrations/pic_4.svg";
-import image6 from "./images/homepage_illustrations/pic_5.svg";
-import ft_image1 from "./images/homepage_illustrations/Mask Group 1.svg";
-import ft_image2 from "./images/homepage_illustrations/Mask Group 2.svg";
-import ft_image3 from "./images/homepage_illustrations/Mask Group 3.svg";
-import twitter_logo from "./images/social_media_logos/twitter.svg";
-import insta_logo from "./images/social_media_logos/insta.svg";
-import linkedin_logo from "./images/social_media_logos/linkedin.svg";
-import fb_logo from "./images/social_media_logos/fb.svg";
-import youtube_logo from "./images/social_media_logos/youtube.svg";
-import acment_logo_white from "./images/homepage_illustrations/Acment_logo.png";
+import Login from './Login';
+import Signup from './Signup';
+import frontbg from './images/homepage_illustrations/background.svg';
+import sidebg from './images/homepage_illustrations/sideBg.svg';
+import logo from './images/homepage_illustrations/logo for cisco.png';
+import image1 from './images/homepage_illustrations/footer.svg';
+import image2 from './images/homepage_illustrations/pic_1.svg';
+import image3 from './images/homepage_illustrations/pic_2.svg';
+import image4 from './images/homepage_illustrations/pic_3.svg';
+import image5 from './images/homepage_illustrations/pic_4.svg';
+import image6 from './images/homepage_illustrations/pic_5.svg';
+import ft_image1 from './images/homepage_illustrations/Mask Group 1.svg';
+import ft_image2 from './images/homepage_illustrations/Mask Group 2.svg';
+import ft_image3 from './images/homepage_illustrations/Mask Group 3.svg';
+import twitter_logo from './images/social_media_logos/twitter.svg';
+import insta_logo from './images/social_media_logos/insta.svg';
+import linkedin_logo from './images/social_media_logos/linkedin.svg';
+import fb_logo from './images/social_media_logos/fb.svg';
+import youtube_logo from './images/social_media_logos/youtube.svg';
+import acment_logo_white from './images/homepage_illustrations/Acment_logo.png';
 
-function HomePage() {
-  const [registerPart, setRegisterPart] = useState("");
+function HomePage () {
+  const [registerPart, setRegisterPart] = useState ('');
 
   // ====================== React scripts ====================================
 
   // code for opening login form
-  const open_login = (registerCategory) => {
-    console.log("opening login form");
+  const open_login = registerCategory => {
+    console.log ('opening login form');
 
-    console.log(registerCategory);
-    setRegisterPart(
+    console.log (registerCategory);
+    setRegisterPart (
       <Login
         close_register={close_register}
         open_signup={open_signup}
         registerCategory={registerCategory}
       />
     );
-    const homepageRegister = document.querySelector(".homepageRegister");
-    const homepage = document.querySelector(".body");
-    homepageRegister.classList.add("show__homepageRegister");
-    homepage.style.overflowY = "hidden";
-    console.log(homepage);
+    const homepageRegister = document.querySelector ('.homepageRegister');
+    const homepage = document.querySelector ('.body');
+    homepageRegister.classList.add ('show__homepageRegister');
+    homepage.style.overflowY = 'hidden';
+    console.log (homepage);
   };
 
   // Code for opening sign up form
-  const open_signup = (registerCategory) => {
-    console.log("opening signup form");
-    setRegisterPart(
+  const open_signup = registerCategory => {
+    console.log ('opening signup form');
+    setRegisterPart (
       <Signup
         close_register={close_register}
         open_login={open_login}
         registerCategory={registerCategory}
       />
     );
-    const homepageRegister = document.querySelector(".homepageRegister");
-    homepageRegister.classList.add("show__homepageRegister");
+    const homepageRegister = document.querySelector ('.homepageRegister');
+    homepageRegister.classList.add ('show__homepageRegister');
   };
 
-  // Code for closing the register form 
+  // Code for closing the register form
   const close_register = () => {
-    console.log("closing register form");
-    const homepageRegister = document.querySelector(".homepageRegister");
-    homepageRegister.classList.remove("show__homepageRegister");
-    setRegisterPart("");
+    console.log ('closing register form');
+    const homepageRegister = document.querySelector ('.homepageRegister');
+    homepageRegister.classList.remove ('show__homepageRegister');
+    setRegisterPart ('');
   };
 
   // Opening and closing drop down form
   const toggleDropDown = () => {
-    console.log("showing dropdown");
-    const dropDown = document.querySelector(".dropdown__menu");
-    dropDown.classList.toggle("show__dropdown__menu");
-    console.log(dropDown.classList);
+    console.log ('showing dropdown');
+    const dropDown = document.querySelector ('.dropdown__menu');
+    dropDown.classList.toggle ('show__dropdown__menu');
+    console.log (dropDown.classList);
   };
 
   return (
     <div className="body">
       <div className="homepageRegister">{registerPart}</div>
       <img src={frontbg} alt="" className="frontBg" />
-      <div className="big_circle"></div>
-      <div className="small_circle"></div>
+      <div className="big_circle" />
+      <div className="small_circle" />
       <div className="sideBg">
         <img src={sidebg} alt="" />
       </div>
-      <div className="grey_circle"></div>
+      <div className="grey_circle" />
 
       <div className="mainwrapper">
         <div className="headerbox">
@@ -99,26 +99,26 @@ function HomePage() {
           <div className="headerbox__menu">
             <ul>
               <li>
-                <a href="#">About us</a>
+                <Link to="aboutus">About us</Link>
               </li>
               <li>
-                <a href="#">Mentorship?</a>
+                <Link to="mentorship">Mentorship?</Link>
               </li>
               <li>
-                <a href="#">Pay Now</a>
+                <Link to="paynow">Pay Now</Link>
               </li>
               <li>
-                <a href="#">Pricing</a>
+                <Link to="aboutus">Pricing</Link>
               </li>
               <li>
-                <a href="#">Contact us</a>
+                <Link to="aboutus">Contact us</Link>
               </li>
             </ul>
           </div>
           <button
             className="header__loginBtn"
             onClick={() => {
-              open_login("student");
+              open_login ('student');
             }}
           >
             Log in
@@ -127,37 +127,37 @@ function HomePage() {
           {/* *************************  Drop down code  ******************************* */}
           <div className="header__dropdown">
             <div className="header__hamburger" onClick={toggleDropDown}>
-              <span></span>
-              <span></span>
-              <span></span>
+              <span />
+              <span />
+              <span />
             </div>
             <div className="dropdown__menu">
               <i
                 className="fa fa-times dropdown__cross"
                 aria-hidden="true"
                 onClick={toggleDropDown}
-              ></i>
+              />
               <ul>
                 <li>
-                  <a href="#">About us</a>
+                  <Link to="aboutus">About us</Link>
                 </li>
                 <li>
-                  <a href="#">Mentorship?</a>
+                  <Link to="mentorship">Mentorship?</Link>
                 </li>
                 <li>
-                  <a href="#">Pay Now</a>
+                  <Link to="paynow">Pay Now</Link>
                 </li>
                 <li>
-                  <a href="#">Pricing</a>
+                  <Link to="aboutus">Pricing</Link>
                 </li>
                 <li>
-                  <a href="#">Contact us</a>
+                  <Link to="aboutus">Contact us</Link>
                 </li>
                 <button
                   className="dropdown__loginBtn"
                   onClick={() => {
-                    toggleDropDown();
-                    open_login("student");
+                    toggleDropDown ();
+                    open_login ('student');
                   }}
                 >
                   Log in

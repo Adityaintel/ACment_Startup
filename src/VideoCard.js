@@ -6,6 +6,7 @@ import UserContextProvider from './UserContext';
 import UserInfo from './UserInfo';
 
 const baseUrl = process.env.REACT_APP_BASE_URL + '/api';
+const videoBaseUrl = process.env.REACT_APP_BASE_URL ;
 
 const VideoCard = ({videoData, maximizeVideo, deleteVideo}) => {
   // ================  states and refs  =======================================
@@ -47,9 +48,7 @@ const VideoCard = ({videoData, maximizeVideo, deleteVideo}) => {
     clearTimeout (timer);
   };
 
-  // Need to be changed later
-  // videoData.thumbnail = image;
-
+  console.log(baseUrl + videoData.video)
   return (
     <div
       ref={videoBlock}
@@ -63,14 +62,14 @@ const VideoCard = ({videoData, maximizeVideo, deleteVideo}) => {
       <div className="videoCard__videoSection">
         <video
           ref={videotag}
-          src={baseUrl + videoData.video}
+          src={videoBaseUrl + videoData.video}
           height="100%"
           width="100%"
           muted="muted"
           preload="metadata"
           playsInline
           loop
-          poster={videoData.thumbnail}
+          // poster={videoData.thumbnail}
           controlsList="nodownload"
         >
           Your browser does not support the video tag.

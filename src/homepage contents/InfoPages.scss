@@ -1,0 +1,36 @@
+@import "../css/variables";
+
+.homepage__pages {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  background-color: $violet;
+  .infoPage__back {
+    margin:10px;
+    .backIcon {
+      font-size: 60px;
+      color: white;
+      cursor: pointer;
+    }
+  }
+  .infoPage__content {
+    background-color: white;
+    max-width: 800px;
+    padding: 30px;
+    margin: auto;
+    margin-top: 50px;
+    line-height: 30px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
+      rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
+      rgba(0, 0, 0, 0.09) 0px 32px 16px;
+    h2 {
+      text-align: center;
+      color: $violet;
+      margin-bottom: 30px;
+    }
+  }
+}
