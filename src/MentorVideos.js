@@ -6,7 +6,7 @@ import axios from 'axios';
 import 'font-awesome/css/font-awesome.min.css';
 import UserContextProvider from './UserContext';
 
-const baseUrl = process.env.REACT_APP_BASE_URL + '/api';
+const baseUrl =  '/api';
 
 function MentorVideos () {
   const [userData] = UserContextProvider (); //To get the username of mentor

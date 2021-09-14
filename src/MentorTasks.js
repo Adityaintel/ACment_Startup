@@ -6,7 +6,7 @@ import UserContextProvider from './UserContext';
 // import alt_profile from "./images/icons/profile_alt_icon.svg";
 import 'font-awesome/css/font-awesome.min.css';
 
-const baseUrl = process.env.REACT_APP_BASE_URL + '/api';
+const baseUrl =  '/api';
 const mentorTasksUrl = baseUrl + '/mentor/tasks';
 const deleteTaskUrl = baseUrl + '/task/delete';
 

@@ -5,7 +5,8 @@ import axios from 'axios';
 import alt_profile from './images/icons/profile_alt_icon.svg';
 import 'font-awesome/css/font-awesome.min.css';
 
-const baseUrl = process.env.REACT_APP_BASE_URL + '/api';
+const serverUrl = process.env.REACT_APP_BASE_URL;
+const baseUrl = '/api';
 const studentTasksUrl = baseUrl + '/tasks';
 const submitTasksUrl = baseUrl + '/task/answer';
 
@@ -183,7 +184,7 @@ const TaskCard = ({taskData, showTaskSubmit, submitted}) => {
       <div className="taskCard__mentorInfo">
         <div className="taskCard__mentorProfile">
           <img
-            src={baseUrl + taskData.postedBy.profile}
+            src={serverUrl + taskData.postedBy.profile}
             alt=""
             onError={e => {
               e.target.src = alt_profile;

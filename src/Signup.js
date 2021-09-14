@@ -11,7 +11,7 @@ import axios from 'axios';
 import mentor_icon from './images/icons/mentor_icon.svg';
 import student_icon from './images/icons/student_icon.svg';
 
-const baseUrl = process.env.REACT_APP_BASE_URL + '/api';
+const baseUrl ='/api';
 
 function Signup({close_register, open_login, registerCategory}) {
   const history = useHistory ();

@@ -5,8 +5,8 @@ import alt_profile from './images/icons/profile_alt_icon.svg';
 import UserContextProvider from './UserContext';
 import UserInfo from './UserInfo';
 
-const baseUrl = process.env.REACT_APP_BASE_URL + '/api';
-const videoBaseUrl = process.env.REACT_APP_BASE_URL ;
+const baseUrl = '/api';
+const serverUrl = process.env.REACT_APP_BASE_URL;
 
 const VideoCard = ({videoData, maximizeVideo, deleteVideo}) => {
   // ================  states and refs  =======================================
@@ -48,7 +48,6 @@ const VideoCard = ({videoData, maximizeVideo, deleteVideo}) => {
     clearTimeout (timer);
   };
 
-  console.log(baseUrl + videoData.video)
   return (
     <div
       ref={videoBlock}
@@ -62,7 +61,7 @@ const VideoCard = ({videoData, maximizeVideo, deleteVideo}) => {
       <div className="videoCard__videoSection">
         <video
           ref={videotag}
-          src={videoBaseUrl + videoData.video}
+          src={serverUrl + videoData.video}
           height="100%"
           width="100%"
           muted="muted"
@@ -79,7 +78,7 @@ const VideoCard = ({videoData, maximizeVideo, deleteVideo}) => {
       <div className="videoCard__info">
         <div className="videoCard__mentorProfile">
           <img
-            src={baseUrl + videoData.postedBy.profile}
+            src={serverUrl + videoData.postedBy.profile}
             alt=""
             onError={e => {
               e.target.src = alt_profile;

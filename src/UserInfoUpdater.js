@@ -5,7 +5,7 @@ import {mentorSignup_validator, studentSignup_validator} from './validator';
 import axios from 'axios';
 import UserContextProvider from './UserContext';
 
-const baseUrl = process.env.REACT_APP_BASE_URL + '/api';
+const baseUrl ='/api';
 
 function UserInfoUpdater({closeUpdateInfo}) {
   const [userData, dispatch] = UserContextProvider ();

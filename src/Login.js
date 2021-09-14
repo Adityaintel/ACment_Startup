@@ -8,7 +8,7 @@ import {userContext} from './UserContext';
 import mentor_icon from './images/icons/mentor_icon.svg';
 import student_icon from './images/icons/student_icon.svg';
 
-const base_url = process.env.REACT_APP_BASE_URL + '/api';
+const base_url =  '/api';
 
 function Login({close_register, open_signup, registerCategory}) {
   console.log ('opened login in category:' + registerCategory);

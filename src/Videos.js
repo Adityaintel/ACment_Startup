@@ -4,7 +4,7 @@ import VideoCard from './VideoCard';
 import axios from 'axios';
 import 'font-awesome/css/font-awesome.min.css';
 
-const baseUrl = process.env.REACT_APP_BASE_URL + '/api';
+const baseUrl ='/api';
 
 function Videos () {
   const [videos, setVideos] = useState ([]);

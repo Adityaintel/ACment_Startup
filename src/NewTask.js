@@ -4,7 +4,7 @@ import './css/NewTask.css';
 import prof from './images/backwaters.jpg';
 import axios from 'axios';
 
-const baseUrl = process.env.REACT_APP_BASE_URL + '/api';
+const baseUrl = '/api';
 const newTaskUrl = baseUrl + '/task/add';
 
 function NewTask () {

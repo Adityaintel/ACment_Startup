@@ -12,7 +12,7 @@ import videoIcon from './images/icons/video-icon.png';
 import studentIcon from './images/icons/student_icon.svg';
 import taskIcon from './images/icons/task-icon.png';
 
-const baseUrl = process.env.REACT_APP_BASE_URL + '/api';
+const baseUrl ='/api';
 
 function MentorPage () {
   const history = useHistory ();

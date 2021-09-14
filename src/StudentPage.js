@@ -10,7 +10,9 @@ import videoIcon from './images/icons/video-icon.png';
 import mentorIcon from './images/icons/mentor.png';
 import taskIcon from './images/icons/task-icon.png';
 
-const baseUrl = process.env.REACT_APP_BASE_URL + '/api';
+
+const baseUrl = '/api';
+
 function StudentPage () {
   const history = useHistory ();
   const [mainContent, setMainContent] = useState (<Videos />);

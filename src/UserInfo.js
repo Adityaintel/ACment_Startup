@@ -9,9 +9,9 @@ import axios from 'axios';
 import UserInfoUpdater from './UserInfoUpdater';
 import logo from './images/homepage_illustrations/Acment_logo.png';
 
-const baseUrl = process.env.REACT_APP_BASE_URL + '/api';
-const orderUrl = baseUrl + 'subscription/order';
-const verifyUrl = baseUrl + '/subscription/verify';
+const baseUrl = '/api';
+// const orderUrl = baseUrl + 'subscription/order';
+// const verifyUrl = baseUrl + '/subscription/verify';
 
 function UserInfo () {
   const [userData, dispatch] = UserContextProvider ();

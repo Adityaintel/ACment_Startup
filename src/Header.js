@@ -7,7 +7,7 @@ import UserContextProvider from './UserContext';
 import axios from 'axios';
 import UserInfo from './UserInfo';
 
-const baseUrl = process.env.REACT_APP_BASE_URL + '/api';
+const baseUrl ='/api';
 const searchapi = baseUrl + '/mentor/search';
 const followMentorUrl = baseUrl + '/user/followmentor';
 const unfollowMentorUrl = baseUrl + '/user/unfollowmentor';

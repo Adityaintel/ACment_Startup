@@ -20,7 +20,8 @@ import PayNow from './homepage contents/PayNow';
 import Mentorship from './homepage contents/Mentorship';
 // ===================================================
 
-const base_url = process.env.REACT_APP_BASE_URL + '/api';
+const serverUrl = process.env.REACT_APP_BASE_URL;
+const base_url = '/api';
 
 function App () {
   const [userData, dispatch] = UserContextProvider ();
@@ -45,7 +46,7 @@ function App () {
             // store response returned from server related to user in the context
             const {...user_info} = res.data;
             // console.log(jwtToken);
-            user_info.profile = base_url + user_info.profile;
+            user_info.profile = serverUrl + user_info.profile;
             console.log (user_info);
 
             // storing data in react context api
@@ -109,7 +110,7 @@ function App () {
             // store response returned from server related to user in the context
             const {...user_info} = res.data;
             // console.log(jwtToken);
-            user_info.profile = base_url + user_info.profile;
+            user_info.profile = serverUrl + user_info.profile;
             console.log (user_info);
 
             // storing data in react context api
