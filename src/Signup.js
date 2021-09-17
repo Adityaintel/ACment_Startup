@@ -11,7 +11,7 @@ import axios from 'axios';
 import mentor_icon from './images/icons/mentor_icon.svg';
 import student_icon from './images/icons/student_icon.svg';
 
-const baseUrl ='/api';
+const baseUrl = '/api';
 
 function Signup({close_register, open_login, registerCategory}) {
   const history = useHistory ();
@@ -46,7 +46,7 @@ function Signup({close_register, open_login, registerCategory}) {
         .post (url, data)
         .then (res => {
           console.log (res);
-          open_login ();
+          open_login ('student');
           // history.push("/studentpage");
         })
         .catch (err => {
@@ -76,7 +76,7 @@ function Signup({close_register, open_login, registerCategory}) {
         .post (url, data)
         .then (res => {
           console.log (res);
-          open_login ();
+          open_login ('mentor');
           // history.push("/mentorpage");
         })
         .catch (err => {
