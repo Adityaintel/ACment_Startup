@@ -310,9 +310,12 @@ select:-webkit-autofill:focus {
 }
 
 @media only screen and (max-width: 650px) {
+  .register {
+    padding: 10px;
+  }
   .registerSection {
-    width: 95%;
-    margin: auto;
+    width: 100%;
+    margin: 40px 0;
     padding: 10px;
   }
 }

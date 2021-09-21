@@ -63,8 +63,8 @@ $shadow: 1px 10px 20px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
   h4 {
     background-color: rgba(0, 0, 0, 0.7);
-    padding:5px 10px;
-    color:white;
+    padding: 5px 10px;
+    color: white;
     border-radius: 50px;
     margin-top: 20px;
   }
@@ -223,9 +223,12 @@ select:-webkit-autofill:focus {
 }
 
 @media only screen and (max-width: 650px) {
+  .register {
+    padding: 10px;
+  }
   .registerSection {
-    width: 95%;
-    margin: auto;
+    width: 100%;
+    margin: 40px 0;
     padding: 10px;
   }
 }
