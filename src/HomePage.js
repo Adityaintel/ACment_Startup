@@ -320,172 +320,69 @@ function HomePage () {
               <li>
                 <a href="#">Leadership</a>
               </li>
-              <li>
-                <a href="#">Blog</a>
-              </li>
-              <li>
-                <a href="#">Careers</a>
-              </li>
-              <li>
-                <a href="#">Customers</a>
-              </li>
-              <li>
-                <a href="#">Partners</a>
-              </li>
-              <li>
-                <a href="#">Referral Program</a>
-              </li>
 
               <li>
-                <a href="#">Press</a>
-              </li>
-              <li>
-                <a href="#">Legal</a>
-              </li>
-              <li>
-                <a href="#">Trust Platform</a>
+                <a href="#">Career</a>
               </li>
 
-              <li>
-                <a href="#">Investor Relations</a>
-              </li>
             </ul>
           </div>
           <div className="footer_list">
             <h3>Products</h3>
             <ul>
               <li>
-                <a href="#">Products Overview</a>
+                <a href="#">Web</a>
               </li>
               <li>
-                <a href="#">Droplets</a>
+                <a href="#">App</a>
               </li>
               <li>
-                <a href="#">Kubernetes</a>
+                <a href="#">Mentorship services</a>
               </li>
               <li>
                 <a href="#">Managed Databases</a>
               </li>
-              <li>
-                <a href="#">Spaces</a>
-              </li>
-              <li>
-                <a href="#">Marketplace</a>
-              </li>
-              <li>
-                <a href="#">Load Balancers</a>
-              </li>
-              <li>
-                <a href="#">Block Storage</a>
-              </li>
-              <li>
-                <a href="#">Tools &amp; Integrations</a>
-              </li>
-              <li>
-                <a href="#">API</a>
-              </li>
-              <li>
-                <a href="#">Pricing</a>
-              </li>
-              <li>
-                <a href="#">Documentation</a>
-              </li>
-              <li>
-                <a href="#">Release Notes</a>
-              </li>
+              <li><a href="#">Test series</a></li>
+              <li><a href="#">doubt solving</a></li>
+              <li><a href="#">Motivation</a></li>
+              <li><a href="#">training</a></li>
             </ul>
           </div>
           <div className="footer_list">
             <h3>Community</h3>
             <ul>
-              <li>
-                <a href="#">Tutorials</a>
-              </li>
-              <li>
-                <a href="#">Meetups</a>
-              </li>
-              <li>
-                <a href="#">Q&mp;A</a>
-              </li>
-              <li>
-                <a href="#">Write for Donations</a>
-              </li>
-              <li>
-                <a href="#">Droplets for Demos</a>
-              </li>
-              <li>
-                <a href="#">Hatch Startup Program</a>
-              </li>
-              <li>
-                <a href="#">Shop Swag</a>
-              </li>
-              <li>
-                <a href="#">Research Program</a>
-              </li>
-              <li>
-                <a href="#">Currents Research</a>
-              </li>
-              <li>
-                <a href="#">Open Source</a>
-              </li>
-              <li>
-                <a href="#">Code of Conduct</a>
-              </li>
-              <li>
-                <a href="#">Newsletter Signup</a>
-              </li>
+              <li><a href="#">IITIANS</a></li>
+              <li><a href="#">NITIANS</a></li>
+              <li><a href="#">Medical students</a></li>
+              <li><a href="#">BSC students</a></li>
+              <li><a href="#">BED students</a></li>
+              <li><a href="#">Educators</a></li>
+              <li><a href="#">teachers</a></li>
+              <li><a href="#">Motivational speakers</a></li>
             </ul>
           </div>
           <div className="footer_list">
-            <h3>Solutions</h3>
+            <h3>Goals</h3>
             <ul>
-              <li>
-                <a href="#">Web &amp; Mobile Apps</a>
-              </li>
-              <li>
-                <a href="#">Website Hosting</a>
-              </li>
-              <li>
-                <a href="#">Game Development</a>
-              </li>
-              <li>
-                <a href="#">Streaming VPN</a>
-              </li>
-              <li>
-                <a href="#">Startups</a>
-              </li>
-              <li>
-                <a href="#">SaaS Solutions</a>
-              </li>
-              <li>
-                <a href="#">Agency &amp; Web Dev Shops Managed Cloud</a>
-              </li>
-              <li>
-                <a href="#">Hosting Providers</a>
-              </li>
-              <li>
-                <a href="#">Big Data</a>
-              </li>
-              <li>
-                <a href="#">Business Solutions</a>
-              </li>
+              <li><a href="#">Helping to students</a></li>
+              <li><a href="#">IIT JEE</a></li>
+              <li><a href="#">BITSAT</a></li>
+              <li><a href="#">NEET</a></li>
+              <li><a href="#">Class 1st-12th</a></li>
+              <li><a href="#">CBSE</a></li>
+              <li><a href="#">ICSE</a></li>
+              <li><a href="#">KVPY</a></li>
+              <li><a href="#">NTSE</a></li>
             </ul>
           </div>
           <div className="footer_list">
-            <h3>Contact</h3>
+            <h3>Contact Us</h3>
             <ul>
-              <li>
-                <a href="#">Support</a>
-              </li>
-              <li>
-                <a href="#">Sales</a>
-              </li>
-              <li>
-                <a href="#">Report Abuse</a>
-              </li>
-              <li>
-                <a href="#">System Status</a>
-              </li>
+              <li><a href="#">mgt@acment.in</a></li>
+              <li><a href="#">linkdin profile</a></li>
+              <li><a href="#">insta profile</a></li>
+              <li><a href="#">learning app</a></li>
+              <li><a href="#">Acment app</a></li>
             </ul>
           </div>
         </div>

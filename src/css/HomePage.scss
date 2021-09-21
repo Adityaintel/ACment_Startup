@@ -79,7 +79,7 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  bottom:0;
+  bottom: 0;
   // height: 100vh;
   // width: 100%;
   overflow-y: auto;
@@ -585,14 +585,14 @@ body {
 .footer {
   width: 100%;
   .footer_upper {
-    padding-top: 20px;
+    padding: 20px 10%;
     background-color: $ft_black;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     color: white;
     .footer_list {
-      margin: 30px;
-      width: 150px;
+      margin: 10px;
+      width: 140px;
       line-height: 30px;
       text-align: left;
       h3 {
@@ -612,7 +612,7 @@ body {
 
   .footer_lower {
     min-height: 80px;
-    padding: 0 100px;
+    padding: 0 10%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -623,10 +623,14 @@ body {
       align-items: center;
       font-size: 14px;
       .logo {
+        overflow: hidden;
         object-fit: contain;
-        height: 60px;
-        width: 60px;
+        max-height: 50px;
+        height: 50px;
+        width: 50px;
         margin: 10px;
+        background-color: $ft_black;
+        border-radius: 50%;
         margin-right: 30px;
         img {
           width: 100%;
@@ -718,8 +722,8 @@ body {
   }
   .footer {
     .footer_upper {
-      flex-wrap: wrap;
-      justify-content:space-evenly;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
       .footer_list {
         margin: 15px;
       }
