@@ -68,8 +68,8 @@ const VideoCard = ({videoData, maximizeVideo, deleteVideo}) => {
           preload="metadata"
           playsInline
           loop
-          // poster={videoData.thumbnail}
-          controlsList="nodownload"
+          disablePictureInPicture
+          controlsList="nodownload noremoteplayback"
         >
           Your browser does not support the video tag.
         </video>

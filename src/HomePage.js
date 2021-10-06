@@ -7,7 +7,9 @@ import Login from './Login';
 import Signup from './Signup';
 import frontbg from './images/homepage_illustrations/background.svg';
 import sidebg from './images/homepage_illustrations/sideBg.svg';
-import logo from './images/homepage_illustrations/logo for cisco.png';
+// import logo from './images/homepage_illustrations/logo for cisco.png';
+import logo from './images/acment_logo.jpeg';
+import logo_transparent from './images/acment_logo_transparent.png';
 import image1 from './images/homepage_illustrations/footer.svg';
 import image2 from './images/homepage_illustrations/pic_1.svg';
 import image3 from './images/homepage_illustrations/pic_2.svg';
@@ -23,6 +25,7 @@ import linkedin_logo from './images/social_media_logos/linkedin.svg';
 import fb_logo from './images/social_media_logos/fb.svg';
 import youtube_logo from './images/social_media_logos/youtube.svg';
 import acment_logo_white from './images/homepage_illustrations/Acment_logo.png';
+import acmentVideo from './images/acment_video.mp4';
 
 function HomePage () {
   const [registerPart, setRegisterPart] = useState ('');
@@ -93,7 +96,7 @@ function HomePage () {
         <div className="headerbox">
           <div className="logo">
             <a href="#">
-              <img src={logo} />
+              <img src={logo_transparent} />
             </a>
           </div>
           <div className="headerbox__menu">
@@ -248,6 +251,21 @@ function HomePage () {
           </div>
         </div>
 
+        {/* Video part */}
+
+        <div className="videoPart">
+          <video
+            width="600px"
+            height="300px"
+            controls
+            disablePictureInPicture
+            controlsList="nodownload noremoteplayback"
+          >
+            <source src={acmentVideo} />
+            Your browser doesn't support this video
+          </video>
+        </div>
+
         <div className="part5">
           <div className="imagePart">
             <img src={image6} alt="" />
@@ -389,7 +407,7 @@ function HomePage () {
         <div className="footer_lower">
           <div className="footer_lower_left">
             <div className="logo">
-              <img src={acment_logo_white} alt="" />
+              <img src={logo} alt="" />
             </div>
             <div className="copyright">
               &copy; Copyright 2021. All Rights Reserved.
