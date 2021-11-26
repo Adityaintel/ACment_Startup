@@ -18,6 +18,7 @@ import UserContextProvider from './UserContext';
 import AboutUs from './homepage contents/AboutUs';
 import PayNow from './homepage contents/PayNow';
 import Mentorship from './homepage contents/Mentorship';
+import Pricing from './Pricing';
 // ===================================================
 
 const serverUrl = process.env.REACT_APP_BASE_URL;
@@ -134,13 +135,16 @@ function App () {
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/login">
+          <Route exact path="/login">
             <Login />
           </Route>
-          <Route path="/mentorpage">
+          <Route exact path="/mentorpage">
             <MentorPage />
           </Route>
-          <Route path="/studentpage">
+          <Route exact path="/pricing">
+            <Pricing />
+          </Route>
+          <Route exact path="/studentpage">
             <StudentPage />
           </Route>
           <Route exact path="/aboutus">

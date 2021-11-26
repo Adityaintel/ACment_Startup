@@ -43,6 +43,7 @@ function Login({close_register, open_signup, registerCategory}) {
         password: studentCred.password,
       };
       console.log (data);
+      console.log(url)
 
       //validating the submitting data
       if (!loginValidator (data)) {
@@ -52,6 +53,7 @@ function Login({close_register, open_signup, registerCategory}) {
       axios
         .post (url, data)
         .then (res => {
+          console.log(res)
           // store response returned from server related to user in the context
           const {jwtToken, ...user_info} = res.data;
           user_info.profile = base_url + user_info.profile;
@@ -70,7 +72,7 @@ function Login({close_register, open_signup, registerCategory}) {
           });
           console.log (userData);
           console.log ('redirecting to studentpage');
-          history.push ('/studentpage');
+          history.push ('/pricing');
         })
         .catch (err => {
           console.log (err.response);

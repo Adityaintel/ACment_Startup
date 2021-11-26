@@ -38,18 +38,22 @@ function Signup({close_register, open_login, registerCategory}) {
       console.log (data);
       // validating the submitting data of student
       if (!studentSignup_validator (data)) {
+        console.log("returned")
         return;
       }
 
       const url = baseUrl + '/user/register';
+      console.log(url)
       axios
         .post (url, data)
         .then (res => {
+          console.log("POSTING THE DATA")
           console.log (res);
           open_login ('student');
           // history.push("/studentpage");
         })
         .catch (err => {
+          console.log(url)
           console.log (err);
           console.log (err.response);
           alert (err.response.data.message);
